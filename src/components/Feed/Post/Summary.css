@@ -1,0 +1,8 @@
+.summary-context-right{
+  float:right;
+}
+
+.card{
+  border: 1px #d4d4d5 solid!important;
+  box-shadow:none!important;
+}

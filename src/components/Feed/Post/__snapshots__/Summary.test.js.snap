@@ -1,0 +1,999 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary render correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Summary
+    data={
+      Object {
+        "getLatestPosts": Array [
+          Object {
+            "author": Object {
+              "username": "Foo",
+            },
+            "content": "Content",
+            "title": "Title",
+          },
+        ],
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "centered": true,
+      "children": Array [
+        undefined,
+        <GridRow>
+          <GridColumn
+            width={12}
+          >
+            <Card
+              fluid={true}
+            >
+              <CardContent>
+                <CardHeader
+                  as="a"
+                  href="/"
+                  target="blank"
+                >
+                  Title
+                </CardHeader>
+                <CardMeta>
+                  Foo
+                   - 
+                  birkaç saniye önce önce
+                </CardMeta>
+                <CardDescription>
+                  Content
+                  ...
+                </CardDescription>
+              </CardContent>
+              <CardContent
+                extra={true}
+              >
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  <Icon
+                    as="i"
+                    name="idea"
+                  />
+                  Katılıyorum
+                </Link>
+                   
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  <Icon
+                    as="i"
+                    name="comment"
+                  />
+                  Yorum Yaz
+                </Link>
+                <Link
+                  className="summary-context-right"
+                  replace={false}
+                  to="/"
+                >
+                  bildir
+                </Link>
+              </CardContent>
+            </Card>
+          </GridColumn>
+        </GridRow>,
+      ],
+      "columns": 1,
+      "id": undefined,
+    },
+    "ref": null,
+    "rendered": Array [
+      undefined,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <GridColumn
+            width={12}
+          >
+            <Card
+              fluid={true}
+            >
+              <CardContent>
+                <CardHeader
+                  as="a"
+                  href="/"
+                  target="blank"
+                >
+                  Title
+                </CardHeader>
+                <CardMeta>
+                  Foo
+                   - 
+                  birkaç saniye önce önce
+                </CardMeta>
+                <CardDescription>
+                  Content
+                  ...
+                </CardDescription>
+              </CardContent>
+              <CardContent
+                extra={true}
+              >
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  <Icon
+                    as="i"
+                    name="idea"
+                  />
+                  Katılıyorum
+                </Link>
+                   
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  <Icon
+                    as="i"
+                    name="comment"
+                  />
+                  Yorum Yaz
+                </Link>
+                <Link
+                  className="summary-context-right"
+                  replace={false}
+                  to="/"
+                >
+                  bildir
+                </Link>
+              </CardContent>
+            </Card>
+          </GridColumn>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <Card
+              fluid={true}
+            >
+              <CardContent>
+                <CardHeader
+                  as="a"
+                  href="/"
+                  target="blank"
+                >
+                  Title
+                </CardHeader>
+                <CardMeta>
+                  Foo
+                   - 
+                  birkaç saniye önce önce
+                </CardMeta>
+                <CardDescription>
+                  Content
+                  ...
+                </CardDescription>
+              </CardContent>
+              <CardContent
+                extra={true}
+              >
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  <Icon
+                    as="i"
+                    name="idea"
+                  />
+                  Katılıyorum
+                </Link>
+                   
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  <Icon
+                    as="i"
+                    name="comment"
+                  />
+                  Yorum Yaz
+                </Link>
+                <Link
+                  className="summary-context-right"
+                  replace={false}
+                  to="/"
+                >
+                  bildir
+                </Link>
+              </CardContent>
+            </Card>,
+            "width": 12,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": Array [
+                <CardContent>
+                  <CardHeader
+                    as="a"
+                    href="/"
+                    target="blank"
+                  >
+                    Title
+                  </CardHeader>
+                  <CardMeta>
+                    Foo
+                     - 
+                    birkaç saniye önce önce
+                  </CardMeta>
+                  <CardDescription>
+                    Content
+                    ...
+                  </CardDescription>
+                </CardContent>,
+                <CardContent
+                  extra={true}
+                >
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    <Icon
+                      as="i"
+                      name="idea"
+                    />
+                    Katılıyorum
+                  </Link>
+                     
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    <Icon
+                      as="i"
+                      name="comment"
+                    />
+                    Yorum Yaz
+                  </Link>
+                  <Link
+                    className="summary-context-right"
+                    replace={false}
+                    to="/"
+                  >
+                    bildir
+                  </Link>
+                </CardContent>,
+              ],
+              "fluid": true,
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": Array [
+                    <CardHeader
+                      as="a"
+                      href="/"
+                      target="blank"
+                    >
+                      Title
+                    </CardHeader>,
+                    <CardMeta>
+                      Foo
+                       - 
+                      birkaç saniye önce önce
+                    </CardMeta>,
+                    <CardDescription>
+                      Content
+                      ...
+                    </CardDescription>,
+                  ],
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "as": "a",
+                      "children": "Title",
+                      "href": "/",
+                      "target": "blank",
+                    },
+                    "ref": null,
+                    "rendered": "Title",
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": Array [
+                        "Foo",
+                        " - ",
+                        "birkaç saniye önce önce",
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      "Foo",
+                      " - ",
+                      "birkaç saniye önce önce",
+                    ],
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "children": Array [
+                        "Content",
+                        "...",
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      "Content",
+                      "...",
+                    ],
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": Array [
+                    <Link
+                      replace={false}
+                      to="/"
+                    >
+                      <Icon
+                        as="i"
+                        name="idea"
+                      />
+                      Katılıyorum
+                    </Link>,
+                    "   ",
+                    <Link
+                      replace={false}
+                      to="/"
+                    >
+                      <Icon
+                        as="i"
+                        name="comment"
+                      />
+                      Yorum Yaz
+                    </Link>,
+                    <Link
+                      className="summary-context-right"
+                      replace={false}
+                      to="/"
+                    >
+                      bildir
+                    </Link>,
+                  ],
+                  "extra": true,
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": Array [
+                        <Icon
+                          as="i"
+                          name="idea"
+                        />,
+                        "Katılıyorum",
+                      ],
+                      "replace": false,
+                      "to": "/",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "as": "i",
+                          "name": "idea",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "Katılıyorum",
+                    ],
+                    "type": [Function],
+                  },
+                  "   ",
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": Array [
+                        <Icon
+                          as="i"
+                          name="comment"
+                        />,
+                        "Yorum Yaz",
+                      ],
+                      "replace": false,
+                      "to": "/",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "as": "i",
+                          "name": "comment",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "Yorum Yaz",
+                    ],
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": "bildir",
+                      "className": "summary-context-right",
+                      "replace": false,
+                      "to": "/",
+                    },
+                    "ref": null,
+                    "rendered": "bildir",
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "centered": true,
+        "children": Array [
+          undefined,
+          <GridRow>
+            <GridColumn
+              width={12}
+            >
+              <Card
+                fluid={true}
+              >
+                <CardContent>
+                  <CardHeader
+                    as="a"
+                    href="/"
+                    target="blank"
+                  >
+                    Title
+                  </CardHeader>
+                  <CardMeta>
+                    Foo
+                     - 
+                    birkaç saniye önce önce
+                  </CardMeta>
+                  <CardDescription>
+                    Content
+                    ...
+                  </CardDescription>
+                </CardContent>
+                <CardContent
+                  extra={true}
+                >
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    <Icon
+                      as="i"
+                      name="idea"
+                    />
+                    Katılıyorum
+                  </Link>
+                     
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    <Icon
+                      as="i"
+                      name="comment"
+                    />
+                    Yorum Yaz
+                  </Link>
+                  <Link
+                    className="summary-context-right"
+                    replace={false}
+                    to="/"
+                  >
+                    bildir
+                  </Link>
+                </CardContent>
+              </Card>
+            </GridColumn>
+          </GridRow>,
+        ],
+        "columns": 1,
+        "id": undefined,
+      },
+      "ref": null,
+      "rendered": Array [
+        undefined,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <GridColumn
+              width={12}
+            >
+              <Card
+                fluid={true}
+              >
+                <CardContent>
+                  <CardHeader
+                    as="a"
+                    href="/"
+                    target="blank"
+                  >
+                    Title
+                  </CardHeader>
+                  <CardMeta>
+                    Foo
+                     - 
+                    birkaç saniye önce önce
+                  </CardMeta>
+                  <CardDescription>
+                    Content
+                    ...
+                  </CardDescription>
+                </CardContent>
+                <CardContent
+                  extra={true}
+                >
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    <Icon
+                      as="i"
+                      name="idea"
+                    />
+                    Katılıyorum
+                  </Link>
+                     
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    <Icon
+                      as="i"
+                      name="comment"
+                    />
+                    Yorum Yaz
+                  </Link>
+                  <Link
+                    className="summary-context-right"
+                    replace={false}
+                    to="/"
+                  >
+                    bildir
+                  </Link>
+                </CardContent>
+              </Card>
+            </GridColumn>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <Card
+                fluid={true}
+              >
+                <CardContent>
+                  <CardHeader
+                    as="a"
+                    href="/"
+                    target="blank"
+                  >
+                    Title
+                  </CardHeader>
+                  <CardMeta>
+                    Foo
+                     - 
+                    birkaç saniye önce önce
+                  </CardMeta>
+                  <CardDescription>
+                    Content
+                    ...
+                  </CardDescription>
+                </CardContent>
+                <CardContent
+                  extra={true}
+                >
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    <Icon
+                      as="i"
+                      name="idea"
+                    />
+                    Katılıyorum
+                  </Link>
+                     
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    <Icon
+                      as="i"
+                      name="comment"
+                    />
+                    Yorum Yaz
+                  </Link>
+                  <Link
+                    className="summary-context-right"
+                    replace={false}
+                    to="/"
+                  >
+                    bildir
+                  </Link>
+                </CardContent>
+              </Card>,
+              "width": 12,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <CardContent>
+                    <CardHeader
+                      as="a"
+                      href="/"
+                      target="blank"
+                    >
+                      Title
+                    </CardHeader>
+                    <CardMeta>
+                      Foo
+                       - 
+                      birkaç saniye önce önce
+                    </CardMeta>
+                    <CardDescription>
+                      Content
+                      ...
+                    </CardDescription>
+                  </CardContent>,
+                  <CardContent
+                    extra={true}
+                  >
+                    <Link
+                      replace={false}
+                      to="/"
+                    >
+                      <Icon
+                        as="i"
+                        name="idea"
+                      />
+                      Katılıyorum
+                    </Link>
+                       
+                    <Link
+                      replace={false}
+                      to="/"
+                    >
+                      <Icon
+                        as="i"
+                        name="comment"
+                      />
+                      Yorum Yaz
+                    </Link>
+                    <Link
+                      className="summary-context-right"
+                      replace={false}
+                      to="/"
+                    >
+                      bildir
+                    </Link>
+                  </CardContent>,
+                ],
+                "fluid": true,
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "children": Array [
+                      <CardHeader
+                        as="a"
+                        href="/"
+                        target="blank"
+                      >
+                        Title
+                      </CardHeader>,
+                      <CardMeta>
+                        Foo
+                         - 
+                        birkaç saniye önce önce
+                      </CardMeta>,
+                      <CardDescription>
+                        Content
+                        ...
+                      </CardDescription>,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "as": "a",
+                        "children": "Title",
+                        "href": "/",
+                        "target": "blank",
+                      },
+                      "ref": null,
+                      "rendered": "Title",
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": Array [
+                          "Foo",
+                          " - ",
+                          "birkaç saniye önce önce",
+                        ],
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        "Foo",
+                        " - ",
+                        "birkaç saniye önce önce",
+                      ],
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": Array [
+                          "Content",
+                          "...",
+                        ],
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        "Content",
+                        "...",
+                      ],
+                      "type": [Function],
+                    },
+                  ],
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "children": Array [
+                      <Link
+                        replace={false}
+                        to="/"
+                      >
+                        <Icon
+                          as="i"
+                          name="idea"
+                        />
+                        Katılıyorum
+                      </Link>,
+                      "   ",
+                      <Link
+                        replace={false}
+                        to="/"
+                      >
+                        <Icon
+                          as="i"
+                          name="comment"
+                        />
+                        Yorum Yaz
+                      </Link>,
+                      <Link
+                        className="summary-context-right"
+                        replace={false}
+                        to="/"
+                      >
+                        bildir
+                      </Link>,
+                    ],
+                    "extra": true,
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": Array [
+                          <Icon
+                            as="i"
+                            name="idea"
+                          />,
+                          "Katılıyorum",
+                        ],
+                        "replace": false,
+                        "to": "/",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "as": "i",
+                            "name": "idea",
+                          },
+                          "ref": null,
+                          "rendered": null,
+                          "type": [Function],
+                        },
+                        "Katılıyorum",
+                      ],
+                      "type": [Function],
+                    },
+                    "   ",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": Array [
+                          <Icon
+                            as="i"
+                            name="comment"
+                          />,
+                          "Yorum Yaz",
+                        ],
+                        "replace": false,
+                        "to": "/",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "as": "i",
+                            "name": "comment",
+                          },
+                          "ref": null,
+                          "rendered": null,
+                          "type": [Function],
+                        },
+                        "Yorum Yaz",
+                      ],
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": "bildir",
+                        "className": "summary-context-right",
+                        "replace": false,
+                        "to": "/",
+                      },
+                      "ref": null,
+                      "rendered": "bildir",
+                      "type": [Function],
+                    },
+                  ],
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

@@ -1,0 +1,12 @@
+.secondary.menu {
+  margin:0 10px -15px 10px;
+}
+
+.header-right {
+  padding:0!important;
+  color:gray!important;
+}
+
+.header-right:last-of-type{
+  padding-right:.92857143em!important;
+}
