@@ -1,0 +1,24 @@
+{
+    "extends": [
+        "airbnb",
+        "plugin:jest/recommended"
+    ],
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "globals": { "fetch": false },
+    "rules": {
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error",
+        "no-param-reassign": [2, { "props": false }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    },
+    "plugins": [
+        "jest"
+    ]
+}
