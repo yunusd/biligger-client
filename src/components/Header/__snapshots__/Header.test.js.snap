@@ -40,12 +40,16 @@ ShallowWrapper {
           <MenuItem
             className="header-right"
           >
-            <Button
-              as="button"
-              basic={true}
-            >
-              Giriş Yap
-            </Button>
+            <LogIn
+              button={
+                <Button
+                  as="button"
+                  basic={true}
+                >
+                  Giriş Yap
+                </Button>
+              }
+            />
           </MenuItem>
           <MenuItem
             className="header-right"
@@ -55,13 +59,17 @@ ShallowWrapper {
           <MenuItem
             className="header-right"
           >
-            <Button
-              as="button"
-              basic={true}
-              color="green"
-            >
-              Kayıt Ol
-            </Button>
+            <Register
+              button={
+                <Button
+                  as="button"
+                  basic={true}
+                  color="green"
+                >
+                  Kayıt Ol
+                </Button>
+              }
+            />
           </MenuItem>
         </Menu>,
         <Divider />,
@@ -94,12 +102,16 @@ ShallowWrapper {
             <MenuItem
               className="header-right"
             >
-              <Button
-                as="button"
-                basic={true}
-              >
-                Giriş Yap
-              </Button>
+              <LogIn
+                button={
+                  <Button
+                    as="button"
+                    basic={true}
+                  >
+                    Giriş Yap
+                  </Button>
+                }
+              />
             </MenuItem>,
             <MenuItem
               className="header-right"
@@ -109,13 +121,17 @@ ShallowWrapper {
             <MenuItem
               className="header-right"
             >
-              <Button
-                as="button"
-                basic={true}
-                color="green"
-              >
-                Kayıt Ol
-              </Button>
+              <Register
+                button={
+                  <Button
+                    as="button"
+                    basic={true}
+                    color="green"
+                  >
+                    Kayıt Ol
+                  </Button>
+                }
+              />
             </MenuItem>,
           ],
           "secondary": true,
@@ -180,12 +196,16 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": <Button
-                as="button"
-                basic={true}
-              >
-                Giriş Yap
-              </Button>,
+              "children": <LogIn
+                button={
+                  <Button
+                    as="button"
+                    basic={true}
+                  >
+                    Giriş Yap
+                  </Button>
+                }
+              />,
               "className": "header-right",
             },
             "ref": null,
@@ -194,12 +214,15 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "as": "button",
-                "basic": true,
-                "children": "Giriş Yap",
+                "button": <Button
+                  as="button"
+                  basic={true}
+                >
+                  Giriş Yap
+                </Button>,
               },
               "ref": null,
-              "rendered": "Giriş Yap",
+              "rendered": null,
               "type": [Function],
             },
             "type": [Function],
@@ -221,13 +244,17 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": <Button
-                as="button"
-                basic={true}
-                color="green"
-              >
-                Kayıt Ol
-              </Button>,
+              "children": <Register
+                button={
+                  <Button
+                    as="button"
+                    basic={true}
+                    color="green"
+                  >
+                    Kayıt Ol
+                  </Button>
+                }
+              />,
               "className": "header-right",
             },
             "ref": null,
@@ -236,13 +263,16 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "as": "button",
-                "basic": true,
-                "children": "Kayıt Ol",
-                "color": "green",
+                "button": <Button
+                  as="button"
+                  basic={true}
+                  color="green"
+                >
+                  Kayıt Ol
+                </Button>,
               },
               "ref": null,
-              "rendered": "Kayıt Ol",
+              "rendered": null,
               "type": [Function],
             },
             "type": [Function],
@@ -291,12 +321,16 @@ ShallowWrapper {
             <MenuItem
               className="header-right"
             >
-              <Button
-                as="button"
-                basic={true}
-              >
-                Giriş Yap
-              </Button>
+              <LogIn
+                button={
+                  <Button
+                    as="button"
+                    basic={true}
+                  >
+                    Giriş Yap
+                  </Button>
+                }
+              />
             </MenuItem>
             <MenuItem
               className="header-right"
@@ -306,13 +340,17 @@ ShallowWrapper {
             <MenuItem
               className="header-right"
             >
-              <Button
-                as="button"
-                basic={true}
-                color="green"
-              >
-                Kayıt Ol
-              </Button>
+              <Register
+                button={
+                  <Button
+                    as="button"
+                    basic={true}
+                    color="green"
+                  >
+                    Kayıt Ol
+                  </Button>
+                }
+              />
             </MenuItem>
           </Menu>,
           <Divider />,
@@ -345,12 +383,16 @@ ShallowWrapper {
               <MenuItem
                 className="header-right"
               >
-                <Button
-                  as="button"
-                  basic={true}
-                >
-                  Giriş Yap
-                </Button>
+                <LogIn
+                  button={
+                    <Button
+                      as="button"
+                      basic={true}
+                    >
+                      Giriş Yap
+                    </Button>
+                  }
+                />
               </MenuItem>,
               <MenuItem
                 className="header-right"
@@ -360,13 +402,17 @@ ShallowWrapper {
               <MenuItem
                 className="header-right"
               >
-                <Button
-                  as="button"
-                  basic={true}
-                  color="green"
-                >
-                  Kayıt Ol
-                </Button>
+                <Register
+                  button={
+                    <Button
+                      as="button"
+                      basic={true}
+                      color="green"
+                    >
+                      Kayıt Ol
+                    </Button>
+                  }
+                />
               </MenuItem>,
             ],
             "secondary": true,
@@ -431,12 +477,16 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": <Button
-                  as="button"
-                  basic={true}
-                >
-                  Giriş Yap
-                </Button>,
+                "children": <LogIn
+                  button={
+                    <Button
+                      as="button"
+                      basic={true}
+                    >
+                      Giriş Yap
+                    </Button>
+                  }
+                />,
                 "className": "header-right",
               },
               "ref": null,
@@ -445,12 +495,15 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "as": "button",
-                  "basic": true,
-                  "children": "Giriş Yap",
+                  "button": <Button
+                    as="button"
+                    basic={true}
+                  >
+                    Giriş Yap
+                  </Button>,
                 },
                 "ref": null,
-                "rendered": "Giriş Yap",
+                "rendered": null,
                 "type": [Function],
               },
               "type": [Function],
@@ -472,13 +525,17 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": <Button
-                  as="button"
-                  basic={true}
-                  color="green"
-                >
-                  Kayıt Ol
-                </Button>,
+                "children": <Register
+                  button={
+                    <Button
+                      as="button"
+                      basic={true}
+                      color="green"
+                    >
+                      Kayıt Ol
+                    </Button>
+                  }
+                />,
                 "className": "header-right",
               },
               "ref": null,
@@ -487,13 +544,16 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "as": "button",
-                  "basic": true,
-                  "children": "Kayıt Ol",
-                  "color": "green",
+                  "button": <Button
+                    as="button"
+                    basic={true}
+                    color="green"
+                  >
+                    Kayıt Ol
+                  </Button>,
                 },
                 "ref": null,
-                "rendered": "Kayıt Ol",
+                "rendered": null,
                 "type": [Function],
               },
               "type": [Function],

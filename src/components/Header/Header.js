@@ -7,6 +7,9 @@ import {
 import './Header.css';
 import logo from '../../logo.png';
 
+import LogIn from '../LogIn';
+import Register from '../Register';
+
 const AppHeader = () => (
   <div>
     <Menu secondary>
@@ -17,13 +20,13 @@ const AppHeader = () => (
       </Menu.Item>
 
       <Menu.Item className="header-right">
-        <Button basic>Giriş Yap</Button>
+        <LogIn button={<Button basic>Giriş Yap</Button>} />
       </Menu.Item>
 
       <Menu.Item className="header-right">yada</Menu.Item>
 
       <Menu.Item className="header-right">
-        <Button basic color="green">Kayıt Ol</Button>
+        <Register button={<Button basic color="green">Kayıt Ol</Button>} />
       </Menu.Item>
     </Menu>
     <Divider />
