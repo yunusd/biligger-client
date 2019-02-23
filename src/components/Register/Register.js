@@ -39,10 +39,10 @@ class Register extends Component {
           bio,
         },
       });
+      return this.setState({ isRegister: true });
     } catch (error) {
       return error;
     }
-    this.setState({ isRegister: true });
   }
 
   handleChange(event) {
