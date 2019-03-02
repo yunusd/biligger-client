@@ -51,15 +51,7 @@ ShallowWrapper {
                 </Button>
               }
             />
-          </MenuItem>
-          <MenuItem
-            className="header-right"
-          >
-            yada
-          </MenuItem>
-          <MenuItem
-            className="header-right"
-          >
+                yada    
             <Register
               button={
                 <Button
@@ -113,15 +105,7 @@ ShallowWrapper {
                   </Button>
                 }
               />
-            </MenuItem>,
-            <MenuItem
-              className="header-right"
-            >
-              yada
-            </MenuItem>,
-            <MenuItem
-              className="header-right"
-            >
+                  yada    
               <Register
                 button={
                   <Button
@@ -197,85 +181,69 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": <LogIn
-                button={
-                  <Button
+              "children": Array [
+                <LogIn
+                  button={
+                    <Button
+                      as="button"
+                      basic={true}
+                    >
+                      Giriş Yap
+                    </Button>
+                  }
+                />,
+                "    yada    ",
+                <Register
+                  button={
+                    <Button
+                      as="button"
+                      basic={true}
+                      color="green"
+                    >
+                      Kayıt Ol
+                    </Button>
+                  }
+                />,
+              ],
+              "className": "header-right",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "button": <Button
                     as="button"
                     basic={true}
                   >
                     Giriş Yap
-                  </Button>
-                }
-              />,
-              "className": "header-right",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "button": <Button
-                  as="button"
-                  basic={true}
-                >
-                  Giriş Yap
-                </Button>,
+                  </Button>,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
               },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "yada",
-              "className": "header-right",
-            },
-            "ref": null,
-            "rendered": "yada",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <Register
-                button={
-                  <Button
+              "    yada    ",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "button": <Button
                     as="button"
                     basic={true}
                     color="green"
                   >
                     Kayıt Ol
-                  </Button>
-                }
-              />,
-              "className": "header-right",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "button": <Button
-                  as="button"
-                  basic={true}
-                  color="green"
-                >
-                  Kayıt Ol
-                </Button>,
+                  </Button>,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
               },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
+            ],
             "type": [Function],
           },
         ],
@@ -332,15 +300,7 @@ ShallowWrapper {
                   </Button>
                 }
               />
-            </MenuItem>
-            <MenuItem
-              className="header-right"
-            >
-              yada
-            </MenuItem>
-            <MenuItem
-              className="header-right"
-            >
+                  yada    
               <Register
                 button={
                   <Button
@@ -394,15 +354,7 @@ ShallowWrapper {
                     </Button>
                   }
                 />
-              </MenuItem>,
-              <MenuItem
-                className="header-right"
-              >
-                yada
-              </MenuItem>,
-              <MenuItem
-                className="header-right"
-              >
+                    yada    
                 <Register
                   button={
                     <Button
@@ -478,85 +430,69 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": <LogIn
-                  button={
-                    <Button
+                "children": Array [
+                  <LogIn
+                    button={
+                      <Button
+                        as="button"
+                        basic={true}
+                      >
+                        Giriş Yap
+                      </Button>
+                    }
+                  />,
+                  "    yada    ",
+                  <Register
+                    button={
+                      <Button
+                        as="button"
+                        basic={true}
+                        color="green"
+                      >
+                        Kayıt Ol
+                      </Button>
+                    }
+                  />,
+                ],
+                "className": "header-right",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "button": <Button
                       as="button"
                       basic={true}
                     >
                       Giriş Yap
-                    </Button>
-                  }
-                />,
-                "className": "header-right",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "button": <Button
-                    as="button"
-                    basic={true}
-                  >
-                    Giriş Yap
-                  </Button>,
+                    </Button>,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
                 },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "yada",
-                "className": "header-right",
-              },
-              "ref": null,
-              "rendered": "yada",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <Register
-                  button={
-                    <Button
+                "    yada    ",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "button": <Button
                       as="button"
                       basic={true}
                       color="green"
                     >
                       Kayıt Ol
-                    </Button>
-                  }
-                />,
-                "className": "header-right",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "button": <Button
-                    as="button"
-                    basic={true}
-                    color="green"
-                  >
-                    Kayıt Ol
-                  </Button>,
+                    </Button>,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
                 },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
+              ],
               "type": [Function],
             },
           ],
