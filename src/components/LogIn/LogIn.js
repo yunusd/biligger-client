@@ -34,7 +34,10 @@ class LogIn extends Component {
         return cb(res);
       }
       this.setState({ error: res.error_description });
-      this.props.handleSubmit(res); // added for unit test
+      const unitTestHandleSubmit = this.props.handleSubmit;
+      if (unitTestHandleSubmit) {
+        this.props.handleSubmit(res); // added for unit test
+      }
       return res;
     });
   }
