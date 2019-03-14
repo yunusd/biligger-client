@@ -25,7 +25,7 @@ moment.updateLocale('en', {
 });
 const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
   const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
-  const content = val.content.length < 500 ? val.content : val.content.slice(0, 500);
+  const content = val.content.length < 500 ? val.content : `${val.content.slice(0, 500)}...`;
   return (
     <Grid columns={1} centered id={val.id} key={val.id}>
       {error && 'HATA'}
@@ -41,9 +41,8 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
                 &nbsp;-&nbsp;
                 {moment(val.createdAt).fromNow()}
               </Card.Meta>
-              <Card.Description>
+              <Card.Description className="display-linebreak">
                 {content}
-                ...
               </Card.Description>
             </Card.Content>
 

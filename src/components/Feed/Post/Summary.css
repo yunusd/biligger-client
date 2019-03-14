@@ -6,3 +6,7 @@
   border: 1px #d4d4d5 solid!important;
   box-shadow:none!important;
 }
+
+.display-linebreak {
+  white-space: pre-line;
+}
