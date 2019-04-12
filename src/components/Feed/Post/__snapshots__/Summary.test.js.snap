@@ -46,19 +46,23 @@ ShallowWrapper {
                 <CardHeader
                   as="a"
                   href="/"
-                  target="blank"
+                  target=""
                 >
                   Title
                 </CardHeader>
                 <CardMeta>
                   Foo
                    - 
-                  birkaç saniye önce önce
+                  birkaç saniye önce
                 </CardMeta>
-                <CardDescription>
-                  Content
-                  ...
-                </CardDescription>
+                <CardDescription
+                  className="display-linebreak"
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "<p>Content",
+                    }
+                  }
+                />
               </CardContent>
               <CardContent
                 extra={true}
@@ -117,19 +121,23 @@ ShallowWrapper {
                 <CardHeader
                   as="a"
                   href="/"
-                  target="blank"
+                  target=""
                 >
                   Title
                 </CardHeader>
                 <CardMeta>
                   Foo
                    - 
-                  birkaç saniye önce önce
+                  birkaç saniye önce
                 </CardMeta>
-                <CardDescription>
-                  Content
-                  ...
-                </CardDescription>
+                <CardDescription
+                  className="display-linebreak"
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "<p>Content",
+                    }
+                  }
+                />
               </CardContent>
               <CardContent
                 extra={true}
@@ -179,19 +187,23 @@ ShallowWrapper {
                 <CardHeader
                   as="a"
                   href="/"
-                  target="blank"
+                  target=""
                 >
                   Title
                 </CardHeader>
                 <CardMeta>
                   Foo
                    - 
-                  birkaç saniye önce önce
+                  birkaç saniye önce
                 </CardMeta>
-                <CardDescription>
-                  Content
-                  ...
-                </CardDescription>
+                <CardDescription
+                  className="display-linebreak"
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "<p>Content",
+                    }
+                  }
+                />
               </CardContent>
               <CardContent
                 extra={true}
@@ -239,19 +251,23 @@ ShallowWrapper {
                   <CardHeader
                     as="a"
                     href="/"
-                    target="blank"
+                    target=""
                   >
                     Title
                   </CardHeader>
                   <CardMeta>
                     Foo
                      - 
-                    birkaç saniye önce önce
+                    birkaç saniye önce
                   </CardMeta>
-                  <CardDescription>
-                    Content
-                    ...
-                  </CardDescription>
+                  <CardDescription
+                    className="display-linebreak"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "<p>Content",
+                      }
+                    }
+                  />
                 </CardContent>,
                 <CardContent
                   extra={true}
@@ -299,19 +315,23 @@ ShallowWrapper {
                     <CardHeader
                       as="a"
                       href="/"
-                      target="blank"
+                      target=""
                     >
                       Title
                     </CardHeader>,
                     <CardMeta>
                       Foo
                        - 
-                      birkaç saniye önce önce
+                      birkaç saniye önce
                     </CardMeta>,
-                    <CardDescription>
-                      Content
-                      ...
-                    </CardDescription>,
+                    <CardDescription
+                      className="display-linebreak"
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "<p>Content",
+                        }
+                      }
+                    />,
                   ],
                 },
                 "ref": null,
@@ -324,7 +344,7 @@ ShallowWrapper {
                       "as": "a",
                       "children": "Title",
                       "href": "/",
-                      "target": "blank",
+                      "target": "",
                     },
                     "ref": null,
                     "rendered": "Title",
@@ -338,14 +358,14 @@ ShallowWrapper {
                       "children": Array [
                         "Foo",
                         " - ",
-                        "birkaç saniye önce önce",
+                        "birkaç saniye önce",
                       ],
                     },
                     "ref": null,
                     "rendered": Array [
                       "Foo",
                       " - ",
-                      "birkaç saniye önce önce",
+                      "birkaç saniye önce",
                     ],
                     "type": [Function],
                   },
@@ -354,16 +374,13 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "function",
                     "props": Object {
-                      "children": Array [
-                        "Content",
-                        "...",
-                      ],
+                      "className": "display-linebreak",
+                      "dangerouslySetInnerHTML": Object {
+                        "__html": "<p>Content",
+                      },
                     },
                     "ref": null,
-                    "rendered": Array [
-                      "Content",
-                      "...",
-                    ],
+                    "rendered": null,
                     "type": [Function],
                   },
                 ],
@@ -522,19 +539,23 @@ ShallowWrapper {
                   <CardHeader
                     as="a"
                     href="/"
-                    target="blank"
+                    target=""
                   >
                     Title
                   </CardHeader>
                   <CardMeta>
                     Foo
                      - 
-                    birkaç saniye önce önce
+                    birkaç saniye önce
                   </CardMeta>
-                  <CardDescription>
-                    Content
-                    ...
-                  </CardDescription>
+                  <CardDescription
+                    className="display-linebreak"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "<p>Content",
+                      }
+                    }
+                  />
                 </CardContent>
                 <CardContent
                   extra={true}
@@ -593,19 +614,23 @@ ShallowWrapper {
                   <CardHeader
                     as="a"
                     href="/"
-                    target="blank"
+                    target=""
                   >
                     Title
                   </CardHeader>
                   <CardMeta>
                     Foo
                      - 
-                    birkaç saniye önce önce
+                    birkaç saniye önce
                   </CardMeta>
-                  <CardDescription>
-                    Content
-                    ...
-                  </CardDescription>
+                  <CardDescription
+                    className="display-linebreak"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "<p>Content",
+                      }
+                    }
+                  />
                 </CardContent>
                 <CardContent
                   extra={true}
@@ -655,19 +680,23 @@ ShallowWrapper {
                   <CardHeader
                     as="a"
                     href="/"
-                    target="blank"
+                    target=""
                   >
                     Title
                   </CardHeader>
                   <CardMeta>
                     Foo
                      - 
-                    birkaç saniye önce önce
+                    birkaç saniye önce
                   </CardMeta>
-                  <CardDescription>
-                    Content
-                    ...
-                  </CardDescription>
+                  <CardDescription
+                    className="display-linebreak"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "<p>Content",
+                      }
+                    }
+                  />
                 </CardContent>
                 <CardContent
                   extra={true}
@@ -715,19 +744,23 @@ ShallowWrapper {
                     <CardHeader
                       as="a"
                       href="/"
-                      target="blank"
+                      target=""
                     >
                       Title
                     </CardHeader>
                     <CardMeta>
                       Foo
                        - 
-                      birkaç saniye önce önce
+                      birkaç saniye önce
                     </CardMeta>
-                    <CardDescription>
-                      Content
-                      ...
-                    </CardDescription>
+                    <CardDescription
+                      className="display-linebreak"
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "<p>Content",
+                        }
+                      }
+                    />
                   </CardContent>,
                   <CardContent
                     extra={true}
@@ -775,19 +808,23 @@ ShallowWrapper {
                       <CardHeader
                         as="a"
                         href="/"
-                        target="blank"
+                        target=""
                       >
                         Title
                       </CardHeader>,
                       <CardMeta>
                         Foo
                          - 
-                        birkaç saniye önce önce
+                        birkaç saniye önce
                       </CardMeta>,
-                      <CardDescription>
-                        Content
-                        ...
-                      </CardDescription>,
+                      <CardDescription
+                        className="display-linebreak"
+                        dangerouslySetInnerHTML={
+                          Object {
+                            "__html": "<p>Content",
+                          }
+                        }
+                      />,
                     ],
                   },
                   "ref": null,
@@ -800,7 +837,7 @@ ShallowWrapper {
                         "as": "a",
                         "children": "Title",
                         "href": "/",
-                        "target": "blank",
+                        "target": "",
                       },
                       "ref": null,
                       "rendered": "Title",
@@ -814,14 +851,14 @@ ShallowWrapper {
                         "children": Array [
                           "Foo",
                           " - ",
-                          "birkaç saniye önce önce",
+                          "birkaç saniye önce",
                         ],
                       },
                       "ref": null,
                       "rendered": Array [
                         "Foo",
                         " - ",
-                        "birkaç saniye önce önce",
+                        "birkaç saniye önce",
                       ],
                       "type": [Function],
                     },
@@ -830,16 +867,13 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "function",
                       "props": Object {
-                        "children": Array [
-                          "Content",
-                          "...",
-                        ],
+                        "className": "display-linebreak",
+                        "dangerouslySetInnerHTML": Object {
+                          "__html": "<p>Content",
+                        },
                       },
                       "ref": null,
-                      "rendered": Array [
-                        "Content",
-                        "...",
-                      ],
+                      "rendered": null,
                       "type": [Function],
                     },
                   ],
@@ -991,7 +1025,10 @@ ShallowWrapper {
           "getChildContext": Object {
             "calledByRenderer": false,
           },
-          "getDerivedStateFromProps": true,
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
           "getSnapshotBeforeUpdate": true,
           "setState": Object {
             "skipsComponentDidUpdateOnNullish": true,

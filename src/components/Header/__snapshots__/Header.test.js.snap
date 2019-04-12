@@ -16,13 +16,251 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
-      "children": Array [
-        <Menu
-          secondary={true}
+      "children": <Menu
+        fixed="top"
+      >
+        <MenuItem
+          className="borderless"
+          header={true}
+          position="left"
+        >
+          <Link
+            replace={false}
+            to="/"
+          >
+            <Image
+              as="img"
+              src="logo.png"
+              ui={true}
+              width="100px"
+            />
+          </Link>
+        </MenuItem>
+        <MenuItem
+          className="header-right"
+        >
+          <LogIn
+            button={
+              <Button
+                as="button"
+                basic={true}
+              >
+                Giriş Yap
+              </Button>
+            }
+          />
+              yada    
+          <Register
+            button={
+              <Button
+                as="button"
+                basic={true}
+                color="green"
+              >
+                Kayıt Ol
+              </Button>
+            }
+          />
+        </MenuItem>
+      </Menu>,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <MenuItem
+            className="borderless"
+            header={true}
+            position="left"
+          >
+            <Link
+              replace={false}
+              to="/"
+            >
+              <Image
+                as="img"
+                src="logo.png"
+                ui={true}
+                width="100px"
+              />
+            </Link>
+          </MenuItem>,
+          <MenuItem
+            className="header-right"
+          >
+            <LogIn
+              button={
+                <Button
+                  as="button"
+                  basic={true}
+                >
+                  Giriş Yap
+                </Button>
+              }
+            />
+                yada    
+            <Register
+              button={
+                <Button
+                  as="button"
+                  basic={true}
+                  color="green"
+                >
+                  Kayıt Ol
+                </Button>
+              }
+            />
+          </MenuItem>,
+        ],
+        "fixed": "top",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <Link
+              replace={false}
+              to="/"
+            >
+              <Image
+                as="img"
+                src="logo.png"
+                ui={true}
+                width="100px"
+              />
+            </Link>,
+            "className": "borderless",
+            "header": true,
+            "position": "left",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Image
+                as="img"
+                src="logo.png"
+                ui={true}
+                width="100px"
+              />,
+              "replace": false,
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "as": "img",
+                "src": "logo.png",
+                "ui": true,
+                "width": "100px",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <LogIn
+                button={
+                  <Button
+                    as="button"
+                    basic={true}
+                  >
+                    Giriş Yap
+                  </Button>
+                }
+              />,
+              "    yada    ",
+              <Register
+                button={
+                  <Button
+                    as="button"
+                    basic={true}
+                    color="green"
+                  >
+                    Kayıt Ol
+                  </Button>
+                }
+              />,
+            ],
+            "className": "header-right",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "button": <Button
+                  as="button"
+                  basic={true}
+                >
+                  Giriş Yap
+                </Button>,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "    yada    ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "button": <Button
+                  as="button"
+                  basic={true}
+                  color="green"
+                >
+                  Kayıt Ol
+                </Button>,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": <Menu
+          fixed="top"
         >
           <MenuItem
+            className="borderless"
             header={true}
             position="left"
           >
@@ -65,18 +303,16 @@ ShallowWrapper {
             />
           </MenuItem>
         </Menu>,
-        <Divider />,
-      ],
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
+      },
+      "ref": null,
+      "rendered": Object {
         "instance": null,
         "key": undefined,
         "nodeType": "class",
         "props": Object {
           "children": Array [
             <MenuItem
+              className="borderless"
               header={true}
               position="left"
             >
@@ -119,7 +355,7 @@ ShallowWrapper {
               />
             </MenuItem>,
           ],
-          "secondary": true,
+          "fixed": "top",
         },
         "ref": null,
         "rendered": Array [
@@ -139,6 +375,7 @@ ShallowWrapper {
                   width="100px"
                 />
               </Link>,
+              "className": "borderless",
               "header": true,
               "position": "left",
             },
@@ -249,266 +486,7 @@ ShallowWrapper {
         ],
         "type": [Function],
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {},
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <Menu
-            secondary={true}
-          >
-            <MenuItem
-              header={true}
-              position="left"
-            >
-              <Link
-                replace={false}
-                to="/"
-              >
-                <Image
-                  as="img"
-                  src="logo.png"
-                  ui={true}
-                  width="100px"
-                />
-              </Link>
-            </MenuItem>
-            <MenuItem
-              className="header-right"
-            >
-              <LogIn
-                button={
-                  <Button
-                    as="button"
-                    basic={true}
-                  >
-                    Giriş Yap
-                  </Button>
-                }
-              />
-                  yada    
-              <Register
-                button={
-                  <Button
-                    as="button"
-                    basic={true}
-                    color="green"
-                  >
-                    Kayıt Ol
-                  </Button>
-                }
-              />
-            </MenuItem>
-          </Menu>,
-          <Divider />,
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <MenuItem
-                header={true}
-                position="left"
-              >
-                <Link
-                  replace={false}
-                  to="/"
-                >
-                  <Image
-                    as="img"
-                    src="logo.png"
-                    ui={true}
-                    width="100px"
-                  />
-                </Link>
-              </MenuItem>,
-              <MenuItem
-                className="header-right"
-              >
-                <LogIn
-                  button={
-                    <Button
-                      as="button"
-                      basic={true}
-                    >
-                      Giriş Yap
-                    </Button>
-                  }
-                />
-                    yada    
-                <Register
-                  button={
-                    <Button
-                      as="button"
-                      basic={true}
-                      color="green"
-                    >
-                      Kayıt Ol
-                    </Button>
-                  }
-                />
-              </MenuItem>,
-            ],
-            "secondary": true,
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <Link
-                  replace={false}
-                  to="/"
-                >
-                  <Image
-                    as="img"
-                    src="logo.png"
-                    ui={true}
-                    width="100px"
-                  />
-                </Link>,
-                "header": true,
-                "position": "left",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "children": <Image
-                    as="img"
-                    src="logo.png"
-                    ui={true}
-                    width="100px"
-                  />,
-                  "replace": false,
-                  "to": "/",
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "as": "img",
-                    "src": "logo.png",
-                    "ui": true,
-                    "width": "100px",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                "type": [Function],
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": Array [
-                  <LogIn
-                    button={
-                      <Button
-                        as="button"
-                        basic={true}
-                      >
-                        Giriş Yap
-                      </Button>
-                    }
-                  />,
-                  "    yada    ",
-                  <Register
-                    button={
-                      <Button
-                        as="button"
-                        basic={true}
-                        color="green"
-                      >
-                        Kayıt Ol
-                      </Button>
-                    }
-                  />,
-                ],
-                "className": "header-right",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "button": <Button
-                      as="button"
-                      basic={true}
-                    >
-                      Giriş Yap
-                    </Button>,
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                "    yada    ",
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "button": <Button
-                      as="button"
-                      basic={true}
-                      color="green"
-                    >
-                      Kayıt Ol
-                    </Button>,
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-      ],
-      "type": "div",
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -523,7 +501,10 @@ ShallowWrapper {
           "getChildContext": Object {
             "calledByRenderer": false,
           },
-          "getDerivedStateFromProps": true,
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
           "getSnapshotBeforeUpdate": true,
           "setState": Object {
             "skipsComponentDidUpdateOnNullish": true,

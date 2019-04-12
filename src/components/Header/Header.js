@@ -11,9 +11,9 @@ import LogIn from '../LogIn';
 import Register from '../Register';
 
 const AppHeader = () => (
-  <div>
-    <Menu secondary>
-      <Menu.Item header position="left">
+  <React.Fragment>
+    <Menu fixed="top">
+      <Menu.Item header position="left" className="borderless">
         <Link to="/">
           <Image src={logo} width="100px" />
         </Link>
@@ -22,7 +22,7 @@ const AppHeader = () => (
           localStorage.getItem('access_token')
             ? (
               <Menu.Item className="header-right">
-                <Button color="green">Yaz</Button>
+                <Link to="/yazi"><Button color="green">Yaz</Button></Link>
                 &nbsp;
                 &nbsp;
                 &nbsp;
@@ -48,8 +48,7 @@ const AppHeader = () => (
         }
 
     </Menu>
-    <Divider />
-  </div>
+  </React.Fragment>
 );
 
 export default AppHeader;

@@ -1,5 +1,7 @@
-.secondary.menu {
-  margin:0 10px -15px 10px;
+.menu{
+  background-color: #fff !important;
+  border-bottom:none!important;
+  box-shadow: none!important;
 }
 
 .header-right {
