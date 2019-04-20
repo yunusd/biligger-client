@@ -10,7 +10,7 @@ import client from './ApolloClient';
 
 import Header from './Header';
 import Feed from './Feed';
-import Post from './Post';
+import { Post, AddPost } from './Post';
 
 const App = () => (
   <ApolloProvider client={client}>
@@ -21,7 +21,8 @@ const App = () => (
         </Container>
         <Container style={{ marginTop: '7em' }}>
           <Route path="/" exact component={Feed} />
-          <Route path="/yazi" component={Post} />
+          <Route path="/p/:id" exact component={Post} />
+          <Route path="/yazi" exact component={AddPost} />
         </Container>
       </React.Fragment>
     </Router>

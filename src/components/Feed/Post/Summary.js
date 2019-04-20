@@ -43,7 +43,7 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
         <Grid.Column width={12}>
           <Card fluid>
             <Card.Content>
-              <Card.Header as="a" href={val.url ? val.url : '/'} target={val.url ? 'blank' : ''}>
+              <Card.Header as="a" href={val.id ? `p/${val.id}` : '/'}/* target={val.url ? 'blank' : ''} */ >
                 {title}
               </Card.Header>
               <Card.Meta>

@@ -6,7 +6,9 @@ import theme from './Theme';
 class Content extends Component {
   constructor(props) {
     super(props);
-    this.draft = localStorage.getItem('content') || null;
+    const { type = 'post' } = this.props || {};
+    this.type = type;
+    this.draft = localStorage.getItem(this.type === 'comment' || 'content') || null;
     this.state = {
       value: this.draft,
     };
@@ -15,17 +17,18 @@ class Content extends Component {
 
   onChange = (value) => {
     const content = value();
-    localStorage.setItem('content', content);
+    localStorage.setItem(this.type === 'comment' ? 'comment' : 'content', content);
   }
 
   render() {
     const { value } = this.state;
+    const { placeholderValue = 'Yazmaya başlayabilirsiniz...' } = this.props || {};
 
     return (
       value
         ? (
           <Editor
-            placeholder="Yazmaya başlayabilirsiniz..."
+            placeholder={placeholderValue}
             defaultValue={value}
             theme={theme}
             autoFocus
@@ -35,8 +38,8 @@ class Content extends Component {
         )
         : (
           <Editor
-            placeholder="Yazmaya başlayabilirsiniz..."
-            autoFocus
+            placeholder={placeholderValue}
+            autoFocus={this.type === 'post'}
             theme={theme}
             onChange={this.onChange}
             style={{ fontSize: '20px' }}

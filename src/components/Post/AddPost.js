@@ -5,7 +5,7 @@ import { Mutation } from 'react-apollo';
 import { ADD_POST } from './mutations';
 import { RichTextEditor } from './RichTextEditor';
 
-const Post = () => {
+const AddPost = () => {
   async function handleSubmit(post) {
     const title = localStorage.getItem('title');
     const content = localStorage.getItem('content');
@@ -64,4 +64,4 @@ const Post = () => {
 };
 
 
-export default Post;
+export default AddPost;

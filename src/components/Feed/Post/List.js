@@ -16,7 +16,9 @@ const List = () => (
           </Dimmer>
         );
       }
-      if (!data) {
+      const isExist = data.getLatestPosts.length !== 0;
+
+      if (!isExist) {
         return (
           <h5>Gönderi bulunamadı!</h5>
         );
