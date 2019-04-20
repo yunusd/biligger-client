@@ -5,26 +5,11 @@ import moment from 'moment';
 import marked from 'marked';
 
 import { Grid, Card, Icon } from 'semantic-ui-react';
+import dateLocale from '../../../helpers/dateLocale';
 import './Summary.css';
 
-moment.updateLocale('en', {
-  relativeTime: {
-    future: '%s içinde',
-    past: '%s önce',
-    s: 'birkaç saniye',
-    ss: '%d saniye',
-    m: 'bir dakika',
-    mm: '%d dakika',
-    h: 'bir saat',
-    hh: '%d saat',
-    d: 'bir gün',
-    dd: '%d gün',
-    M: 'bir ay',
-    MM: '%d ay',
-    y: 'bir yıl',
-    yy: '%d yıl',
-  },
-});
+moment.updateLocale('en', dateLocale);
+
 const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
   const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
   const rawContent = marked(val.content);
@@ -43,7 +28,7 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
         <Grid.Column width={12}>
           <Card fluid>
             <Card.Content>
-              <Card.Header as="a" href={val.id ? `p/${val.id}` : '/'}/* target={val.url ? 'blank' : ''} */ >
+              <Card.Header as="a" href={val.id ? `p/${val.id}` : '/'}>
                 {title}
               </Card.Header>
               <Card.Meta>
