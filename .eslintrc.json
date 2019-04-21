@@ -17,7 +17,9 @@
         "jest/prefer-to-have-length": "warn",
         "jest/valid-expect": "error",
         "no-param-reassign": [2, { "props": false }],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "template-curly-spacing" : "off",
+        "indent" : "off"
     },
     "plugins": [
         "jest"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Menu, Image, Divider, Button, Dropdown,
+  Menu, Image, Button, Dropdown,
 } from 'semantic-ui-react';
 
 import './Header.css';
@@ -9,19 +9,23 @@ import logo from '../../logo.png';
 
 import LogIn from '../LogIn';
 import Register from '../Register';
+import { Category } from '../Category';
 
 const AppHeader = () => (
   <React.Fragment>
-    <Menu fixed="top">
-      <Menu.Item header position="left" className="borderless">
+    <Menu fixed="top" inverted>
+      <Menu.Item header className="borderless">
         <Link to="/">
           <Image src={logo} width="100px" />
         </Link>
       </Menu.Item>
+      <Menu.Item>
+        <Category />
+      </Menu.Item>
       {
           localStorage.getItem('access_token')
             ? (
-              <Menu.Item className="header-right">
+              <Menu.Item position="right" className="header-right">
                 <Link to="/yazi"><Button color="green">Yaz</Button></Link>
                 &nbsp;
                 &nbsp;
@@ -35,7 +39,7 @@ const AppHeader = () => (
               </Menu.Item>
             )
             : (
-              <Menu.Item className="header-right">
+              <Menu.Item position="right" className="header-right">
                 <LogIn button={<Button basic>Giriş Yap</Button>} />
                 &nbsp;
                 &nbsp;
