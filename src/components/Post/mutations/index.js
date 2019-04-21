@@ -5,11 +5,13 @@ const ADD_POST = gql`
     $title: String!,
     $content: String!,
     $url: String,
+    $category: ID!,
   ){
     addPost(
       title: $title,
       content: $content,
       url:  $url,
+      category: $category,
     ){
       title
     }
@@ -22,14 +24,16 @@ const EDIT_POST = gql`
     $title: String!,
     $content: String!,
     $url: String,
+    $category: ID!,
     $author: ID!,
   ){
     editPost(
-      id: $ID,
+      id: $id,
       title: $title,
       content: $content,
       url:  $url,
-      author: $ID,
+      category: $category,
+      author: $id,
     ){
       title
     }

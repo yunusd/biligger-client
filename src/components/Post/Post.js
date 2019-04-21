@@ -65,7 +65,7 @@ const Post = (props) => {
 
                   </Card.Content>
                 </Card>
-                <Comment />
+                <Comment post={id} />
                 <Divider horizontal>
                   <Header as="h3" style={{ color: 'grey' }}>
                       Yorumlar
