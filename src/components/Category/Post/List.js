@@ -20,12 +20,7 @@ const List = (props) => {
         }
         const isExist = data.getLatestPostsByCategory.length !== 0;
 
-        if (!isExist) {
-          return (
-            <h5>Gönderi bulunamadı!</h5>
-          );
-        }
-        return <Summary category={{ id, name }} error={error} data={data} />;
+        return <Summary isExist={isExist} category={{ id, name }} error={error} data={data} />;
       }}
     </Query>
   );

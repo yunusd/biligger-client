@@ -22,7 +22,7 @@ const App = () => (
         </Container>
         <Container style={{ marginTop: '7em' }}>
           <Route path="/" exact component={Feed} />
-          <Route path="/p/:id" exact component={Post} />
+          <Route path="/p/:title" exact component={Post} />
           <Route path="/yazi" exact component={AddPost} />
           <Route path="/k/:name/" exact component={CategoryPosts} />
         </Container>

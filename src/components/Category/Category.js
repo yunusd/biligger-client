@@ -13,7 +13,7 @@ const Category = () => (
             <NavLink
               key={id}
               to={{
-                pathname: `/k/${name.toLowerCase()}`,
+                pathname: `/k/${name.toLowerCase().replace(/\s/g, '-')}-${id.slice(-10)}`,
                 state: { id, name },
               }}
               activeStyle={{

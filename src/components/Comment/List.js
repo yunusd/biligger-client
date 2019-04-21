@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Query } from 'react-apollo';
 import moment from 'moment';
 import {
@@ -10,12 +10,9 @@ import dateLocale from '../../helpers/dateLocale';
 
 moment.updateLocale('en', dateLocale);
 
-const List = () => {
-  const pathname = window.location.pathname.split('/');
-  const [id] = useState(pathname[2]);
-  return (
-    <Query query={GET_LATEST_COMMENTS} variables={{ post: id }} pollInterval={500}>
-      {({ error, loading, data }) => {
+const List = ({ post }) => (
+  <Query query={GET_LATEST_COMMENTS} variables={{ post }}>
+    {({ error, loading, data }) => {
         if (error) return 'HATA';
         if (loading) return 'Yükleniyor';
         if (!data.getLatestComments.length) return <h1>Yorum Yok!</h1>;
@@ -46,9 +43,8 @@ const List = () => {
           })
         );
       }}
-    </Query>
+  </Query>
   );
-};
 
 // <React.Fragment>
 //   <Card fluid style={{ padding: '20px'}}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Query } from 'react-apollo';
 import marked from 'marked';
 import {
@@ -10,30 +10,12 @@ import moment from 'moment';
 import GET_POST from './queries';
 
 import { List, Comment } from '../Comment';
+import dateLocale from '../../helpers/dateLocale';
 
-moment.updateLocale('en', {
-  relativeTime: {
-    future: '%s içinde',
-    past: '%s önce',
-    s: 'birkaç saniye',
-    ss: '%d saniye',
-    m: 'bir dakika',
-    mm: '%d dakika',
-    h: 'bir saat',
-    hh: '%d saat',
-    d: 'bir gün',
-    dd: '%d gün',
-    M: 'bir ay',
-    MM: '%d ay',
-    y: 'bir yıl',
-    yy: '%d yıl',
-  },
-});
+moment.updateLocale('en', dateLocale);
 
-const Post = () => {
-  const pathname = window.location.pathname.split('/');
-  const [id] = useState(pathname[2]);
-
+const Post = (props) => {
+  const { id } = props.location.state;
   return (
     <Query query={GET_POST} variables={{ id }}>
       {({ loading, error, data }) => {
@@ -89,8 +71,8 @@ const Post = () => {
                       Yorumlar
                   </Header>
                 </Divider>
-                
-                <List />
+
+                <List post={id} />
               </Grid.Column>
             </Grid.Row>
           </Grid>

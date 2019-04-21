@@ -12,6 +12,7 @@ moment.updateLocale('en', dateLocale);
 
 const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
   const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
+  const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id.slice(-10)}`;
   const rawContent = marked(val.content);
 
   const paragraph = rawContent.substring(
@@ -28,8 +29,16 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
         <Grid.Column width={12}>
           <Card fluid>
             <Card.Content>
-              <Card.Header as="a" href={val.id ? `p/${val.id}` : '/'}>
-                {title}
+              <Card.Header>
+                <Link
+                  to={{
+                  pathname: val.id ? `p/${url}` : '/',
+                  state: { id: val.id },
+                }}
+                  style={{ color: 'rgba(0,0,0,.85)' }}
+                >
+                  {title}
+                </Link>
               </Card.Header>
               <Card.Meta>
                 {val.author.username}
