@@ -12,21 +12,24 @@ import Header from './Header';
 import Feed from './Feed';
 import { Post, AddPost } from './Post';
 import { List as CategoryPosts } from './Category/Post';
+import ScrollTop from './ScrollTop';
 
 const App = () => (
   <ApolloProvider client={client}>
     <Router>
-      <React.Fragment>
-        <Container fluid>
-          <Header />
-        </Container>
-        <Container style={{ marginTop: '7em' }}>
-          <Route path="/" exact component={Feed} />
-          <Route path="/p/:title" exact component={Post} />
-          <Route path="/yazi" exact component={AddPost} />
-          <Route path="/k/:name/" exact component={CategoryPosts} />
-        </Container>
-      </React.Fragment>
+      <ScrollTop>
+        <React.Fragment>
+          <Container fluid>
+            <Header />
+          </Container>
+          <Container style={{ marginTop: '7em' }}>
+            <Route path="/" exact component={Feed} />
+            <Route path="/p/:title" exact component={Post} />
+            <Route path="/yazi" exact component={AddPost} />
+            <Route path="/k/:name/" exact component={CategoryPosts} />
+          </Container>
+        </React.Fragment>
+      </ScrollTop>
     </Router>
   </ApolloProvider>
 );
