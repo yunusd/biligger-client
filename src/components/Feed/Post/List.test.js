@@ -19,7 +19,7 @@ describe('List', () => {
         data: {
           getLatestPosts: [
             {
-              id: 1,
+              id: '000000000000000000000000',
               title: 'Title',
               content: 'Content',
               url: 'https://google.com',

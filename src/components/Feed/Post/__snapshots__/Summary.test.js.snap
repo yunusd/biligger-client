@@ -12,6 +12,7 @@ ShallowWrapper {
               "username": "Foo",
             },
             "content": "Content",
+            "id": "000000000000000000000000",
             "title": "Title",
           },
         ],
@@ -29,7 +30,7 @@ ShallowWrapper {
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
-    "key": undefined,
+    "key": "000000000000000000000000",
     "nodeType": "function",
     "props": Object {
       "centered": true,
@@ -43,11 +44,25 @@ ShallowWrapper {
               fluid={true}
             >
               <CardContent>
-                <CardHeader
-                  as="a"
-                  href="/"
-                >
-                  Title
+                <CardHeader>
+                  <Link
+                    replace={false}
+                    style={
+                      Object {
+                        "color": "rgba(0,0,0,.85)",
+                      }
+                    }
+                    to={
+                      Object {
+                        "pathname": "p/title-0000000000",
+                        "state": Object {
+                          "id": "000000000000000000000000",
+                        },
+                      }
+                    }
+                  >
+                    Title
+                  </Link>
                 </CardHeader>
                 <CardMeta>
                   Foo
@@ -100,7 +115,7 @@ ShallowWrapper {
         </GridRow>,
       ],
       "columns": 1,
-      "id": undefined,
+      "id": "000000000000000000000000",
     },
     "ref": null,
     "rendered": Array [
@@ -117,11 +132,25 @@ ShallowWrapper {
               fluid={true}
             >
               <CardContent>
-                <CardHeader
-                  as="a"
-                  href="/"
-                >
-                  Title
+                <CardHeader>
+                  <Link
+                    replace={false}
+                    style={
+                      Object {
+                        "color": "rgba(0,0,0,.85)",
+                      }
+                    }
+                    to={
+                      Object {
+                        "pathname": "p/title-0000000000",
+                        "state": Object {
+                          "id": "000000000000000000000000",
+                        },
+                      }
+                    }
+                  >
+                    Title
+                  </Link>
                 </CardHeader>
                 <CardMeta>
                   Foo
@@ -182,11 +211,25 @@ ShallowWrapper {
               fluid={true}
             >
               <CardContent>
-                <CardHeader
-                  as="a"
-                  href="/"
-                >
-                  Title
+                <CardHeader>
+                  <Link
+                    replace={false}
+                    style={
+                      Object {
+                        "color": "rgba(0,0,0,.85)",
+                      }
+                    }
+                    to={
+                      Object {
+                        "pathname": "p/title-0000000000",
+                        "state": Object {
+                          "id": "000000000000000000000000",
+                        },
+                      }
+                    }
+                  >
+                    Title
+                  </Link>
                 </CardHeader>
                 <CardMeta>
                   Foo
@@ -245,11 +288,25 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <CardContent>
-                  <CardHeader
-                    as="a"
-                    href="/"
-                  >
-                    Title
+                  <CardHeader>
+                    <Link
+                      replace={false}
+                      style={
+                        Object {
+                          "color": "rgba(0,0,0,.85)",
+                        }
+                      }
+                      to={
+                        Object {
+                          "pathname": "p/title-0000000000",
+                          "state": Object {
+                            "id": "000000000000000000000000",
+                          },
+                        }
+                      }
+                    >
+                      Title
+                    </Link>
                   </CardHeader>
                   <CardMeta>
                     Foo
@@ -308,11 +365,25 @@ ShallowWrapper {
                 "nodeType": "function",
                 "props": Object {
                   "children": Array [
-                    <CardHeader
-                      as="a"
-                      href="/"
-                    >
-                      Title
+                    <CardHeader>
+                      <Link
+                        replace={false}
+                        style={
+                          Object {
+                            "color": "rgba(0,0,0,.85)",
+                          }
+                        }
+                        to={
+                          Object {
+                            "pathname": "p/title-0000000000",
+                            "state": Object {
+                              "id": "000000000000000000000000",
+                            },
+                          }
+                        }
+                      >
+                        Title
+                      </Link>
                     </CardHeader>,
                     <CardMeta>
                       Foo
@@ -336,12 +407,47 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "function",
                     "props": Object {
-                      "as": "a",
-                      "children": "Title",
-                      "href": "/",
+                      "children": <Link
+                        replace={false}
+                        style={
+                          Object {
+                            "color": "rgba(0,0,0,.85)",
+                          }
+                        }
+                        to={
+                          Object {
+                            "pathname": "p/title-0000000000",
+                            "state": Object {
+                              "id": "000000000000000000000000",
+                            },
+                          }
+                        }
+                      >
+                        Title
+                      </Link>,
                     },
                     "ref": null,
-                    "rendered": "Title",
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": "Title",
+                        "replace": false,
+                        "style": Object {
+                          "color": "rgba(0,0,0,.85)",
+                        },
+                        "to": Object {
+                          "pathname": "p/title-0000000000",
+                          "state": Object {
+                            "id": "000000000000000000000000",
+                          },
+                        },
+                      },
+                      "ref": null,
+                      "rendered": "Title",
+                      "type": [Function],
+                    },
                     "type": [Function],
                   },
                   Object {
@@ -516,7 +622,7 @@ ShallowWrapper {
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
-      "key": undefined,
+      "key": "000000000000000000000000",
       "nodeType": "function",
       "props": Object {
         "centered": true,
@@ -530,11 +636,25 @@ ShallowWrapper {
                 fluid={true}
               >
                 <CardContent>
-                  <CardHeader
-                    as="a"
-                    href="/"
-                  >
-                    Title
+                  <CardHeader>
+                    <Link
+                      replace={false}
+                      style={
+                        Object {
+                          "color": "rgba(0,0,0,.85)",
+                        }
+                      }
+                      to={
+                        Object {
+                          "pathname": "p/title-0000000000",
+                          "state": Object {
+                            "id": "000000000000000000000000",
+                          },
+                        }
+                      }
+                    >
+                      Title
+                    </Link>
                   </CardHeader>
                   <CardMeta>
                     Foo
@@ -587,7 +707,7 @@ ShallowWrapper {
           </GridRow>,
         ],
         "columns": 1,
-        "id": undefined,
+        "id": "000000000000000000000000",
       },
       "ref": null,
       "rendered": Array [
@@ -604,11 +724,25 @@ ShallowWrapper {
                 fluid={true}
               >
                 <CardContent>
-                  <CardHeader
-                    as="a"
-                    href="/"
-                  >
-                    Title
+                  <CardHeader>
+                    <Link
+                      replace={false}
+                      style={
+                        Object {
+                          "color": "rgba(0,0,0,.85)",
+                        }
+                      }
+                      to={
+                        Object {
+                          "pathname": "p/title-0000000000",
+                          "state": Object {
+                            "id": "000000000000000000000000",
+                          },
+                        }
+                      }
+                    >
+                      Title
+                    </Link>
                   </CardHeader>
                   <CardMeta>
                     Foo
@@ -669,11 +803,25 @@ ShallowWrapper {
                 fluid={true}
               >
                 <CardContent>
-                  <CardHeader
-                    as="a"
-                    href="/"
-                  >
-                    Title
+                  <CardHeader>
+                    <Link
+                      replace={false}
+                      style={
+                        Object {
+                          "color": "rgba(0,0,0,.85)",
+                        }
+                      }
+                      to={
+                        Object {
+                          "pathname": "p/title-0000000000",
+                          "state": Object {
+                            "id": "000000000000000000000000",
+                          },
+                        }
+                      }
+                    >
+                      Title
+                    </Link>
                   </CardHeader>
                   <CardMeta>
                     Foo
@@ -732,11 +880,25 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <CardContent>
-                    <CardHeader
-                      as="a"
-                      href="/"
-                    >
-                      Title
+                    <CardHeader>
+                      <Link
+                        replace={false}
+                        style={
+                          Object {
+                            "color": "rgba(0,0,0,.85)",
+                          }
+                        }
+                        to={
+                          Object {
+                            "pathname": "p/title-0000000000",
+                            "state": Object {
+                              "id": "000000000000000000000000",
+                            },
+                          }
+                        }
+                      >
+                        Title
+                      </Link>
                     </CardHeader>
                     <CardMeta>
                       Foo
@@ -795,11 +957,25 @@ ShallowWrapper {
                   "nodeType": "function",
                   "props": Object {
                     "children": Array [
-                      <CardHeader
-                        as="a"
-                        href="/"
-                      >
-                        Title
+                      <CardHeader>
+                        <Link
+                          replace={false}
+                          style={
+                            Object {
+                              "color": "rgba(0,0,0,.85)",
+                            }
+                          }
+                          to={
+                            Object {
+                              "pathname": "p/title-0000000000",
+                              "state": Object {
+                                "id": "000000000000000000000000",
+                              },
+                            }
+                          }
+                        >
+                          Title
+                        </Link>
                       </CardHeader>,
                       <CardMeta>
                         Foo
@@ -823,12 +999,47 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "function",
                       "props": Object {
-                        "as": "a",
-                        "children": "Title",
-                        "href": "/",
+                        "children": <Link
+                          replace={false}
+                          style={
+                            Object {
+                              "color": "rgba(0,0,0,.85)",
+                            }
+                          }
+                          to={
+                            Object {
+                              "pathname": "p/title-0000000000",
+                              "state": Object {
+                                "id": "000000000000000000000000",
+                              },
+                            }
+                          }
+                        >
+                          Title
+                        </Link>,
                       },
                       "ref": null,
-                      "rendered": "Title",
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": "Title",
+                          "replace": false,
+                          "style": Object {
+                            "color": "rgba(0,0,0,.85)",
+                          },
+                          "to": Object {
+                            "pathname": "p/title-0000000000",
+                            "state": Object {
+                              "id": "000000000000000000000000",
+                            },
+                          },
+                        },
+                        "ref": null,
+                        "rendered": "Title",
+                        "type": [Function],
+                      },
                       "type": [Function],
                     },
                     Object {

@@ -7,6 +7,7 @@ describe('Summary', () => {
   const mock = {
     getLatestPosts: [
       {
+        id: '000000000000000000000000',
         title: 'Title',
         content: 'Content',
         author: {
