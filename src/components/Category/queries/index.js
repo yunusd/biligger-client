@@ -17,23 +17,7 @@ const GET_CATEGORIES = gql`
   }
 `;
 
-const GET_LATEST_POSTS_BY_CATEGORY = gql`
-  query getLatestPostsByCategory($category: ID!){
-    getLatestPostsByCategory(category: $category){
-      id
-      title
-      content
-      url
-      author {
-        username
-      }
-      createdAt
-    }
-  }
-`;
-
 export {
   GET_CATEGORY,
   GET_CATEGORIES,
-  GET_LATEST_POSTS_BY_CATEGORY,
 };
