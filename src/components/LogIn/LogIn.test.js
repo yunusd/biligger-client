@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+
 import {
   Header, Form, FormInput,
 } from 'semantic-ui-react';
 
 import waita from '../../helpers/waita';
 import LogIn from './LogIn';
-
-const fetchMock = require('fetch-mock');
-
 
 describe('LogIn', () => {
   it('render without crashing', () => {
@@ -34,39 +34,22 @@ describe('LogIn', () => {
     expect(wrapper.state()).toMatchObject({ username: 'foo', password: 'bar' });
   });
 
-  it('should return token if credentials are valid', async () => {
-    const payload = JSON.stringify({
-      grant_type: 'password',
-      username: 'foo',
-      password: 'bar',
-      scope: 'offline_access',
-    });
-
-    fetchMock.mock((url, opts) => (url === 'http://localhost:3000/oauth/token' && opts.body === payload), {
-      access_token: 'dummy-token',
-    }).catch({ error: 'not match' });
-
-    const fakeEvent = { preventDefault: () => {} };
-    const wrapper = shallow(<LogIn />);
-    wrapper.find(FormInput).at(0).simulate('change', { target: { name: 'username', value: 'foo' } });
-    wrapper.find(FormInput).at(1).simulate('change', { target: { name: 'password', value: 'bar' } });
-    wrapper.find(Form).simulate('submit', fakeEvent);
-    await waita(2);
-    expect(localStorage.getItem('access_token')).toBe('dummy-token');
-    fetchMock.restore();
-  });
-
   it('should return an error if credentials are not valid', async () => {
+    const mock = new MockAdapter(axios);
+
     const payload = JSON.stringify({
-      grant_type: 'password',
       username: 'foo',
       password: 'bar',
-      scope: 'offline_access',
     });
 
-    fetchMock.mock((url, opts) => (url === 'http://localhost:3000/oauth/token' && opts.body !== payload), {
-      error: 'wrong credentials!',
-    }).catch({});
+    mock.onPost('https://localhost:3000/auth').reply(({ url, data }) => {
+      if (url === 'https://localhost:3000/auth' && data !== payload) {
+        return [400, {
+          error: 'wrong credentials!',
+        }];
+      }
+      return {};
+    });
 
     const handleSubmit = jest.fn(res => res);
     const fakeEvent = { preventDefault: () => {} };
@@ -76,13 +59,15 @@ describe('LogIn', () => {
     wrapper.find(Form).simulate('submit', fakeEvent);
     await waita(2);
 
-    const error = handleSubmit.mock.results[0] ? handleSubmit.mock.results[0].value.error : false;
+    const error = handleSubmit.mock.results[0]
+    ? handleSubmit.mock.results[0].value.response.data.error : false;
+
     /* manually set error to the state because enzyme doesn't re-render component
     and cause to not pass error message to the component */
     if (error) wrapper.setState({ error });
 
     expect(wrapper.find(Header).dive().text()).toContain('Hata :('); // HTML
     expect(error).toBe('wrong credentials!'); // Fetch response
-    fetchMock.restore();
+    mock.restore();
   });
 });

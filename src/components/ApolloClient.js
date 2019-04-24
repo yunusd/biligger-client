@@ -1,16 +1,35 @@
 import ApolloClient from 'apollo-boost';
 
-const token = localStorage.getItem('access_token');
-
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/api',
-  request: (operation) => {
+  uri: 'https://localhost:3000/api',
+  request: async (operation) => {
     operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : false,
+      fetchOptions: {
+        credentials: 'include',
       },
     });
   },
+});
+
+const initData = () => client.writeData({
+  data: {
+    currentUser: {
+      __typename: 'User',
+      isLoggedIn: false,
+    },
+  },
+});
+
+initData();
+
+// client.resetStore()
+client.onResetStore(async () => {
+  initData();
+});
+
+// client.clearStore()
+client.onClearStore(async () => {
+  initData();
 });
 
 export default client;

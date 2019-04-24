@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import {
   Button, Header, Modal, Form,
@@ -13,32 +14,21 @@ class LogIn extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e, cb) {
+  handleSubmit() {
     const { username, password } = this.state;
-    fetch('http://localhost:3000/oauth/token', {
-      method: 'POST',
-      headers: {
-        Authorization: 'Basic YWJjMTIzOnNzaC1zZWNyZXQ=',
-        'Content-Type': 'application/json',
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify({
-        grant_type: 'password',
-        username,
-        password,
-        scope: 'offline_access',
-      }),
-    }).then(res => res.json()).then((res) => {
-      if (!res.error) {
-        window.location.replace('/');
-        return cb(res);
-      }
-      this.setState({ error: res.error_description });
+    axios.post('https://localhost:3000/auth', {
+      username,
+      password,
+    }, { withCredentials: 'include' }).then((res) => {
+      window.location.reload();
+      return res;
+    }).catch((error) => {
       const unitTestHandleSubmit = this.props.handleSubmit;
       if (unitTestHandleSubmit) {
-        this.props.handleSubmit(res); // added for unit test
+        this.props.handleSubmit(error); // added for unit test
       }
-      return res;
+      this.setState({ error: true });
+      return error;
     });
   }
 
@@ -62,13 +52,7 @@ class LogIn extends Component {
             </Header>
           </div>
           <Modal.Description>
-            <Form onSubmit={(e) => {
-              e.preventDefault();
-              this.handleSubmit(e, async (res) => {
-                localStorage.setItem('access_token', res.access_token);
-              });
-            }}
-            >
+            <Form onSubmit={this.handleSubmit}>
               <Form.Input label="Kullanıcı adı" placeholder="Kullanıcı adı" name="username" onChange={this.handleChange} />
               <Form.Input type="password" label="Şifre" placeholder="Şifre" name="password" onChange={this.handleChange} />
               <Button
@@ -78,7 +62,6 @@ class LogIn extends Component {
               />
             </Form>
           </Modal.Description>
-
         </Modal.Content>
       </Modal>
     );

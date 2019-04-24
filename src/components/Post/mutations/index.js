@@ -13,6 +13,7 @@ const ADD_POST = gql`
       url:  $url,
       category: $category,
     ){
+      id
       title
     }
   }
