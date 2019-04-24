@@ -2,14 +2,15 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { Dimmer, Loader } from 'semantic-ui-react';
 
+import Summary from './Summary';
 import GET_LATEST_POSTS_BY_CATEGORY from './queries';
 
-import Summary from './Summary';
-
 const List = (props) => {
-  const { id, name } = props.location.state;
+  const path = props.location.pathname.slice(1);
+  const name = path.replace('-', ' ');
+
   return (
-    <Query query={GET_LATEST_POSTS_BY_CATEGORY} variables={{ category: id }}>
+    <Query query={GET_LATEST_POSTS_BY_CATEGORY} variables={{ category: name }}>
       {({ loading, error, data }) => {
         if (loading) {
           return (
@@ -18,9 +19,10 @@ const List = (props) => {
             </Dimmer>
           );
         }
+
         const isExist = data.getLatestPostsByCategory.length !== 0;
 
-        return <Summary isExist={isExist} category={{ id, name }} error={error} data={data} />;
+        return <Summary isExist={isExist} error={error} category={name} data={data} />;
       }}
     </Query>
   );

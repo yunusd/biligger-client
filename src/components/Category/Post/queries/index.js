@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 const GET_LATEST_POSTS_BY_CATEGORY = gql`
-  query getLatestPostsByCategory($category: ID!){
+  query getLatestPostsByCategory($category: String!){
     getLatestPostsByCategory(category: $category){
       id
       title

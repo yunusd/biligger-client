@@ -12,16 +12,19 @@ moment.updateLocale('en', dateLocale);
 
 const Summary = (props) => {
   const {
-    data, error, category, isExist,
+    // eslint-disable-next-line react/prop-types
+    data, error, isExist, category,
   } = props;
-  const lowerName = category.name.toLowerCase();
+  const posts = data.getLatestPostsByCategory;
+
   const colors = {
-    teknoloji: lowerName === 'teknoloji' && 'blue',
-    bilim: lowerName === 'bilim' && 'red',
-    spor: lowerName === 'spor' && 'green',
-    sanat: lowerName === 'sanat' && 'yellow',
-    yasam: lowerName === 'yaşam biçimi' && 'purple',
+    teknoloji: category === 'teknoloji' && 'blue',
+    bilim: category === 'bilim' && 'red',
+    spor: category === 'spor' && 'green',
+    sanat: category === 'sanat' && 'yellow',
+    yasam: category === 'yaşam biçimi' && 'purple',
   };
+
   return (
     <React.Fragment>
       <Grid columns={2} centered>
@@ -37,17 +40,18 @@ const Summary = (props) => {
                 boxShadow: 'none',
                 border: 'none',
                 fontWeight: '600',
+                textTransform: 'capitalize',
               }}
             >
-              { category.name }
+              { category }
             </Segment>
           </Grid.Column>
         </Grid.Row>
         {
           !isExist ? <h5>Gönderi bulunamadı!</h5>
-          : data.getLatestPostsByCategory.map((val) => {
+          : posts.map((val) => {
               const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
-              const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id.slice(-10)}`;
+              const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id}`;
               const rawContent = marked(val.content);
 
               const paragraph = rawContent.substring(
@@ -66,7 +70,7 @@ const Summary = (props) => {
                         <Card.Header>
                           <Link
                             to={{
-                              pathname: val.id ? `/p/${url}` : '/',
+                              pathname: val.id ? `/${url}` : '/',
                               state: { id: val.id },
                             }}
                             style={{ color: 'rgba(0,0,0,.85)' }}

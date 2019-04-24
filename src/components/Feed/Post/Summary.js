@@ -12,7 +12,7 @@ moment.updateLocale('en', dateLocale);
 
 const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
   const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
-  const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id.slice(-10)}`;
+  const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id}`;
   const rawContent = marked(val.content);
 
   const paragraph = rawContent.substring(
@@ -32,7 +32,7 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
               <Card.Header>
                 <Link
                   to={{
-                  pathname: val.id ? `p/${url}` : '/',
+                  pathname: val.id ? `/${url}` : '/',
                   state: { id: val.id },
                 }}
                   style={{ color: 'rgba(0,0,0,.85)' }}

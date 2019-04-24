@@ -40,7 +40,7 @@ const AppHeader = () => {
               currentUser.isLoggedIn
                 ? (
                   <Menu.Item position="right" className="header-right">
-                    <Link to="/yazi"><Button color="green">Yaz</Button></Link>
+                    <Link to="/yeni-bilig"><Button color="green">Yeni Bilig</Button></Link>
                     &nbsp;
                     &nbsp;
                     &nbsp;

@@ -15,7 +15,8 @@ import dateLocale from '../../helpers/dateLocale';
 moment.updateLocale('en', dateLocale);
 
 const Post = (props) => {
-  const { id } = props.location.state;
+  const url = props.location.pathname;
+  const id = url.slice(-24);
   return (
     <Query query={GET_POST} variables={{ id }}>
       {({ loading, error, data }) => {

@@ -1,20 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import {
+ BrowserRouter as Router, Route, Redirect, Switch,
+} from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import { Container } from 'semantic-ui-react';
 
 import GET_AUTH_STATUS from '../queries';
 
-import './App.css';
 import ScrollTop from './ScrollTop';
-
 import client from './ApolloClient';
 import Header from './Header';
 import Feed from './Feed';
 import { Post, AddPost } from './Post';
-import { List as CategoryPosts } from './Category/Post';
+import { List as Category } from './Category/Post';
 import Auth from './Auth';
 
+// eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -47,10 +48,13 @@ const App = () => (
               <Header />
             </Container>
             <Container style={{ marginTop: '7em' }}>
-              <Route path="/" exact component={Feed} />
-              <Route path="/p/:title" exact component={Post} />
-              <PrivateRoute path="/yazi" exact component={AddPost} />
-              <Route path="/k/:name/" exact component={CategoryPosts} />
+              <Switch>
+                <Route path="/" exact component={Feed} />
+                <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
+                <Route path="/(teknoloji|bilim|yaşam-biçimi|spor|sanat)/" exact component={Category} />
+                <Route path="/:title" exact component={Post} />
+                {/* <Route component={NotFound} /> */}
+              </Switch>
             </Container>
           </Auth>
         </React.Fragment>

@@ -1,8 +1,9 @@
 import gql from 'graphql-tag';
 
 const GET_CATEGORY = gql`
-  query getCategory{
-    getCategory{
+  query getCategory($name: String!){
+    getCategory(name: $name){
+      id
       name
     }
   }

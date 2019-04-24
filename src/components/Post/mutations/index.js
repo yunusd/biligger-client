@@ -5,7 +5,7 @@ const ADD_POST = gql`
     $title: String!,
     $content: String!,
     $url: String,
-    $category: ID!,
+    $category: String!,
   ){
     addPost(
       title: $title,
@@ -25,7 +25,7 @@ const EDIT_POST = gql`
     $title: String!,
     $content: String!,
     $url: String,
-    $category: ID!,
+    $category: String!,
     $author: ID!,
   ){
     editPost(
