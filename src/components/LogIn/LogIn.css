@@ -1,27 +1,18 @@
-.modal-content {
-  padding:0!important;
+.login-grid {
+  height: 100%!important;
 }
 
-.login-left{
-  background-color: #5B7EBB;
-  width: 40%;
+.login-column {
+  max-width: 300px!important;
+  margin-top: 50px!important;
 }
 
-.login-left .header{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color:white;
+.login-header {
+  color: #527ec0!important;
+  margin-top: 80px!important;
 }
 
-.description form {
-  padding: 20px
-}
-
-.description form .button {
-  margin:0 0 10px 0;
-  color: white;
-  background-color: #5B7EBB;
+.login-segment {
+  padding: 20px 40px!important;
+  border: none!important;
 }

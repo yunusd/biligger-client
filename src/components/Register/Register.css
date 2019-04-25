@@ -1,26 +1,18 @@
-.modal-content {
-  padding:0!important;
+.register-grid {
+  height: 100%!important;
 }
 
-.register-left{
-  background-color: #5B7EBB;
-  width: 40%
-}
-.register-left .header{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color:white
+.register-column {
+  max-width: 300px!important;
+  margin-top: 50px!important;
 }
 
-.description form {
-  padding: 20px
+.register-header {
+  color: #527ec0!important;
+  margin-top: 80px!important;
 }
 
-.description form .button {
-  margin:0 0 10px 0;
-  color: white;
-  background-color: #5B7EBB;
+.register-segment {
+  padding: 20px 40px!important;
+  border: none!important;
 }

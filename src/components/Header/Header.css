@@ -1,8 +1,14 @@
-.menu{
+#header-menu-fix {
+  background-color: red;
+  margin-bottom: 100px;
+}
+
+.header-menu {
   background-color: #fff !important;
   border-bottom:none!important;
   box-shadow: none!important;
 }
+
 
 .header-right {
   padding:0!important;

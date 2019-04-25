@@ -3,6 +3,7 @@ import {
  BrowserRouter as Router, Route, Redirect, Switch,
 } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks';
 import { Container } from 'semantic-ui-react';
 
 import GET_AUTH_STATUS from '../queries';
@@ -11,9 +12,13 @@ import ScrollTop from './ScrollTop';
 import client from './ApolloClient';
 import Header from './Header';
 import Feed from './Feed';
+import LogIn from './LogIn';
+import Register from './Register';
 import { Post, AddPost } from './Post';
 import { List as Category } from './Category/Post';
+import NotFound from './NotFound';
 import Auth from './Auth';
+
 
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -27,7 +32,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         ? <Component {...props} />
         : (
           <Redirect to={{
-              pathname: '/',
+              pathname: '/giriş',
               state: { from: props.location },
             }}
           />
@@ -40,26 +45,28 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 const App = () => (
   <ApolloProvider client={client}>
-    <Router>
-      <ScrollTop>
-        <React.Fragment>
-          <Auth>
-            <Container fluid>
-              <Header />
-            </Container>
-            <Container style={{ marginTop: '7em' }}>
-              <Switch>
-                <Route path="/" exact component={Feed} />
-                <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
-                <Route path="/(teknoloji|bilim|yaşam-biçimi|spor|sanat)/" exact component={Category} />
-                <Route path="/:title" exact component={Post} />
-                {/* <Route component={NotFound} /> */}
-              </Switch>
-            </Container>
-          </Auth>
-        </React.Fragment>
-      </ScrollTop>
-    </Router>
+    <ApolloProviderHooks client={client}>
+      <Router>
+        <ScrollTop>
+          <React.Fragment>
+            <Auth>
+              <Container fluid>
+                <Route component={Header} />
+                <Switch>
+                  <Route path="/giriş" exact component={LogIn} />
+                  <Route path="/kayıt" exact component={Register} />
+                  <PrivateRoute path="/" exact component={Feed} />
+                  <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
+                  <PrivateRoute path="/(teknoloji|bilim|yaşam-biçimi|spor|sanat)/" exact component={Category} />
+                  <Route path="/:title" exact component={Post} />
+                  <PrivateRoute component={NotFound} />
+                </Switch>
+              </Container>
+            </Auth>
+          </React.Fragment>
+        </ScrollTop>
+      </Router>
+    </ApolloProviderHooks>
   </ApolloProvider>
 );
 

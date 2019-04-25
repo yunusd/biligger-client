@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-
+import { Link } from 'react-router-dom';
 import {
-  Button, Header, Modal, Form,
+  Grid, Button, Header, Segment, Form, Divider, Image,
 } from 'semantic-ui-react';
+
 import './Register.css';
+import logo from '../../logo.png';
 
 import { REGISTER_USER } from './mutations';
 import LogIn from '../LogIn';
@@ -15,6 +17,20 @@ class Register extends Component {
     this.state = { isRegister: false };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    document.getElementById('root').style.background = 'linear-gradient(to top, #527ec0 68.3%, #ffffff 50%)';
+    document.getElementById('root').style.position = 'absolute';
+    document.getElementById('root').style.width = '100%';
+    document.getElementById('root').style.height = '100%';
+  }
+
+  componentWillUnmount() {
+    document.getElementById('root').style.background = null;
+    document.getElementById('root').style.position = null;
+    document.getElementById('root').style.width = null;
+    document.getElementById('root').style.height = null;
   }
 
   async handleSubmit(register) {
@@ -50,59 +66,66 @@ class Register extends Component {
   }
 
   render() {
-    const { isRegister, formValidation, username } = this.state;
-    const { button } = this.props;
+    const {
+      isRegister,
+      formValidation,
+      username,
+    } = this.state;
+
+
     return (
       <Mutation mutation={REGISTER_USER}>
-        {(register, { loading, error }) => (
+        {(register, { loading, error = '' }) => {
+        const errorMessage = `${error && 'Lütfen bilgileri doğru giriniz!'}`;
+        return (
           <div>
             {!isRegister
               ? (
-                <Modal trigger={button} dimmer="blurring">
-
-                  <Modal.Content image className="modal-content">
-                    <div className="register-left">
-                      <Header size="huge">
-                        KAYIT OL
-                        <pre>
-                          {error && 'Hata :('}
-                        </pre>
+                <div className="login-form">
+                  <Grid textAlign="center" className="register-grid" verticalAlign="bottom">
+                    <Grid.Column className="register-column">
+                      <Image as={Link} to="/" src={logo} size="medium" />
+                      <Header as="h2" className="register-header" textAlign="center">
+                        {errorMessage || 'Hoşgeldiniz'}
                       </Header>
-                    </div>
-                    <Modal.Description>
-                      <Form
-                        loading={loading}
-                        onSubmit={(e) => {
+                      <Segment raised className="register-segment">
+                        <Form
+                          loading={loading}
+                          onSubmit={(e) => {
                           e.preventDefault();
                           this.handleSubmit(register);
                         }}
-                      >
-                        <Form.Input label="Kullanıcı adı" placeholder="Kullanıcı adı" name="username" onChange={this.handleChange} />
-                        <Form.Input type="email" label="E-Posta adresi" placeholder="E-Posta adresi" name="email" onChange={this.handleChange} />
-                        <Form.Input type="password" label="Şifre" placeholder="Şifre" name="password" onChange={this.handleChange} />
-                        <Form.Input type="password" label="Şifre(tekrar)" placeholder="Şifre(tekrar)" name="passwordCheck" onChange={this.handleChange} />
-                        <Form.Input label="Ünvan" placeholder="Ünvan" name="degree" onChange={this.handleChange} />
-                        <Form.TextArea label="Hakkınızda" placeholder="Hakkınızda" name="bio" onChange={this.handleChange} />
+                        >
+                          <Form.Input placeholder="Kullanıcı adı" name="username" onChange={this.handleChange} />
+                          <Form.Input type="email" placeholder="E-Posta adresi" name="email" onChange={this.handleChange} />
+                          <Form.Input type="password" placeholder="Şifre" name="password" onChange={this.handleChange} />
+                          <Form.Input type="password" placeholder="Şifre(tekrar)" name="passwordCheck" onChange={this.handleChange} />
+                          <Form.Input placeholder="Ünvan" name="degree" onChange={this.handleChange} />
+                          <Form.TextArea placeholder="Hakkınızda" name="bio" onChange={this.handleChange} />
 
-                        <Button
-                          disabled={formValidation}
-                          type="submit"
-                          content="Kayıt Ol"
-                          floated="right"
-                        />
-                      </Form>
-                    </Modal.Description>
-
-                  </Modal.Content>
-                </Modal>
+                          <Button
+                            disabled={formValidation}
+                            type="submit"
+                            content="Kayıt Ol"
+                          />
+                        </Form>
+                        <Divider />
+                        Zaten kayıtlı mısın?
+                        <br />
+                        <Link to="/giriş" style={{ color: '#49ba6f' }}>Giriş Yap</Link>
+                      </Segment>
+                    </Grid.Column>
+                  </Grid>
+                </div>
               )
               : <LogIn isRedirect username={username} />
             }
           </div>
-        )}
+        );
+        }
+      }
       </Mutation>
     );
   }
 }
-
 export default Register;

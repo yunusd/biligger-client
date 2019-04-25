@@ -1,0 +1,25 @@
+.logIn {
+  padding: 10px 12px!important;
+  width: 500px!important;
+}
+
+.logInRow {
+  padding: 0px!important;
+}
+
+.logInLeft {
+  background-color: #527ec0!important;
+}
+
+.logInRight {
+  padding: 20px 10px!important;
+}
+
+.logInLeftText {
+  color: white!important;
+  height: 100%!important;
+  display: flex!important;
+  flex-direction: column!important;
+  align-items: center!important;
+  justify-content: center!important;
+}
