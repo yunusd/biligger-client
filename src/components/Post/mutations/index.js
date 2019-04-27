@@ -34,11 +34,19 @@ const EDIT_POST = gql`
       content: $content,
       url:  $url,
       category: $category,
-      author: $id,
+      author: $author,
     ){
       title
     }
   }
 `;
 
-export { ADD_POST, EDIT_POST };
+const DELETE_POST = gql`
+  mutation deletePost($id: ID!, $author: ID!){
+    deletePost(id: $id, author: $author){
+      title
+    }
+  }
+`;
+
+export { ADD_POST, EDIT_POST, DELETE_POST };

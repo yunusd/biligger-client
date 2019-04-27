@@ -1,4 +1,5 @@
 import React from 'react';
+import { useApolloClient } from 'react-apollo-hooks';
 import marked from 'marked';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -7,10 +8,17 @@ import {
  Grid, Card, Icon, Segment,
 } from 'semantic-ui-react';
 import dateLocale from '../../../helpers/dateLocale';
+import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../../queries';
 
 moment.updateLocale('en', dateLocale);
 
 const Summary = (props) => {
+  const client = useApolloClient();
+
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
+
+
   const {
     // eslint-disable-next-line react/prop-types
     data, error, isExist, category,
@@ -50,6 +58,12 @@ const Summary = (props) => {
         {
           !isExist ? <h5>Bilig bulunamadı!</h5>
           : posts.map((val) => {
+
+              const auth = {
+                isOwn: getMe && getMe.username === val.author.username,
+                isLoggedIn: currentUser.isLoggedIn && true,
+              };
+
               const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
               const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id}`;
               const rawContent = marked(val.content);
@@ -101,9 +115,20 @@ const Summary = (props) => {
                             Yorum Yaz
                         </Link>
 
-                        <Link to="/" className="summary-context-right">
-                            bildir
-                        </Link>
+                        {auth.isLoggedIn && (
+                            auth.isOwn ? (
+                              <React.Fragment>
+                                <Link to={`${url}/düzenle`} className="summary-context-right">
+                                  <Icon name="edit" />
+                                  Düzenle
+                                </Link>
+                              </React.Fragment>
+                            ) : (
+                              <Link to="#" className="summary-context-right" title="Bildir">
+                                <Icon name="flag" title="bildir" />
+                              </Link>
+                            )
+                          )}
 
                       </Card.Content>
                     </Card>

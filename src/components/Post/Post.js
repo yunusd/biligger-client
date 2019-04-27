@@ -13,6 +13,7 @@ import { List, Comment } from '../Comment';
 import NotFound from '../NotFound';
 import dateLocale from '../../helpers/dateLocale';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../queries';
+import DeletePost from './DeletePost';
 
 moment.updateLocale('en', dateLocale);
 
@@ -88,16 +89,14 @@ const Post = (props) => {
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
-                    <Link to="#" className="summary-context-right">
-                      düzenle
+                    <Link to={`${url}/düzenle`}>
+                      <Icon name="edit" className="summary-context-right" />
                     </Link>
-                    <Link to="#" className="summary-context-right">
-                      sil
-                    </Link>
+                    <DeletePost id={id} authorId={author.id} {...props} />
                   </React.Fragment>
                 ) : (
-                  <Link to="#" className="summary-context-right">
-                    bildir
+                  <Link to="#" className="summary-context-right" title="bildir">
+                    <Icon name="flag" title="bildir" />
                   </Link>
                 )
               )}

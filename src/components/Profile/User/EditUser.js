@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { useApolloClient } from 'react-apollo-hooks';
 import { Mutation } from 'react-apollo';
 
 import {
  Segment, Grid, Card, Accordion, Form, Button, Header,
 } from 'semantic-ui-react';
 
+import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../../queries';
 import EDIT_USER from './mutations';
 import './css/EditUser.css';
+import NotFound from '../../NotFound';
 
 const Settings = (props) => {
+  const client = useApolloClient();
+
   const messageText = 'Değişiklik yapmadan önce şifrenizi giriniz';
   const [message, setMessage] = useState(messageText);
   const [active, setActive] = useState(0);
@@ -20,6 +25,15 @@ const Settings = (props) => {
   const [newPasswordCheck, setNewPasswordCheck] = useState(null);
 
   const username = props.location.pathname.split('/')[1].slice(1);
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
+
+  const auth = {
+    isOwn: getMe && getMe.username === username,
+    isLoggedIn: currentUser.isLoggedIn && true,
+  };
+
+  if (!auth.isOwn) return <NotFound {...props} />;
 
   const handleSubmit = async (editUser) => {
     // Try catch block needed for testing. Without it test not passing.

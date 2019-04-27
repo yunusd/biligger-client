@@ -1,3 +1,10 @@
+.summary-context-icon {
+  cursor: pointer;
+}
+.summary-context-icon:hover {
+  color:#2185d0;
+}
+
 .summary-context-right{
   float:right;
   padding-left:10px;

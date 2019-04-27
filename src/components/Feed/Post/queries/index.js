@@ -7,7 +7,12 @@ const GET_LATEST_POSTS = gql`
       title
       content
       url
+      category {
+        id
+        name
+      }
       author {
+        id,
         username
       }
       createdAt

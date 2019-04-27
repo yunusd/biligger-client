@@ -4,10 +4,10 @@ import Title from './Title';
 import Content from './Content';
 import './RichTextEditor.css';
 
-const RichTextEditor = () => (
+const RichTextEditor = props => (
   <React.Fragment>
-    <Title />
-    <Content />
+    <Title {...props} />
+    <Content {...props} />
   </React.Fragment>
 );
 

@@ -83,16 +83,14 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
-                    <Link to="#" className="summary-context-right">
-                      düzenle
-                    </Link>
-                    <Link to="#" className="summary-context-right">
-                      sil
+                    <Link to={`${url}/düzenle`} className="summary-context-right">
+                      <Icon name="edit" />
+                      Düzenle
                     </Link>
                   </React.Fragment>
                 ) : (
-                  <Link to="#" className="summary-context-right">
-                    bildir
+                  <Link to="#" className="summary-context-right" title="Bildir">
+                    <Icon name="flag" title="bildir" />
                   </Link>
                 )
               )}

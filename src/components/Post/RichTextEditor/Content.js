@@ -6,17 +6,19 @@ import theme from './Theme';
 class Content extends Component {
   constructor(props) {
     super(props);
-    const { type = 'post' } = this.props || {};
+    const { type = 'post', post } = this.props || {};
+    this.post = post;
     this.type = type;
     this.draft = localStorage.getItem(this.type === 'comment' || 'content') || null;
     this.state = {
-      value: this.draft,
+      value: this.post ? this.post.content : this.draft,
     };
   }
 
 
   onChange = (value) => {
     const content = value();
+    if (this.type === 'editPost') return localStorage.setItem('edit-content', content);
     localStorage.setItem(this.type === 'comment' ? 'comment' : 'content', content);
   }
 

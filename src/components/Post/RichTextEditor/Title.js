@@ -9,6 +9,10 @@ import { Header } from 'semantic-ui-react';
 class Title extends Component {
   constructor(props) {
     super(props);
+    const { type = 'post', post } = this.props;
+    this.type = type;
+    if (this.type === 'editPost') localStorage.setItem('edit-title', post.title);
+
     this.initialValue = Value.fromJSON({
       document: {
         nodes: [
@@ -18,7 +22,7 @@ class Title extends Component {
             nodes: [
               {
                 object: 'text',
-                text: localStorage.getItem('title') || null,
+                text: post ? post.title : localStorage.getItem('title') || null,
               },
             ],
           },
@@ -47,7 +51,9 @@ class Title extends Component {
   onChange = ({ value }) => {
     if (value.document !== this.state.value.document) {
       const title = Plain.serialize(value);
-      localStorage.setItem('title', title);
+      if (this.type === 'editPost') localStorage.setItem('edit-title', title);
+      if (this.type === 'post') localStorage.setItem('title', title);
+
       this.setState({
         value,
       });

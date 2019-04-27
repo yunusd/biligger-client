@@ -14,7 +14,7 @@ import Header from './Header';
 import Feed from './Feed';
 import LogIn from './LogIn';
 import Register from './Register';
-import { Post, AddPost } from './Post';
+import { Post, AddPost, EditPost } from './Post';
 import { List as Category } from './Category/Post';
 import NotFound from './NotFound';
 import Auth from './Auth';
@@ -63,6 +63,7 @@ const App = () => (
                   <PrivateRoute path="/@:username" exact component={Profile} />
                   <PrivateRoute path="/@:username/ayarlar" exact component={EditUser} />
                   <Route path="/:title" exact component={Post} />
+                  <PrivateRoute path="/:title/düzenle" exact component={EditPost} />
                   <PrivateRoute component={NotFound} />
                 </Switch>
               </Container>

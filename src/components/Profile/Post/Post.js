@@ -4,8 +4,10 @@ import { useQuery } from 'react-apollo-hooks';
 import { List, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import GET_POST_BY_USER from './queries';
+import { DeletePost } from '../../Post';
 
-const Post = ({ userId, auth }) => {
+const Post = (props) => {
+  const { userId, auth } = props;
   const { data, loading, error } = useQuery(GET_POST_BY_USER, { variables: { id: userId } });
 
   if (loading) return null;
@@ -32,8 +34,7 @@ const Post = ({ userId, auth }) => {
               <Dropdown.Menu style={{ boxShadow: 'none' }}>
                 {isOwn ? (
                   <React.Fragment>
-                    <Dropdown.Item icon="edit" content="düzenle" />
-                    <Dropdown.Item icon="trash" content="sil" />
+                    <Dropdown.Item as={Link} to={`${postUrl}/düzenle`} icon="edit" content="düzenle" />
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
