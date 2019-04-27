@@ -31,7 +31,7 @@ class Url extends Component {
 
 
   onChange = ({ value }) => {
-    if (value.document != this.state.value.document) {
+    if (value.document !== this.state.value.document) {
       // const content = JSON.stringify(value.toJSON())
       const url = Plain.serialize(value);
       localStorage.setItem('url', url);

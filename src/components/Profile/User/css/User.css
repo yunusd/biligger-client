@@ -1,0 +1,50 @@
+.ui.piled.segment:after,
+.ui.piled.segment:before,
+.ui.piled.segments:after,
+.ui.piled.segments:before {
+  border: none!important;
+}
+
+.segment {
+  box-shadow: none!important;
+  border: none!important;
+}
+
+.profile-tab, .tabular, .active {
+  border: none!important;
+}
+
+.user-post-list, .user-comment-list {
+  padding:27px!important;
+}
+
+.user-post-list-item:first-child, .user-comment-list-item:first-child {
+  margin-top: -15px!important;
+}
+
+.user-post-list-item, .user-comment-list-item {
+  margin: 15px 0px!important;
+}
+
+.list-item-hr-margin:first-child{
+  margin-top: 15px!important;
+}
+
+.user-post-list-content, .user-comment-list-content {
+  color: #000000;
+  cursor: pointer;
+}
+
+.user-post-list-header, .user-comment-list-header {
+  font-size: 1.5em!important;
+  margin-bottom: 10px!important;
+}
+
+.profile-user-icon{
+  color: #000000;
+}
+
+.profile-user-icon:hover {
+  color: #527ec0!important;
+  cursor: pointer!important
+}

@@ -16,25 +16,29 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
-      "centered": true,
-      "children": <ModalContent
-        className="modal-content"
-        image={true}
+      "children": <GridColumn
+        className="login-column"
       >
-        <div
-          className="login-left"
+        <Image
+          as={[Function]}
+          size="medium"
+          src="logo.png"
+          to="/"
+          ui={true}
+        />
+        <Header
+          as="h2"
+          className="login-header"
+          textAlign="center"
         >
-          <Header
-            size="huge"
-          >
-            GİRİŞ YAP
-            <br />
-            <pre />
-          </Header>
-        </div>
-        <ModalDescription>
+          Hoşgeldiniz
+        </Header>
+        <Segment
+          className="login-segment"
+          raised={true}
+        >
           <Form
             as="form"
             onSubmit={[Function]}
@@ -42,7 +46,6 @@ ShallowWrapper {
             <FormInput
               as={[Function]}
               control={[Function]}
-              label="Kullanıcı adı"
               name="username"
               onChange={[Function]}
               placeholder="Kullanıcı adı"
@@ -50,7 +53,6 @@ ShallowWrapper {
             <FormInput
               as={[Function]}
               control={[Function]}
-              label="Şifre"
               name="password"
               onChange={[Function]}
               placeholder="Şifre"
@@ -59,18 +61,29 @@ ShallowWrapper {
             <Button
               as="button"
               content="Giriş Yap"
-              floated="right"
               type="submit"
             />
           </Form>
-        </ModalDescription>
-      </ModalContent>,
-      "closeOnDimmerClick": true,
-      "closeOnDocumentClick": false,
-      "dimmer": "blurring",
-      "eventPool": "Modal",
-      "open": undefined,
-      "trigger": undefined,
+          <Divider />
+          Henüz kayıt olmadın mı?
+          <br />
+          <Link
+            onClick={[Function]}
+            replace={false}
+            style={
+              Object {
+                "color": "#49ba6f",
+              }
+            }
+            to="/kayıt"
+          >
+            Kayıt Ol
+          </Link>
+        </Segment>
+      </GridColumn>,
+      "className": "login-grid",
+      "textAlign": "center",
+      "verticalAlign": "bottom",
     },
     "ref": null,
     "rendered": Object {
@@ -79,18 +92,24 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <div
-            className="login-left"
+          <Image
+            as={[Function]}
+            size="medium"
+            src="logo.png"
+            to="/"
+            ui={true}
+          />,
+          <Header
+            as="h2"
+            className="login-header"
+            textAlign="center"
           >
-            <Header
-              size="huge"
-            >
-              GİRİŞ YAP
-              <br />
-              <pre />
-            </Header>
-          </div>,
-          <ModalDescription>
+            Hoşgeldiniz
+          </Header>,
+          <Segment
+            className="login-segment"
+            raised={true}
+          >
             <Form
               as="form"
               onSubmit={[Function]}
@@ -98,7 +117,6 @@ ShallowWrapper {
               <FormInput
                 as={[Function]}
                 control={[Function]}
-                label="Kullanıcı adı"
                 name="username"
                 onChange={[Function]}
                 placeholder="Kullanıcı adı"
@@ -106,7 +124,6 @@ ShallowWrapper {
               <FormInput
                 as={[Function]}
                 control={[Function]}
-                label="Şifre"
                 name="password"
                 onChange={[Function]}
                 placeholder="Şifre"
@@ -115,278 +132,65 @@ ShallowWrapper {
               <Button
                 as="button"
                 content="Giriş Yap"
-                floated="right"
                 type="submit"
               />
             </Form>
-          </ModalDescription>,
+            <Divider />
+            Henüz kayıt olmadın mı?
+            <br />
+            <Link
+              onClick={[Function]}
+              replace={false}
+              style={
+                Object {
+                  "color": "#49ba6f",
+                }
+              }
+              to="/kayıt"
+            >
+              Kayıt Ol
+            </Link>
+          </Segment>,
         ],
-        "className": "modal-content",
-        "image": true,
+        "className": "login-column",
       },
       "ref": null,
       "rendered": Array [
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": <Header
-              size="huge"
-            >
-              GİRİŞ YAP
-              <br />
-              <pre />
-            </Header>,
-            "className": "login-left",
+            "as": [Function],
+            "size": "medium",
+            "src": "logo.png",
+            "to": "/",
+            "ui": true,
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "children": Array [
-                "GİRİŞ YAP",
-                <br />,
-                <pre />,
-              ],
-              "size": "huge",
-            },
-            "ref": null,
-            "rendered": Array [
-              "GİRİŞ YAP",
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": "br",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": undefined,
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "pre",
-              },
-            ],
-            "type": [Function],
-          },
-          "type": "div",
+          "rendered": null,
+          "type": [Function],
         },
         Object {
           "instance": null,
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": <Form
-              as="form"
-              onSubmit={[Function]}
-            >
-              <FormInput
-                as={[Function]}
-                control={[Function]}
-                label="Kullanıcı adı"
-                name="username"
-                onChange={[Function]}
-                placeholder="Kullanıcı adı"
-              />
-              <FormInput
-                as={[Function]}
-                control={[Function]}
-                label="Şifre"
-                name="password"
-                onChange={[Function]}
-                placeholder="Şifre"
-                type="password"
-              />
-              <Button
-                as="button"
-                content="Giriş Yap"
-                floated="right"
-                type="submit"
-              />
-            </Form>,
+            "as": "h2",
+            "children": "Hoşgeldiniz",
+            "className": "login-header",
+            "textAlign": "center",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "as": "form",
-              "children": Array [
-                <FormInput
-                  as={[Function]}
-                  control={[Function]}
-                  label="Kullanıcı adı"
-                  name="username"
-                  onChange={[Function]}
-                  placeholder="Kullanıcı adı"
-                />,
-                <FormInput
-                  as={[Function]}
-                  control={[Function]}
-                  label="Şifre"
-                  name="password"
-                  onChange={[Function]}
-                  placeholder="Şifre"
-                  type="password"
-                />,
-                <Button
-                  as="button"
-                  content="Giriş Yap"
-                  floated="right"
-                  type="submit"
-                />,
-              ],
-              "onSubmit": [Function],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "as": [Function],
-                  "control": [Function],
-                  "label": "Kullanıcı adı",
-                  "name": "username",
-                  "onChange": [Function],
-                  "placeholder": "Kullanıcı adı",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "as": [Function],
-                  "control": [Function],
-                  "label": "Şifre",
-                  "name": "password",
-                  "onChange": [Function],
-                  "placeholder": "Şifre",
-                  "type": "password",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "as": "button",
-                  "content": "Giriş Yap",
-                  "floated": "right",
-                  "type": "submit",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
-            "type": [Function],
-          },
+          "rendered": "Hoşgeldiniz",
           "type": [Function],
         },
-      ],
-      "type": [Function],
-    },
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "centered": true,
-        "children": <ModalContent
-          className="modal-content"
-          image={true}
-        >
-          <div
-            className="login-left"
-          >
-            <Header
-              size="huge"
-            >
-              GİRİŞ YAP
-              <br />
-              <pre />
-            </Header>
-          </div>
-          <ModalDescription>
-            <Form
-              as="form"
-              onSubmit={[Function]}
-            >
-              <FormInput
-                as={[Function]}
-                control={[Function]}
-                label="Kullanıcı adı"
-                name="username"
-                onChange={[Function]}
-                placeholder="Kullanıcı adı"
-              />
-              <FormInput
-                as={[Function]}
-                control={[Function]}
-                label="Şifre"
-                name="password"
-                onChange={[Function]}
-                placeholder="Şifre"
-                type="password"
-              />
-              <Button
-                as="button"
-                content="Giriş Yap"
-                floated="right"
-                type="submit"
-              />
-            </Form>
-          </ModalDescription>
-        </ModalContent>,
-        "closeOnDimmerClick": true,
-        "closeOnDocumentClick": false,
-        "dimmer": "blurring",
-        "eventPool": "Modal",
-        "open": undefined,
-        "trigger": undefined,
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "children": Array [
-            <div
-              className="login-left"
-            >
-              <Header
-                size="huge"
-              >
-                GİRİŞ YAP
-                <br />
-                <pre />
-              </Header>
-            </div>,
-            <ModalDescription>
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
               <Form
                 as="form"
                 onSubmit={[Function]}
@@ -394,7 +198,6 @@ ShallowWrapper {
                 <FormInput
                   as={[Function]}
                   control={[Function]}
-                  label="Kullanıcı adı"
                   name="username"
                   onChange={[Function]}
                   placeholder="Kullanıcı adı"
@@ -402,7 +205,6 @@ ShallowWrapper {
                 <FormInput
                   as={[Function]}
                   control={[Function]}
-                  label="Şifre"
                   name="password"
                   onChange={[Function]}
                   placeholder="Şifre"
@@ -411,108 +213,31 @@ ShallowWrapper {
                 <Button
                   as="button"
                   content="Giriş Yap"
-                  floated="right"
-                  type="submit"
-                />
-              </Form>
-            </ModalDescription>,
-          ],
-          "className": "modal-content",
-          "image": true,
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": <Header
-                size="huge"
-              >
-                GİRİŞ YAP
-                <br />
-                <pre />
-              </Header>,
-              "className": "login-left",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "children": Array [
-                  "GİRİŞ YAP",
-                  <br />,
-                  <pre />,
-                ],
-                "size": "huge",
-              },
-              "ref": null,
-              "rendered": Array [
-                "GİRİŞ YAP",
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": "br",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": undefined,
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": "pre",
-                },
-              ],
-              "type": [Function],
-            },
-            "type": "div",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "children": <Form
-                as="form"
-                onSubmit={[Function]}
-              >
-                <FormInput
-                  as={[Function]}
-                  control={[Function]}
-                  label="Kullanıcı adı"
-                  name="username"
-                  onChange={[Function]}
-                  placeholder="Kullanıcı adı"
-                />
-                <FormInput
-                  as={[Function]}
-                  control={[Function]}
-                  label="Şifre"
-                  name="password"
-                  onChange={[Function]}
-                  placeholder="Şifre"
-                  type="password"
-                />
-                <Button
-                  as="button"
-                  content="Giriş Yap"
-                  floated="right"
                   type="submit"
                 />
               </Form>,
-            },
-            "ref": null,
-            "rendered": Object {
+              <Divider />,
+              "Henüz kayıt olmadın mı?",
+              <br />,
+              <Link
+                onClick={[Function]}
+                replace={false}
+                style={
+                  Object {
+                    "color": "#49ba6f",
+                  }
+                }
+                to="/kayıt"
+              >
+                Kayıt Ol
+              </Link>,
+            ],
+            "className": "login-segment",
+            "raised": true,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
               "instance": null,
               "key": undefined,
               "nodeType": "class",
@@ -522,7 +247,6 @@ ShallowWrapper {
                   <FormInput
                     as={[Function]}
                     control={[Function]}
-                    label="Kullanıcı adı"
                     name="username"
                     onChange={[Function]}
                     placeholder="Kullanıcı adı"
@@ -530,7 +254,6 @@ ShallowWrapper {
                   <FormInput
                     as={[Function]}
                     control={[Function]}
-                    label="Şifre"
                     name="password"
                     onChange={[Function]}
                     placeholder="Şifre"
@@ -539,7 +262,6 @@ ShallowWrapper {
                   <Button
                     as="button"
                     content="Giriş Yap"
-                    floated="right"
                     type="submit"
                   />,
                 ],
@@ -554,7 +276,6 @@ ShallowWrapper {
                   "props": Object {
                     "as": [Function],
                     "control": [Function],
-                    "label": "Kullanıcı adı",
                     "name": "username",
                     "onChange": [Function],
                     "placeholder": "Kullanıcı adı",
@@ -570,7 +291,6 @@ ShallowWrapper {
                   "props": Object {
                     "as": [Function],
                     "control": [Function],
-                    "label": "Şifre",
                     "name": "password",
                     "onChange": [Function],
                     "placeholder": "Şifre",
@@ -587,7 +307,6 @@ ShallowWrapper {
                   "props": Object {
                     "as": "button",
                     "content": "Giriş Yap",
-                    "floated": "right",
                     "type": "submit",
                   },
                   "ref": null,
@@ -597,6 +316,391 @@ ShallowWrapper {
               ],
               "type": [Function],
             },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "Henüz kayıt olmadın mı?",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Kayıt Ol",
+                "onClick": [Function],
+                "replace": false,
+                "style": Object {
+                  "color": "#49ba6f",
+                },
+                "to": "/kayıt",
+              },
+              "ref": null,
+              "rendered": "Kayıt Ol",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": <GridColumn
+          className="login-column"
+        >
+          <Image
+            as={[Function]}
+            size="medium"
+            src="logo.png"
+            to="/"
+            ui={true}
+          />
+          <Header
+            as="h2"
+            className="login-header"
+            textAlign="center"
+          >
+            Hoşgeldiniz
+          </Header>
+          <Segment
+            className="login-segment"
+            raised={true}
+          >
+            <Form
+              as="form"
+              onSubmit={[Function]}
+            >
+              <FormInput
+                as={[Function]}
+                control={[Function]}
+                name="username"
+                onChange={[Function]}
+                placeholder="Kullanıcı adı"
+              />
+              <FormInput
+                as={[Function]}
+                control={[Function]}
+                name="password"
+                onChange={[Function]}
+                placeholder="Şifre"
+                type="password"
+              />
+              <Button
+                as="button"
+                content="Giriş Yap"
+                type="submit"
+              />
+            </Form>
+            <Divider />
+            Henüz kayıt olmadın mı?
+            <br />
+            <Link
+              onClick={[Function]}
+              replace={false}
+              style={
+                Object {
+                  "color": "#49ba6f",
+                }
+              }
+              to="/kayıt"
+            >
+              Kayıt Ol
+            </Link>
+          </Segment>
+        </GridColumn>,
+        "className": "login-grid",
+        "textAlign": "center",
+        "verticalAlign": "bottom",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <Image
+              as={[Function]}
+              size="medium"
+              src="logo.png"
+              to="/"
+              ui={true}
+            />,
+            <Header
+              as="h2"
+              className="login-header"
+              textAlign="center"
+            >
+              Hoşgeldiniz
+            </Header>,
+            <Segment
+              className="login-segment"
+              raised={true}
+            >
+              <Form
+                as="form"
+                onSubmit={[Function]}
+              >
+                <FormInput
+                  as={[Function]}
+                  control={[Function]}
+                  name="username"
+                  onChange={[Function]}
+                  placeholder="Kullanıcı adı"
+                />
+                <FormInput
+                  as={[Function]}
+                  control={[Function]}
+                  name="password"
+                  onChange={[Function]}
+                  placeholder="Şifre"
+                  type="password"
+                />
+                <Button
+                  as="button"
+                  content="Giriş Yap"
+                  type="submit"
+                />
+              </Form>
+              <Divider />
+              Henüz kayıt olmadın mı?
+              <br />
+              <Link
+                onClick={[Function]}
+                replace={false}
+                style={
+                  Object {
+                    "color": "#49ba6f",
+                  }
+                }
+                to="/kayıt"
+              >
+                Kayıt Ol
+              </Link>
+            </Segment>,
+          ],
+          "className": "login-column",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "as": [Function],
+              "size": "medium",
+              "src": "logo.png",
+              "to": "/",
+              "ui": true,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "as": "h2",
+              "children": "Hoşgeldiniz",
+              "className": "login-header",
+              "textAlign": "center",
+            },
+            "ref": null,
+            "rendered": "Hoşgeldiniz",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                <Form
+                  as="form"
+                  onSubmit={[Function]}
+                >
+                  <FormInput
+                    as={[Function]}
+                    control={[Function]}
+                    name="username"
+                    onChange={[Function]}
+                    placeholder="Kullanıcı adı"
+                  />
+                  <FormInput
+                    as={[Function]}
+                    control={[Function]}
+                    name="password"
+                    onChange={[Function]}
+                    placeholder="Şifre"
+                    type="password"
+                  />
+                  <Button
+                    as="button"
+                    content="Giriş Yap"
+                    type="submit"
+                  />
+                </Form>,
+                <Divider />,
+                "Henüz kayıt olmadın mı?",
+                <br />,
+                <Link
+                  onClick={[Function]}
+                  replace={false}
+                  style={
+                    Object {
+                      "color": "#49ba6f",
+                    }
+                  }
+                  to="/kayıt"
+                >
+                  Kayıt Ol
+                </Link>,
+              ],
+              "className": "login-segment",
+              "raised": true,
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "as": "form",
+                  "children": Array [
+                    <FormInput
+                      as={[Function]}
+                      control={[Function]}
+                      name="username"
+                      onChange={[Function]}
+                      placeholder="Kullanıcı adı"
+                    />,
+                    <FormInput
+                      as={[Function]}
+                      control={[Function]}
+                      name="password"
+                      onChange={[Function]}
+                      placeholder="Şifre"
+                      type="password"
+                    />,
+                    <Button
+                      as="button"
+                      content="Giriş Yap"
+                      type="submit"
+                    />,
+                  ],
+                  "onSubmit": [Function],
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "as": [Function],
+                      "control": [Function],
+                      "name": "username",
+                      "onChange": [Function],
+                      "placeholder": "Kullanıcı adı",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "as": [Function],
+                      "control": [Function],
+                      "name": "password",
+                      "onChange": [Function],
+                      "placeholder": "Şifre",
+                      "type": "password",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "as": "button",
+                      "content": "Giriş Yap",
+                      "type": "submit",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "Henüz kayıt olmadın mı?",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": "br",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "Kayıt Ol",
+                  "onClick": [Function],
+                  "replace": false,
+                  "style": Object {
+                    "color": "#49ba6f",
+                  },
+                  "to": "/kayıt",
+                },
+                "ref": null,
+                "rendered": "Kayıt Ol",
+                "type": [Function],
+              },
+            ],
             "type": [Function],
           },
         ],

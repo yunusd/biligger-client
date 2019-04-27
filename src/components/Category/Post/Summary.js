@@ -48,7 +48,7 @@ const Summary = (props) => {
           </Grid.Column>
         </Grid.Row>
         {
-          !isExist ? <h5>Gönderi bulunamadı!</h5>
+          !isExist ? <h5>Bilig bulunamadı!</h5>
           : posts.map((val) => {
               const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
               const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id}`;

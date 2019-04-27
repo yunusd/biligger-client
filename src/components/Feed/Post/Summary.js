@@ -1,16 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useApolloClient } from 'react-apollo-hooks';
 
 import moment from 'moment';
 import marked from 'marked';
 
 import { Grid, Card, Icon } from 'semantic-ui-react';
+
+import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../../queries';
 import dateLocale from '../../../helpers/dateLocale';
 import './Summary.css';
 
 moment.updateLocale('en', dateLocale);
 
 const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
+  const client = useApolloClient();
+
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
+
+  const auth = {
+    isOwn: getMe && getMe.username === val.author.username,
+    isLoggedIn: currentUser.isLoggedIn && true,
+  };
+
+  const authorUrl = `/@${val.author.username}`;
+
   const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
   const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id}`;
   const rawContent = marked(val.content);
@@ -41,7 +56,9 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
                 </Link>
               </Card.Header>
               <Card.Meta>
-                {val.author.username}
+                <Link to={authorUrl}>
+                  {val.author.username}
+                </Link>
                 &nbsp;-&nbsp;
                 {moment(val.createdAt).fromNow()}
               </Card.Meta>
@@ -63,9 +80,22 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
                 Yorum Yaz
               </Link>
 
-              <Link to="/" className="summary-context-right">
-                bildir
-              </Link>
+              {auth.isLoggedIn && (
+                auth.isOwn ? (
+                  <React.Fragment>
+                    <Link to="#" className="summary-context-right">
+                      düzenle
+                    </Link>
+                    <Link to="#" className="summary-context-right">
+                      sil
+                    </Link>
+                  </React.Fragment>
+                ) : (
+                  <Link to="#" className="summary-context-right">
+                    bildir
+                  </Link>
+                )
+              )}
 
             </Card.Content>
           </Card>

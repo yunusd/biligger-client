@@ -1,24 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ApolloConsumer } from 'react-apollo';
-import axios from 'axios';
+import { useApolloClient } from 'react-apollo-hooks';
 
 import {
-  Menu, Image, Button, Dropdown,
+  Menu, Image, Button,
 } from 'semantic-ui-react';
 import './Header.css';
 import logo from '../../logo.png';
 
 import LogIn from './LogIn';
 import { Category } from '../Category';
-import GET_AUTH_STATUS from '../../queries';
+import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
 
 const AppHeader = (props) => {
-  const handleSubmit = (client) => {
-    axios.get('https://localhost:3000/auth/logout', { withCredentials: 'include' })
-      .then(() => { client.clearStore(); window.location.replace('/'); })
-      .catch(error => error);
-  };
+  const client = useApolloClient();
+
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
+
+  const profileUrl = currentUser.isLoggedIn ? `/@${getMe.username}` : '#';
+
   if (props.location.pathname !== '/giriş' && props.location.pathname !== '/kayıt') {
     return (
       <div id="header-menu-fix">
@@ -29,35 +30,21 @@ const AppHeader = (props) => {
           <Menu.Item>
             <Category />
           </Menu.Item>
-          <ApolloConsumer>
-            {(client) => {
-              const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
-
-              return (
-                currentUser.isLoggedIn
-                  ? (
-                    <Menu.Item position="right" className="header-right">
-                      <Link to="/yeni-bilig"><Button color="green">Yeni Bilig</Button></Link>
-                      &nbsp;
-                      &nbsp;
-                      &nbsp;
-                      <Dropdown button text="Profil">
-                        <Dropdown.Menu>
-                          <Dropdown.Item>Ayarlar</Dropdown.Item>
-                          <Dropdown.Item onClick={() => { handleSubmit(client); }}>
-                            Çıkış
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </Menu.Item>
-                  )
-                  : (
-                    <Menu.Item position="right" className="header-right">
-                      <LogIn button={<Button basic color="green">Giriş Yap</Button>} />
-                    </Menu.Item>
-                ));
-            }}
-          </ApolloConsumer>
+          {currentUser.isLoggedIn ? (
+            <Menu.Item position="right" className="header-right">
+              <Button as={Link} to="/yeni-bilig" color="green" icon="write" />
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              <Button as={Link} to={profileUrl} content={getMe.username} icon="user" />
+            </Menu.Item>
+            )
+            : (
+              <Menu.Item position="right" className="header-right">
+                <LogIn button={<Button basic color="green">Giriş Yap</Button>} />
+              </Menu.Item>
+            )
+          }
         </Menu>
       </div>
     );

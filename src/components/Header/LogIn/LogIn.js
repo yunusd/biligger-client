@@ -40,7 +40,7 @@ class LogIn extends Component {
   render() {
     const { error = '' } = this.state;
     const {
-      isRedirect, username, button, location,
+      button, location,
     } = this.props;
 
     const urlCheck = location ? location.pathname === '/giriş-yap' : false;

@@ -8,4 +8,16 @@ const GET_AUTH_STATUS = gql`
   }
 `;
 
-export default GET_AUTH_STATUS;
+const GET_ME_FROM_CACHE = gql`
+  {
+    getMe @client {
+      id
+      username
+    }
+  }
+`;
+
+export {
+  GET_ME_FROM_CACHE,
+  GET_AUTH_STATUS,
+};

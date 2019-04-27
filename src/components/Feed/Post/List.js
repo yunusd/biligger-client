@@ -20,7 +20,7 @@ const List = () => (
 
       if (!isExist) {
         return (
-          <h5>Gönderi bulunamadı!</h5>
+          <h5>Bilig bulunamadı!</h5>
         );
       }
       return <Summary error={error} data={data} />;

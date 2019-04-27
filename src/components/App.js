@@ -6,7 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks';
 import { Container } from 'semantic-ui-react';
 
-import GET_AUTH_STATUS from '../queries';
+import { GET_AUTH_STATUS } from '../queries';
 
 import ScrollTop from './ScrollTop';
 import client from './ApolloClient';
@@ -18,6 +18,8 @@ import { Post, AddPost } from './Post';
 import { List as Category } from './Category/Post';
 import NotFound from './NotFound';
 import Auth from './Auth';
+import Profile from './Profile';
+import { EditUser } from './Profile/User';
 
 
 // eslint-disable-next-line react/prop-types
@@ -58,6 +60,8 @@ const App = () => (
                   <PrivateRoute path="/" exact component={Feed} />
                   <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
                   <PrivateRoute path="/(teknoloji|bilim|yaşam-biçimi|spor|sanat)/" exact component={Category} />
+                  <PrivateRoute path="/@:username" exact component={Profile} />
+                  <PrivateRoute path="/@:username/ayarlar" exact component={EditUser} />
                   <Route path="/:title" exact component={Post} />
                   <PrivateRoute component={NotFound} />
                 </Switch>

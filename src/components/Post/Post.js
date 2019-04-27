@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-apollo-hooks';
+import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import marked from 'marked';
 import {
   Grid, Card, Label, Header, Divider, Icon,
@@ -12,10 +12,13 @@ import GET_POST from './queries';
 import { List, Comment } from '../Comment';
 import NotFound from '../NotFound';
 import dateLocale from '../../helpers/dateLocale';
+import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../queries';
 
 moment.updateLocale('en', dateLocale);
 
 const Post = (props) => {
+  const client = useApolloClient();
+
   const url = props.location.pathname;
   const path = url.split('/');
   const pathTitle = path[1].slice(0, -25).replace(/-/g, ' ');
@@ -26,9 +29,19 @@ const Post = (props) => {
   if (loading) return null;
   if (error) return <NotFound {...props} />;
 
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
+
   const {
     title, content, author, createdAt,
   } = data.getPost;
+
+  const auth = {
+    isOwn: getMe && getMe.username === author.username,
+    isLoggedIn: currentUser.isLoggedIn && true,
+  };
+
+  const authorUrl = `/@${author.username}`;
 
   /**
    * if title of url is not match with title of post, page will be
@@ -38,7 +51,7 @@ const Post = (props) => {
     const validUrl = `${title.toLowerCase().replace(/\s/g, '-')}-${id}`;
     return <Redirect to={validUrl} />;
   }
-  // console.log(props);
+
   const markedContent = marked(content);
   return (
     <Grid columns={1} centered id={id} key={id}>
@@ -46,7 +59,7 @@ const Post = (props) => {
         <Grid.Column width={12}>
           <Card fluid>
             <Card.Content>
-              <Label as="a" color="blue" ribbon>
+              <Label as={Link} to={authorUrl} color="blue" ribbon>
                 {author.username}
                 &nbsp;-&nbsp;
                 {moment(createdAt).fromNow()}
@@ -72,11 +85,22 @@ const Post = (props) => {
                 <Icon name="comment" />
               Yorum Yaz
               </Link>
-
-              <Link to="#" className="summary-context-right">
-              bildir
-              </Link>
-
+              {auth.isLoggedIn && (
+                auth.isOwn ? (
+                  <React.Fragment>
+                    <Link to="#" className="summary-context-right">
+                      düzenle
+                    </Link>
+                    <Link to="#" className="summary-context-right">
+                      sil
+                    </Link>
+                  </React.Fragment>
+                ) : (
+                  <Link to="#" className="summary-context-right">
+                    bildir
+                  </Link>
+                )
+              )}
             </Card.Content>
           </Card>
           <Comment post={id} />

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import {
-  Comment, Divider, Header, Card,
+  Comment, Card,
 } from 'semantic-ui-react';
 import marked from 'marked';
+
 import { GET_LATEST_COMMENTS } from './queries';
 import dateLocale from '../../helpers/dateLocale';
 
@@ -19,13 +21,15 @@ const List = ({ post }) => (
         return (
           data.getLatestComments.map((val) => {
             const rawContent = marked(val.content);
-
+            const authorUrl = `/@${val.author.username}`;
             return (
               <Card fluid style={{ padding: '20px' }} key={val.id}>
                 <Comment.Group>
                   <Comment>
                     <Comment.Content>
-                      <Comment.Author as="a">{ val.author.username }</Comment.Author>
+                      <Comment.Author as={Link} to={authorUrl}>
+                        { val.author.username }
+                      </Comment.Author>
                       <Comment.Metadata>
                         <span>{moment(val.createdAt).fromNow()}</span>
                       </Comment.Metadata>

@@ -6,7 +6,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Content as CommentEditor } from '../Post/RichTextEditor';
 import { ADD_COMMENT } from './mutations';
-import GET_AUTH_STATUS from '../../queries';
+import { GET_AUTH_STATUS } from '../../queries';
 
 const Comment = (props) => {
   const { post } = props;
