@@ -72,7 +72,7 @@ const User = (props) => {
       render: () => <Tab.Pane>İçerik</Tab.Pane>,
     },
     /**
-     * I leave the example below. Above object rendering like this structure.
+     * I leave the example below. Above objects rendering like this structure.
      */
     // {
     //   menuItem: (

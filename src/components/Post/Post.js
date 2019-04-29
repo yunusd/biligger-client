@@ -9,7 +9,7 @@ import { Link, Redirect } from 'react-router-dom';
 import moment from 'moment';
 import GET_POST from './queries';
 
-import { List, Comment } from '../Comment';
+import { List, AddComment } from '../Comment';
 import NotFound from '../NotFound';
 import dateLocale from '../../helpers/dateLocale';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../queries';
@@ -102,14 +102,14 @@ const Post = (props) => {
               )}
             </Card.Content>
           </Card>
-          <Comment post={id} />
+          <AddComment parent={{ id, parentModel: 'Post' }} />
           <Divider horizontal>
             <Header as="h3" style={{ color: 'grey' }}>
                 Yorumlar
             </Header>
           </Divider>
 
-          <List post={id} />
+          <List parent={{ id }} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

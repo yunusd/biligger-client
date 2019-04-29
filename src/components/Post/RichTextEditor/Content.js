@@ -6,12 +6,14 @@ import theme from './Theme';
 class Content extends Component {
   constructor(props) {
     super(props);
-    const { type = 'post', post } = this.props || {};
+    const { type = 'post', post, comment } = this.props || {};
+    this.comment = comment;
     this.post = post;
     this.type = type;
-    this.draft = localStorage.getItem(this.type === 'comment' || 'content') || null;
+    this.draft = localStorage.getItem(this.type === 'comment' || 'content' || this.type === 'editComment' || 'edit-comment') || null;
     this.state = {
-      value: this.post ? this.post.content : this.draft,
+      // eslint-disable-next-line no-nested-ternary
+      value: this.post ? this.post.content : (this.comment ? this.comment.content : this.draft),
     };
   }
 
@@ -19,6 +21,7 @@ class Content extends Component {
   onChange = (value) => {
     const content = value();
     if (this.type === 'editPost') return localStorage.setItem('edit-content', content);
+    if (this.type === 'editComment') return localStorage.setItem('edit-comment', content);
     localStorage.setItem(this.type === 'comment' ? 'comment' : 'content', content);
   }
 

@@ -5,9 +5,29 @@ const GET_USER_COMMENTS = gql`
     getUserComments(author: $author){
       id
       content
-      post {
-        id,
-        title
+      author {
+        id
+        username
+      }
+      parentModel
+      parent {
+        post {
+          id
+          title
+          author {
+            id
+            username
+          }
+        }
+        comment {
+          id
+          content
+          author {
+            id
+            username
+          }
+        }
+   
       }
       createdAt
     }

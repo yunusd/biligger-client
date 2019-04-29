@@ -17,7 +17,7 @@ const NotFound = props => (
       <List>
         <List.Item>
           <p>
-            Maalesef aradığınız sayfayı bulamadık.
+            { props.deleted ? 'Aradığınız içerik kullanıcı tarafından silinmiş!' : 'Maalesef aradığınız sayfayı bulamadık.'}
           </p>
         </List.Item>
         <List.Item>

@@ -20,6 +20,7 @@ import NotFound from './NotFound';
 import Auth from './Auth';
 import Profile from './Profile';
 import { EditUser } from './Profile/User';
+import { Comment, EditComment } from './Comment';
 
 
 // eslint-disable-next-line react/prop-types
@@ -61,7 +62,9 @@ const App = () => (
                   <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
                   <PrivateRoute path="/(teknoloji|bilim|yaşam-biçimi|spor|sanat)/" exact component={Category} />
                   <PrivateRoute path="/@:username" exact component={Profile} />
-                  <PrivateRoute path="/@:username/ayarlar" exact component={EditUser} />
+                  <PrivateRoute path="/@:username/ayarlar" component={EditUser} />
+                  <Route path="/@:username/:content/:comment" exact component={Comment} />
+                  <PrivateRoute path="/@:username/:content/:comment/düzenle" exact component={EditComment} />
                   <Route path="/:title" exact component={Post} />
                   <PrivateRoute path="/:title/düzenle" exact component={EditPost} />
                   <PrivateRoute component={NotFound} />
