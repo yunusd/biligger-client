@@ -1,5 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Menu } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import { GET_CATEGORIES } from './queries';
 
@@ -10,19 +11,23 @@ const Category = () => (
         if (error) return 'Hata';
         return (
           data.getCategories.map(({ id, name }) => (
-            <NavLink
+            <Menu.Item
               key={id}
-              to={{
-                pathname: `/${name.replace(/\s/g, '-')}`,
-              }}
-              activeStyle={{
-                fontWeight: 'bold',
-                color: 'green',
-              }}
-              style={{ color: 'black', padding: '0px 20px', textTransform: 'capitalize' }}
+              name={name}
             >
-              {name}
-            </NavLink>
+              <NavLink
+                to={{
+                  pathname: `/${name.replace(/\s/g, '-')}`,
+                }}
+                activeStyle={{
+                  fontWeight: 'bold',
+                  color: 'green',
+                }}
+                style={{ color: 'black', textTransform: 'capitalize' }}
+              >
+                {name}
+              </NavLink>
+            </Menu.Item>
           ))
         );
       }}

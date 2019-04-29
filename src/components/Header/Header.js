@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useApolloClient } from 'react-apollo-hooks';
 
 import {
-  Menu, Image, Button,
+  Menu, Image, Button, Input,
 } from 'semantic-ui-react';
 import './Header.css';
 import logo from '../../logo.png';
@@ -20,24 +20,33 @@ const AppHeader = (props) => {
 
   const profileUrl = currentUser.isLoggedIn ? `/@${getMe.username}` : '#';
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      return props.history.replace(`/ara?bilig=${e.target.value}`);
+    }
+  };
+
   if (props.location.pathname !== '/giriş' && props.location.pathname !== '/kayıt') {
     return (
       <div id="header-menu-fix">
-        <Menu fixed="top" inverted className="header-menu">
-          <Menu.Item header className="borderless">
+        <Menu stackable fixed="top" className="borderless header-menu">
+          <Menu.Item header>
             <Image as={Link} to="/" src={logo} width="100px" />
           </Menu.Item>
-          <Menu.Item>
-            <Category />
-          </Menu.Item>
+          <Category />
           {currentUser.isLoggedIn ? (
-            <Menu.Item position="right" className="header-right">
-              <Button as={Link} to="/yeni-bilig" color="green" icon="write" />
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              <Button as={Link} to={profileUrl} content={getMe.username} icon="user" />
-            </Menu.Item>
+            <Menu.Menu position="right">
+              <Menu.Item>
+                <Input icon={{ name: 'search', link: true }} placeholder="Ara..." transparent onKeyPress={handleKeyPress} />
+              </Menu.Item>
+              <Menu.Item>
+                <Button as={Link} to="/yeni-bilig" color="green" icon="write" />
+              </Menu.Item>
+              <Menu.Item>
+                <Button as={Link} to={profileUrl} content={getMe.username} icon="user" />
+              </Menu.Item>
+            </Menu.Menu>
             )
             : (
               <Menu.Item position="right" className="header-right">
