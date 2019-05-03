@@ -1,20 +1,12 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
-import { List, Dropdown } from 'semantic-ui-react';
+import { List, Dropdown, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import GET_POST_BY_USER from './queries';
 import urlSerializer from '../../../helpers/urlSerializer';
 
-const Post = (props) => {
-  const { userId, auth } = props;
-  const { data, loading, error } = useQuery(GET_POST_BY_USER, { variables: { id: userId } });
-
-  if (loading) return null;
-  if (error) return 'Maalesef zorluklar yaşıyoruz!';
-  if (data.getPostsByUser.length === 0) return 'Bilig bulunamadı!';
-
-  return data.getPostsByUser.map((val) => {
+const PostList = ({ data, auth }) => data.getPostsByUser.map((val) => {
     const { id, title, content } = val;
     const { isOwn, isLoggedIn } = auth;
 
@@ -58,6 +50,50 @@ const Post = (props) => {
       </List.Item>
     );
   });
+
+const Post = (props) => {
+  const { userId, auth } = props;
+  const {
+    data, loading, error, fetchMore,
+  } = useQuery(GET_POST_BY_USER, {
+    variables: {
+      id: userId,
+      offset: 0,
+      limit: 10,
+    },
+  });
+
+  if (loading) return null;
+  if (error) return 'Maalesef zorluklar yaşıyoruz!';
+  if (data.getPostsByUser.length === 0) return 'Bilig bulunamadı!';
+
+  return (
+    <React.Fragment>
+      <PostList data={data} auth={auth} />
+      { data.getPostsByUser.length >= 10
+      && (
+        <Button
+          basic
+          fluid
+          onClick={() => {
+            fetchMore({
+              variables: {
+                offset: data.getPostsByUser.length,
+              },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+                return Object.assign({}, prev, {
+                  getPostsByUser: [...prev.getPostsByUser, ...fetchMoreResult.getPostsByUser],
+                });
+              },
+            });
+          }}
+        >
+          Daha Fazla
+        </Button>
+      )}
+    </React.Fragment>
+  );
 };
 
 export default Post;

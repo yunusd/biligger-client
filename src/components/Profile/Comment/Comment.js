@@ -1,22 +1,16 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
-import { List, Dropdown } from 'semantic-ui-react';
+import { List, Dropdown, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import GET_USER_COMMENTS from './queries';
 import urlSerializer from '../../../helpers/urlSerializer';
 
-const Comment = ({ userId, auth }) => {
-  const { data, loading, error } = useQuery(GET_USER_COMMENTS, { variables: { author: userId } });
-  if (loading) return null;
-  if (error) return 'Maalesef zorluklar yaşıyoruz!';
-  if (data.getUserComments.length === 0) return 'Yorum bulunamadı!';
-
+const CommentList = ({ auth, data }) => {
+  const { isOwn, isLoggedIn } = auth;
   return data.getUserComments.map((val) => {
     const { id, content, author } = val;
-    const { isOwn, isLoggedIn } = auth;
-
     const slug = urlSerializer({
       id,
       username: author.username,
@@ -53,6 +47,47 @@ const Comment = ({ userId, auth }) => {
       </List.Item>
     );
   });
+};
+
+const Comment = ({ userId, auth }) => {
+  const { data, loading, error, fetchMore } = useQuery(GET_USER_COMMENTS, {
+    variables: {
+      author: userId,
+      offset: 0,
+      limit: 10,
+    },
+  });
+  if (loading) return null;
+  if (error) return 'Maalesef zorluklar yaşıyoruz!';
+  if (data.getUserComments.length === 0) return 'Yorum bulunamadı!';
+
+  return (
+    <React.Fragment>
+      <CommentList auth={auth} data={data} />
+      { data.getUserComments.length >= 10
+      && (
+        <Button
+          basic
+          fluid
+          onClick={() => {
+            fetchMore({
+              variables: {
+                offset: data.getUserComments.length,
+              },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+                return Object.assign({}, prev, {
+                  getUserComments: [...prev.getUserComments, ...fetchMoreResult.getUserComments],
+                });
+              },
+            });
+          }}
+        >
+          Daha Fazla
+        </Button>
+      )}
+    </React.Fragment>
+  );
 };
 
 export default Comment;

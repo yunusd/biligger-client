@@ -3,7 +3,7 @@ import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import {
- Comment, Card, Divider, Icon,
+ Comment, Card, Divider, Icon, Button,
 } from 'semantic-ui-react';
 import marked from 'marked';
 
@@ -20,6 +20,8 @@ const Reply = ({ parent, getMe, currentUser }) => {
   const { data, loading, error } = useQuery(GET_LATEST_COMMENTS, {
     variables: {
       parent: parent.id,
+      offset: 0,
+      limit: 1,
     },
   });
   if (loading) return null;
@@ -87,17 +89,11 @@ const Reply = ({ parent, getMe, currentUser }) => {
   );
 };
 
-const List = ({ parent }) => {
+const CommentList = ({ data }) => {
   const client = useApolloClient();
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
 
-  const { data, loading, error } = useQuery(GET_LATEST_COMMENTS, {
-    variables: {
-      parent: parent.id,
-    },
-  });
-  if (loading) return null;
-  if (error) return 'Biraz sıkıntı yaşıyoruz!';
-  if (!data.getLatestComments.length) return 'Yorum Yok!';
 
   return data.getLatestComments.map(({
     id,
@@ -106,9 +102,6 @@ const List = ({ parent }) => {
     like,
     createdAt,
   }) => {
-    const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
-    const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
-
     const auth = {
       isOwn: getMe && getMe.username === author.username,
       isLoggedIn: currentUser.isLoggedIn && true,
@@ -164,6 +157,49 @@ const List = ({ parent }) => {
       </Card>
     );
   });
+};
+
+const List = ({ parent }) => {
+  const {
+ data, loading, error, fetchMore,
+} = useQuery(GET_LATEST_COMMENTS, {
+    variables: {
+      parent: parent.id,
+      offset: 0,
+      limit: 10,
+    },
+  });
+  if (loading) return null;
+  if (error) return 'Biraz sıkıntı yaşıyoruz!';
+  if (!data.getLatestComments.length) return 'Yorum Yok!';
+
+  return (
+    <React.Fragment>
+      <CommentList data={data} />
+      {data.getLatestComments.length >= 10
+      && (
+        <Button
+          basic
+          fluid
+          onClick={() => {
+            fetchMore({
+              variables: {
+                offset: data.getLatestComments.length,
+              },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+                return Object.assign({}, prev, {
+                  getLatestComments: [...prev.getLatestComments, ...fetchMoreResult.getLatestComments],
+                });
+              },
+            });
+          }}
+        >
+          Daha fazla
+        </Button>
+      )}
+    </React.Fragment>
+  );
 };
 
 export default List;

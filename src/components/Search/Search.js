@@ -4,11 +4,13 @@ import moment from 'moment';
 
 import { Link } from 'react-router-dom';
 import {
-  Grid, Card, Icon, Segment,
+  Grid, Card, Icon, Segment, Button,
 } from 'semantic-ui-react';
 import SEARCH_POSTS from './queries';
 import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
 import dateLocale from '../../helpers/dateLocale';
+import urlSerializer from '../../helpers/urlSerializer';
+import Like from '../Like';
 
 moment.updateLocale('en', dateLocale);
 
@@ -30,18 +32,94 @@ const SearchHeader = () => (
   </Grid.Row>
 );
 
-const Search = (props) => {
+const SearchList = ({ data }) => {
   const client = useApolloClient();
 
   const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
   const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
+  return data.searchPosts.map((val, i) => {
+    const auth = {
+      isOwn: getMe && getMe.username === val.author.username,
+      isLoggedIn: currentUser.isLoggedIn && true,
+    };
 
-  // const content = paragraph.length < 500 ? paragraph : `${paragraph.slice(0, 500)}...`;
+    const authorUrl = `/@${val.author.username}`;
+
+    const slug = urlSerializer({
+      id: val.id,
+      username: val.author.username,
+      text: {
+        title: val.title,
+      },
+      type: {
+        post: true,
+      },
+    });
+    return (
+      <Card fluid id={val.id} key={val.id}>
+        <Card.Content>
+          <Card.Header>
+            <Link
+              to={{
+              pathname: val.id ? `${slug.post.url}` : '/',
+              state: { id: val.id },
+            }}
+              style={{ color: 'rgba(0,0,0,.85)' }}
+            >
+              {val.title}
+            </Link>
+          </Card.Header>
+          <Card.Meta>
+            <Link to={authorUrl}>
+              {val.author.username}
+            </Link>
+            &nbsp;-&nbsp;
+            {moment(val.createdAt).fromNow()}
+          </Card.Meta>
+          <Card.Description dangerouslySetInnerHTML={{ __html: val.content }} className="display-linebreak">
+            {/* {content} */}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <Like parentModel="Post" id={val.id} like={val.like} />
+
+
+              &nbsp;&nbsp;&nbsp;
+
+          <Link to="/" className="summary-context-icon">
+            <Icon name="comment" size="large" />
+          </Link>
+
+          {auth.isLoggedIn && (
+            auth.isOwn ? (
+              <React.Fragment>
+                <Link to={`${slug.post.url}/düzenle`} className="summary-context-right summary-context-icon">
+                  <Icon name="edit" size="large" />
+                </Link>
+              </React.Fragment>
+            ) : (
+              <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
+                <Icon name="flag" title="bildir" size="large" />
+              </Link>
+            )
+          )}
+
+        </Card.Content>
+      </Card>
+    );
+  });
+};
+
+const Search = (props) => {
   const params = new URLSearchParams(props.location.search);
   const search = params.get('bilig');
-  const { data, loading, error } = useQuery(SEARCH_POSTS, {
+  const {
+    data, loading, error, fetchMore,
+  } = useQuery(SEARCH_POSTS, {
     variables: {
       text: search,
+      offset: 0,
+      limit: 10,
     },
   });
 
@@ -58,90 +136,40 @@ const Search = (props) => {
     );
   }
 
-  return data.searchPosts.map((val, i) => {
-    const auth = {
-      isOwn: getMe && getMe.username === val.author.username,
-      isLoggedIn: currentUser.isLoggedIn && true,
-    };
-
-    const authorUrl = `/@${val.author.username}`;
-
-    const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
-    const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id}`;
-
-    // const rawContent = marked(val.content);
-
-    // const paragraph = rawContent.substring(
-    //   rawContent.lastIndexOf('<p>'),
-    //   rawContent.lastIndexOf('</p>'),
-    // );
-    return (
-      <Grid columns={1} centered id={val.id} key={val.id}>
-        {error && 'HATA'}
-        {i === 0 && <SearchHeader />}
+  return (
+    <React.Fragment>
+      <Grid columns={1} centered>
         <Grid.Row>
           <Grid.Column width={12}>
-            <Card fluid>
-              <Card.Content>
-                <Card.Header>
-                  <Link
-                    to={{
-                    pathname: val.id ? `/${url}` : '/',
-                    state: { id: val.id },
-                  }}
-                    style={{ color: 'rgba(0,0,0,.85)' }}
-                  >
-                    {title}
-                  </Link>
-                </Card.Header>
-                <Card.Meta>
-                  <Link to={authorUrl}>
-                    {val.author.username}
-                  </Link>
-                  &nbsp;-&nbsp;
-                  {moment(val.createdAt).fromNow()}
-                </Card.Meta>
-                <Card.Description dangerouslySetInnerHTML={{ __html: val.content }} className="display-linebreak">
-                  {/* {content} */}
-                </Card.Description>
-              </Card.Content>
-
-              <Card.Content extra>
-                <Link to="/">
-                  <Icon name="idea" />
-                  Katılıyorum
-                </Link>
-
-              &nbsp;&nbsp;&nbsp;
-
-                <Link to="/">
-                  <Icon name="comment" />
-                  Yorum Yaz
-                </Link>
-
-                {auth.isLoggedIn && (
-                  auth.isOwn ? (
-                    <React.Fragment>
-                      <Link to={`${url}/düzenle`} className="summary-context-right">
-                        <Icon name="edit" />
-                        Düzenle
-                      </Link>
-                    </React.Fragment>
-                  ) : (
-                    <Link to="#" className="summary-context-right" title="Bildir">
-                      <Icon name="flag" title="bildir" />
-                    </Link>
-                  )
-                )}
-
-              </Card.Content>
-            </Card>
-
+            <SearchHeader />
+            <SearchList data={data} />
+            {data.searchPosts.length >= 10
+            && (
+              <Button
+                basic
+                fluid
+                onClick={() => {
+                  fetchMore({
+                    variables: {
+                      offset: data.searchPosts.length,
+                    },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                      if (!fetchMoreResult) return prev;
+                      return Object.assign({}, prev, {
+                        searchPosts: [...prev.searchPosts, ...fetchMoreResult.searchPosts],
+                      });
+                    },
+                  });
+                }}
+              >
+              Daha Fazla
+              </Button>
+            )}
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    );
-  });
+    </React.Fragment>
+  );
 };
 
 export default Search;

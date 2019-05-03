@@ -1,16 +1,12 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import { Link } from 'react-router-dom';
-import { List } from 'semantic-ui-react';
+import { List, Button } from 'semantic-ui-react';
 import GET_LIKES from './queries';
 
 import urlSerializer from '../../../helpers/urlSerializer';
 
-const Like = () => {
-  const { data, loading, error } = useQuery(GET_LIKES);
-  if (loading) return null;
-  if (error) return 'Maalesef zorluklar yaşıyoruz!';
-  return data.getLikes.map(({ parent }) => {
+const LikeList = ({ data }) => data.getLikes.map(({ parent }) => {
     const { id, title, content } = parent;
     const slug = urlSerializer({
       id,
@@ -34,6 +30,47 @@ const Like = () => {
       </List.Item>
     );
   });
+
+const Like = () => {
+  const {
+    data, loading, error, fetchMore,
+  } = useQuery(GET_LIKES, {
+    variables: {
+      offset: 0,
+      limit: 10,
+    },
+  });
+  if (loading) return null;
+  if (error) return 'Maalesef zorluklar yaşıyoruz!';
+  if (data.getLikes.length === 0) return 'Katıldığınız herhangi bir içerik bulunamadı!';
+
+  return (
+    <React.Fragment>
+      <LikeList data={data} />
+      {data.getLikes.length >= 10
+      && (
+        <Button
+          basic
+          fluid
+          onClick={() => {
+            fetchMore({
+              variables: {
+                offset: data.getLikes.length,
+              },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+                return Object.assign({}, prev, {
+                  getLikes: [...prev.getLikes, ...fetchMoreResult.getLikes],
+                });
+              },
+            });
+          }}
+        >
+          Daha Fazla
+        </Button>
+      )}
+    </React.Fragment>
+  );
 };
 
 export default Like;

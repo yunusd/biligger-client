@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const GET_LIKES = gql`
-  {
-    getLikes{
+  query getLikes($offset: Int!, $limit: Int!){
+    getLikes(offset: $offset, limit: $limit){
       parent{
         ... on Post {
           id

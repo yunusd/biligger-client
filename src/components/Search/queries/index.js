@@ -1,14 +1,15 @@
 import gql from 'graphql-tag';
 
 const SEARCH_POSTS = gql`
-query searchPosts($text: String!){
-  searchPosts(text: $text) {
+query searchPosts($text: String!, $offset: Int!, $limit: Int!){
+  searchPosts(text: $text, offset: $offset, limit: $limit) {
     id
     title
     content
+    url
     like
     author {
-      id
+      id,
       username
     }
     createdAt

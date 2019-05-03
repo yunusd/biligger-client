@@ -35,8 +35,8 @@ const GET_COMMENT = gql`
 `;
 
 const GET_LATEST_COMMENTS = gql`
- query getLatestComments($parent: ID!){
-   getLatestComments(parent: $parent){
+ query getLatestComments($parent: ID!, $offset: Int!, $limit: Int!){
+   getLatestComments(parent: $parent, offset: $offset, limit: $limit){
     id
     content
     author {

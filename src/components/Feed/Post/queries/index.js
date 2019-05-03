@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const GET_LATEST_POSTS = gql`
-  {
-    getLatestPosts {
+  query getLatestPosts($offset: Int!, $limit: Int!){
+    getLatestPosts(offset: $offset, limit: $limit) {
       id
       title
       content
