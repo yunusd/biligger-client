@@ -29,7 +29,7 @@ const DeletePost = (props) => {
   });
   return (
     <React.Fragment>
-      <Icon name="trash" onClick={handleOpen} className="summary-context-icon summary-context-right" />
+      <Icon name="trash" onClick={handleOpen} size="large" color="grey" className="summary-context-icon summary-context-right" />
       <Modal
         open={open}
         basic

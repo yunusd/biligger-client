@@ -4,7 +4,7 @@ import { useQuery } from 'react-apollo-hooks';
 import { List, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import GET_POST_BY_USER from './queries';
-import { DeletePost } from '../../Post';
+import urlSerializer from '../../../helpers/urlSerializer';
 
 const Post = (props) => {
   const { userId, auth } = props;
@@ -16,13 +16,22 @@ const Post = (props) => {
 
   return data.getPostsByUser.map((val) => {
     const { id, title, content } = val;
-    const postUrl = `/${title.toLowerCase().replace(' ', '-')}-${id}`;
     const { isOwn, isLoggedIn } = auth;
+
+    const slug = urlSerializer({
+      id,
+      text: {
+        title,
+      },
+      type: {
+        post: true,
+      },
+    });
 
     return (
       <List.Item key={id} className="user-post-list-item">
         <div className="list-item-hr-margin" />
-        <List.Content as={Link} to={postUrl} className="user-post-list-content">
+        <List.Content as={Link} to={slug.post.url} className="user-post-list-content">
           <List.Header className="user-post-list-header">
             {title}
           </List.Header>
@@ -34,7 +43,7 @@ const Post = (props) => {
               <Dropdown.Menu style={{ boxShadow: 'none' }}>
                 {isOwn ? (
                   <React.Fragment>
-                    <Dropdown.Item as={Link} to={`${postUrl}/düzenle`} icon="edit" content="düzenle" />
+                    <Dropdown.Item as={Link} to={`${slug.post.url}/düzenle`} icon="edit" content="düzenle" />
                   </React.Fragment>
                 ) : (
                   <React.Fragment>

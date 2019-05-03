@@ -7,6 +7,8 @@ import marked from 'marked';
 
 import { Grid, Card, Icon } from 'semantic-ui-react';
 
+import urlSerializer from '../../../helpers/urlSerializer';
+import Like from '../../Like';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../../queries';
 import dateLocale from '../../../helpers/dateLocale';
 import './Summary.css';
@@ -27,8 +29,18 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
   const authorUrl = `/@${val.author.username}`;
 
   const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
-  const url = `${title.toLowerCase().replace(/\s/g, '-')}-${val.id}`;
   const rawContent = marked(val.content);
+
+  const slug = urlSerializer({
+    id: val.id,
+    username: val.author.username,
+    text: {
+      title: val.title,
+    },
+    type: {
+      post: true,
+    },
+  });
 
   const paragraph = rawContent.substring(
     rawContent.lastIndexOf('<p>'),
@@ -47,7 +59,7 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
               <Card.Header>
                 <Link
                   to={{
-                  pathname: val.id ? `/${url}` : '/',
+                  pathname: val.id ? `${slug.post.url}` : '/',
                   state: { id: val.id },
                 }}
                   style={{ color: 'rgba(0,0,0,.85)' }}
@@ -68,29 +80,25 @@ const Summary = ({ error, data }) => data.getLatestPosts.map((val) => {
             </Card.Content>
 
             <Card.Content extra>
-              <Link to="/">
-                <Icon name="idea" />
-                Katılıyorum
-              </Link>
+              <Like parentModel="Post" id={val.id} like={val.like} />
+
 
             &nbsp;&nbsp;&nbsp;
 
-              <Link to="/">
-                <Icon name="comment" />
-                Yorum Yaz
+              <Link to="/" className="summary-context-icon">
+                <Icon name="comment" size="large" />
               </Link>
 
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
-                    <Link to={`${url}/düzenle`} className="summary-context-right">
-                      <Icon name="edit" />
-                      Düzenle
+                    <Link to={`${slug.post.url}/düzenle`} className="summary-context-right summary-context-icon">
+                      <Icon name="edit" size="large" />
                     </Link>
                   </React.Fragment>
                 ) : (
-                  <Link to="#" className="summary-context-right" title="Bildir">
-                    <Icon name="flag" title="bildir" />
+                  <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
+                    <Icon name="flag" title="bildir" size="large" />
                   </Link>
                 )
               )}

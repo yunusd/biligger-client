@@ -5,6 +5,7 @@ import { List, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import GET_USER_COMMENTS from './queries';
+import urlSerializer from '../../../helpers/urlSerializer';
 
 const Comment = ({ userId, auth }) => {
   const { data, loading, error } = useQuery(GET_USER_COMMENTS, { variables: { author: userId } });
@@ -16,15 +17,20 @@ const Comment = ({ userId, auth }) => {
     const { id, content, author } = val;
     const { isOwn, isLoggedIn } = auth;
 
-
-    const commentContent = content.slice(0, 100)
-      .toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/\s/g, '-');
-    const commentUrl = `/@${author.username}/${commentContent}/${id}`;
-
+    const slug = urlSerializer({
+      id,
+      username: author.username,
+      text: {
+        content,
+      },
+      type: {
+        comment: true,
+      },
+    });
     return (
       <List.Item key={id} className="user-comment-list-item">
         <div className="list-item-hr-margin" />
-        <List.Content as={Link} to={commentUrl} className="user-comment-list-content">
+        <List.Content as={Link} to={slug.comment.url} className="user-comment-list-content">
           {content}
         </List.Content>
         {isLoggedIn && (
@@ -33,7 +39,7 @@ const Comment = ({ userId, auth }) => {
               <Dropdown.Menu style={{ boxShadow: 'none' }}>
                 {isOwn ? (
                   <React.Fragment>
-                    <Dropdown.Item as={Link} to={`${commentUrl}/düzenle`} icon="edit" content="düzenle" />
+                    <Dropdown.Item as={Link} to={`${slug.comment.url}/düzenle`} icon="edit" content="düzenle" />
                   </React.Fragment>
                 ) : (
                   <React.Fragment>

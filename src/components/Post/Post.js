@@ -14,16 +14,17 @@ import NotFound from '../NotFound';
 import dateLocale from '../../helpers/dateLocale';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../queries';
 import DeletePost from './DeletePost';
+import Like from '../Like';
+import urlSerializer from '../../helpers/urlSerializer';
 
 moment.updateLocale('en', dateLocale);
 
 const Post = (props) => {
   const client = useApolloClient();
 
-  const url = props.location.pathname;
-  const path = url.split('/');
-  const pathTitle = path[1].slice(0, -25).replace(/-/g, ' ');
-  const checkUrl = path.length >= 2 ? url.slice(-24) : false;
+  const { pathname } = props.location;
+  const path = pathname.split('/');
+  const checkUrl = path.length >= 2 ? pathname.slice(-24) : false;
   const id = checkUrl.search('/') === 0 ? false : checkUrl;
   const { data, loading, error } = useQuery(GET_POST, { variables: { id } });
 
@@ -34,7 +35,7 @@ const Post = (props) => {
   const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
 
   const {
-    title, content, author, createdAt,
+    title, content, author, createdAt, like,
   } = data.getPost;
 
   const auth = {
@@ -48,9 +49,23 @@ const Post = (props) => {
    * if title of url is not match with title of post, page will be
    * redirected to matching url
    */
-  if (pathTitle !== title.toLowerCase()) {
-    const validUrl = `${title.toLowerCase().replace(/\s/g, '-')}-${id}`;
-    return <Redirect to={validUrl} />;
+  const slug = urlSerializer({
+    pathname,
+    id,
+    text: {
+      title,
+    },
+    type: {
+      post: true,
+    },
+  });
+
+  /**
+   * if title and post id of url is not match with title and id of post, page will be
+   * redirected to matching url
+   */
+  if (!slug.post.valid.title) {
+    return <Redirect to={slug.post.url} />;
   }
 
   const markedContent = marked(content);
@@ -75,28 +90,24 @@ const Post = (props) => {
             </Card.Content>
 
             <Card.Content extra>
-              <Link to="#">
-                <Icon name="idea" />
-              Katılıyorum
-              </Link>
+              <Like parentModel="Post" id={id} like={like} />
 
-          &nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;
 
               <Link to="#">
-                <Icon name="comment" />
-              Yorum Yaz
+                <Icon name="comment" size="large" color="grey" />
               </Link>
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
-                    <Link to={`${url}/düzenle`}>
-                      <Icon name="edit" className="summary-context-right" />
+                    <Link to={`${slug.post.url}/düzenle`}>
+                      <Icon name="edit" color="grey" className="summary-context-right" size="large" />
                     </Link>
                     <DeletePost id={id} authorId={author.id} {...props} />
                   </React.Fragment>
                 ) : (
                   <Link to="#" className="summary-context-right" title="bildir">
-                    <Icon name="flag" title="bildir" />
+                    <Icon name="flag" size="large" title="bildir" />
                   </Link>
                 )
               )}

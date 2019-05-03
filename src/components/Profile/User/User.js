@@ -9,6 +9,7 @@ import {
 
 import Post from '../Post';
 import Comment from '../Comment';
+import Like from '../Like';
 import GET_USER from './queries';
 import NotFound from '../../NotFound';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../../queries';
@@ -68,8 +69,18 @@ const User = (props) => {
       ),
     },
     {
-      menuItem: { key: 'likes', icon: 'like', content: 'Katıldıkları' },
-      render: () => <Tab.Pane>İçerik</Tab.Pane>,
+      menuItem: auth.isLoggedIn && auth.isOwn ? { key: 'likes', icon: 'idea', content: 'Katıldıkları' } : null,
+      render: () => (
+        <React.Fragment>
+          {auth.isLoggedIn && auth.isOwn ? (
+            <Tab.Pane>
+              <List divided className="user-comment-list">
+                <Like auth={auth} userId={id} {...props} />
+              </List>
+            </Tab.Pane>
+          ) : null }
+        </React.Fragment>
+      ),
     },
     /**
      * I leave the example below. Above objects rendering like this structure.

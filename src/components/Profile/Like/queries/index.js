@@ -1,16 +1,9 @@
 import gql from 'graphql-tag';
 
-const GET_USER_COMMENTS = gql`
-  query getUserComments($author: ID!){
-    getUserComments(author: $author){
-      id
-      content
-      author {
-        id
-        username
-      }
-      parentModel
-      parent {
+const GET_LIKES = gql`
+  {
+    getLikes{
+      parent{
         ... on Post {
           id
           title
@@ -28,10 +21,9 @@ const GET_USER_COMMENTS = gql`
           }
         }
       }
-      createdAt
     }
   }
 `;
 
 
-export default GET_USER_COMMENTS;
+export default GET_LIKES;

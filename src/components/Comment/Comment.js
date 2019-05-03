@@ -16,16 +16,16 @@ import CommentParent from './CommentParent';
 import DeleteComment from './DeleteComment';
 import NotFound from '../NotFound';
 import dateLocale from '../../helpers/dateLocale';
+import Like from '../Like';
+import urlSerializer from '../../helpers/urlSerializer';
 
 moment.updateLocale('en', dateLocale);
 
 const Comment = (props) => {
   const client = useApolloClient();
-
-  const path = props.location.pathname.split('/');
-  const commentAuthor = path[1].slice(1);
+  const { pathname } = props.location;
+  const path = pathname.split('/');
   const commentId = path[path.length - 1];
-  const commentContent = path[2].slice(0, 100);
   const { data, loading, error } = useQuery(GET_COMMENT, {
     variables: { id: commentId },
   });
@@ -37,28 +37,36 @@ const Comment = (props) => {
     id,
     content,
     author,
+    like,
     parent,
     parentModel,
     createdAt,
   } = data.getComment;
 
-  const deleted = parentModel === 'Post' && !parent.post ? true : (parentModel === 'Comment' && !parent.comment ? true : false);
+  const deleted = parentModel === 'Post' && !parent ? true : (!!(parentModel === 'Comment' && !parent));
 
-  if (commentAuthor !== author.username) return <NotFound {...props} />;
+  const slug = urlSerializer({
+    pathname,
+    id,
+    username: author.username,
+    text: {
+      content,
+    },
+    type: {
+      comment: true,
+    },
+  });
+
+  if (!slug.comment.valid.username) return <NotFound {...props} />;
 
   /**
    * if title and post id of url is not match with title and id of post, page will be
    * redirected to matching url
    */
-  const urlStringify = JSON.stringify(commentContent).replace(/[^a-zA-Z\d\-:]/g, '').replace(/\s/g, '-');
-  const contentStr = content.slice(0, 100).toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/\s/g, '-');
-
-  if (urlStringify !== contentStr) {
-    const validUrl = `/@${author.username}/${contentStr}/${id}`;
-    return <Redirect to={validUrl} />;
+  if (!slug.comment.valid.content) {
+    return <Redirect to={slug.comment.url} />;
   }
 
-  const url = props.location.pathname;
   const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
   const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
 
@@ -68,15 +76,15 @@ const Comment = (props) => {
   };
 
   const post = {
-    id: deleted || parent.post.id,
-    title: deleted || parent.post.title,
-    author: deleted ? deleted : (parent.post.author ? parent.post.author.username : null),
+    id: deleted || parent.id,
+    title: deleted || parent.title,
+    author: deleted || (parent.author ? parent.author.username : null),
   };
 
   const comment = {
-    id: deleted ? deleted : parent.comment.id,
-    content: deleted ? deleted : parent.comment.content,
-    author: deleted ? deleted : (parent.comment.author ? parent.comment.author.username : null)
+    id: deleted || parent.id,
+    content: deleted || parent.content,
+    author: deleted || (parent.author ? parent.author.username : null),
   };
 
   return (
@@ -100,22 +108,19 @@ const Comment = (props) => {
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <Link to="#">
-                <Icon name="idea" />
-              Katılıyorum
-              </Link>
+              <Like parentModel="Comment" id={id} like={like} />
 
-          &nbsp;&nbsp;&nbsp;
 
-              <Link to="#">
-                <Icon name="comment" />
-              Yorum Yaz
+              &nbsp;&nbsp;&nbsp;
+
+              <Link to="#" className="summary-context-icon">
+                <Icon name="comment" size="large" />
               </Link>
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
-                    <Link to={`${url}/düzenle`}>
-                      <Icon name="edit" className="summary-context-right" />
+                    <Link to={`${pathname}/düzenle`}>
+                      <Icon name="edit" size="large" className="summary-context-right summary-context-icon" />
                     </Link>
                     <DeleteComment
                       comment={
@@ -125,8 +130,8 @@ const Comment = (props) => {
                     />
                   </React.Fragment>
                 ) : (
-                  <Link to="#" className="summary-context-right" title="bildir">
-                    <Icon name="flag" title="bildir" />
+                  <Link to="#" title="bildir" className="summary-context-right summary-context-icon">
+                    <Icon name="flag" title="bildir" size="large" />
                   </Link>
                 )
               )}

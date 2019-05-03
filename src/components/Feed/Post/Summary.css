@@ -1,8 +1,9 @@
 .summary-context-icon {
   cursor: pointer;
+  color:#767676!important;
 }
 .summary-context-icon:hover {
-  color:#2185d0;
+  color:#fece56!important;
 }
 
 .summary-context-right{

@@ -6,6 +6,7 @@ query searchPosts($text: String!){
     id
     title
     content
+    like
     author {
       id
       username

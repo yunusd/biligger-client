@@ -13,16 +13,16 @@ const DeletePost = (props) => {
   const message = 'Bu Yorumu Silmek İstediğinize Emin misiniz?';
 
   // eslint-disable-next-line no-nested-ternary
-  const contentUrl = parent.deleted ? null : parent.comment.content
-    ? parent.comment.content.slice(0, 100)
+  const contentUrl = parent ? null : parent.content
+    ? parent.content.slice(0, 100)
       .toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/\s/g, '-')
-    : parent.post.title.slice(0, 100)
+    : parent.title.slice(0, 100)
       .toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/\s/g, '-');
 
   // eslint-disable-next-line no-nested-ternary
-  const redirectUrl = !contentUrl ? '/' : parent.comment.content
-  ? `/@${parent.comment.author.username}/${contentUrl}/${parent.comment.id}`
-  : `/${contentUrl}-${parent.post.id}`;
+  const redirectUrl = !contentUrl ? '/' : parent.content
+  ? `/@${parent.author.username}/${contentUrl}/${parent.id}`
+  : `/${contentUrl}-${parent.id}`;
 
   const handleOpen = () => {
     setOpen(true);
@@ -40,7 +40,7 @@ const DeletePost = (props) => {
   });
   return (
     <React.Fragment>
-      <Icon name="trash" onClick={handleOpen} className="summary-context-icon summary-context-right" />
+      <Icon name="trash" onClick={handleOpen} size="large" className="summary-context-icon summary-context-right" />
       <Modal
         open={open}
         basic
@@ -48,7 +48,7 @@ const DeletePost = (props) => {
         closeOnDimmerClick={false}
         onClose={handleClose}
       >
-        <Header icon="trash" content={message} />
+        <Header icon="trash" content={message} size="large" />
         <Modal.Actions>
           <Button basic color="green" inverted onClick={handleClose}>
             <Icon name="remove" />

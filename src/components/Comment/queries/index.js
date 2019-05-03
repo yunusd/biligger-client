@@ -9,9 +9,10 @@ const GET_COMMENT = gql`
         id
         username
       }
+      like
       parentModel
       parent {
-        post {
+        ... on Post {
           id
           title
           author {
@@ -19,7 +20,7 @@ const GET_COMMENT = gql`
             username
           }
         }
-        comment {
+        ... on Comment {
           id
           content
           author {
@@ -27,7 +28,6 @@ const GET_COMMENT = gql`
             username
           }
         }
-   
       }
       createdAt
     }
@@ -43,9 +43,10 @@ const GET_LATEST_COMMENTS = gql`
       id
       username
     }
+    like
     parentModel
     parent {
-      post {
+      ... on Post {
         id
         title
         author {
@@ -53,7 +54,7 @@ const GET_LATEST_COMMENTS = gql`
           username
         }
       }
-      comment {
+      ... on Comment {
         id
         content
         author {
@@ -61,7 +62,6 @@ const GET_LATEST_COMMENTS = gql`
           username
         }
       }
- 
     }
     createdAt
    }

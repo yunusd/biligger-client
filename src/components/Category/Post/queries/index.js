@@ -7,6 +7,7 @@ const GET_LATEST_POSTS_BY_CATEGORY = gql`
       title
       content
       url
+      like
       category {
         id
         name
