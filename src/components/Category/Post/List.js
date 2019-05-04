@@ -63,7 +63,12 @@ const List = (props) => {
                 </Segment>
               </Grid.Column>
             </Grid.Row>
-            <Summary isExist={isExist} data={data} />
+            <Grid.Row >
+              {error && 'HATA'}
+              <Grid.Column width={12}>
+                <Summary isExist={isExist} data={data} />
+              </Grid.Column>
+            </Grid.Row>
             <Grid.Column width={12}>
               {data.getLatestPostsByCategory.length >= 10
                 && (
