@@ -5,7 +5,7 @@ import {
 } from 'semantic-ui-react';
 import { useApolloClient } from 'react-apollo-hooks';
 
-import { GET_POPULER_POSTS } from './queries';
+import { GET_LATEST_POSTS } from './queries';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../../queries';
 
 import Summary from './Summary';
@@ -18,7 +18,7 @@ const List = () => {
 
   return (
     <Query
-      query={GET_POPULER_POSTS}
+      query={GET_LATEST_POSTS}
       variables={{
         offset: 0,
         limit: 10,
@@ -34,8 +34,7 @@ const List = () => {
             </Dimmer>
           );
         }
-
-        const isExist = data.getPopulerPosts.length !== 0;
+        const isExist = data.getLatestPosts.length !== 0;
 
         if (!isExist) {
           return (
@@ -47,8 +46,8 @@ const List = () => {
             { error && 'Maalesef bazı sıkıntılar yaşıyoruz!'}
             <Grid.Row>
               <Grid.Column width={16}>
-                <Summary data={data.getPopulerPosts} getMe={getMe} currentUser={currentUser} />
-                {data.getPopulerPosts.length >= 10
+                <Summary data={data.getLatestPosts} getMe={getMe} currentUser={currentUser} />
+                {data.getLatestPosts.length >= 10
                 && (
                   <Button
                     basic
@@ -56,12 +55,12 @@ const List = () => {
                     onClick={() => {
                       fetchMore({
                         variables: {
-                          offset: data.getPopulerPosts.length,
+                          offset: data.getLatestPosts.length,
                         },
                         updateQuery: (prev, { fetchMoreResult }) => {
                           if (!fetchMoreResult) return prev;
                           return Object.assign({}, prev, {
-                            getPopulerPosts: [...prev.getPopulerPosts, ...fetchMoreResult.getPopulerPosts],
+                            getLatestPosts: [...prev.getLatestPosts, ...fetchMoreResult.getLatestPosts],
                           });
                         },
                       });

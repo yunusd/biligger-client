@@ -24,15 +24,14 @@ const Summary = (props) => {
 
   const {
     // eslint-disable-next-line react/prop-types
-    data, error, isExist,
+    data, isExist,
   } = props;
-  const posts = data.getLatestPostsByCategory;
 
   return (
     <React.Fragment>
       {
         !isExist ? <h5>Bilig bulunamadı!</h5>
-        : posts.map((val) => {
+        : data.map((val) => {
             const auth = {
               isOwn: getMe && getMe.username === val.author.username,
               isLoggedIn: currentUser.isLoggedIn && true,

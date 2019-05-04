@@ -21,4 +21,28 @@ const GET_LATEST_POSTS_BY_CATEGORY = gql`
   }
 `;
 
-export default GET_LATEST_POSTS_BY_CATEGORY;
+const GET_POPULER_POSTS_BY_CATEGORY = gql`
+  query getPopulerPostsByCategory($category: String!, $offset: Int!, $limit: Int!){
+    getPopulerPostsByCategory(category: $category, offset: $offset, limit: $limit){
+      id
+      title
+      content
+      url
+      like
+      category {
+        id
+        name
+      }
+      author {
+        id,
+        username
+      }
+      createdAt
+    }
+  }
+`;
+
+export {
+  GET_LATEST_POSTS_BY_CATEGORY,
+  GET_POPULER_POSTS_BY_CATEGORY,
+ };

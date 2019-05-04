@@ -13,7 +13,7 @@ import './Summary.css';
 
 moment.updateLocale('en', dateLocale);
 
-const Summary = ({ data, getMe, currentUser }) => data.getLatestPosts.map((val) => {
+const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
   const authorUrl = `/@${val.author.username}`;
 
   const auth = {

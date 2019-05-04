@@ -5,7 +5,7 @@ import {
 } from 'semantic-ui-react';
 
 import Summary from './Summary';
-import GET_LATEST_POSTS_BY_CATEGORY from './queries';
+import { GET_POPULER_POSTS_BY_CATEGORY } from './queries';
 
 const List = (props) => {
   const path = props.location.pathname.slice(1);
@@ -13,7 +13,7 @@ const List = (props) => {
 
   return (
     <Query
-      query={GET_LATEST_POSTS_BY_CATEGORY}
+      query={GET_POPULER_POSTS_BY_CATEGORY}
       variables={{
       category: name,
       offset: 0,
@@ -32,7 +32,7 @@ const List = (props) => {
         }
         if (error) return 'Maalesef bazı sıkıntılar yaşıyoruz!';
 
-        const isExist = data.getLatestPostsByCategory.length !== 0;
+        const isExist = data.getPopulerPostsByCategory.length !== 0;
 
         const colors = {
           teknoloji: name === 'teknoloji' && 'blue',
@@ -63,14 +63,14 @@ const List = (props) => {
                 </Segment>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row >
+            <Grid.Row>
               {error && 'HATA'}
               <Grid.Column width={12}>
-                <Summary isExist={isExist} data={data} />
+                <Summary isExist={isExist} data={data.getPopulerPostsByCategory} />
               </Grid.Column>
             </Grid.Row>
             <Grid.Column width={12}>
-              {data.getLatestPostsByCategory.length >= 10
+              {data.getPopulerPostsByCategory.length >= 10
                 && (
                   <Button
                     basic
@@ -78,12 +78,12 @@ const List = (props) => {
                     onClick={() => {
                       fetchMore({
                         variables: {
-                          offset: data.getLatestPostsByCategory.length,
+                          offset: data.getPopulerPostsByCategory.length,
                         },
                         updateQuery: (prev, { fetchMoreResult }) => {
                           if (!fetchMoreResult) return prev;
                           return Object.assign({}, prev, {
-                            getLatestPostsByCategory: [...prev.getLatestPostsByCategory, ...fetchMoreResult.getLatestPostsByCategory],
+                            getPopulerPostsByCategory: [...prev.getPopulerPostsByCategory, ...fetchMoreResult.getPopulerPostsByCategory],
                           });
                         },
                       });

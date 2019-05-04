@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Grid } from 'semantic-ui-react';
-import { List } from './Post';
+import { List, LatestList } from './Post';
 
-const Feed = () => (
+const Feed = ({ location }) => (
   <Grid>
     <Grid.Row columns={1} centered>
       <Grid.Column width={12}>
-        <List />
+        { location.pathname !== '/yeni' ? <List /> : <LatestList /> }
       </Grid.Column>
     </Grid.Row>
   </Grid>

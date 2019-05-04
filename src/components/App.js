@@ -59,6 +59,7 @@ const App = () => (
                   <Route path="/giriş" exact component={LogIn} />
                   <Route path="/kayıt" exact component={Register} />
                   <PrivateRoute path="/" exact component={Feed} />
+                  <PrivateRoute path="/yeni" exact component={Feed} />
                   <PrivateRoute path="/ara" exact component={Search} />
                   <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
                   <PrivateRoute path="/(teknoloji|bilim|yaşam-biçimi|spor|sanat)/" exact component={Category} />
