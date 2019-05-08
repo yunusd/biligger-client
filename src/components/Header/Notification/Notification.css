@@ -1,0 +1,21 @@
+.notification-feed {
+  padding:10px 0px!important;
+
+}
+
+.notification-feed-message {
+  font-weight: 400!important;
+  color: black;
+}
+
+.notification-feed-message:hover {
+  color: #919191;
+}
+
+.notification-feed-message-actor {
+  color: black;
+}
+
+.notification-feed-message-actor:hover {
+  color: #919191;
+}

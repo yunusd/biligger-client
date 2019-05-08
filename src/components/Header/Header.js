@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useApolloClient } from 'react-apollo-hooks';
 
 import {
-  Menu, Image, Button, Input,
+  Menu, Image, Button, Input, Icon, Label, Popup,
 } from 'semantic-ui-react';
 import './Header.css';
 import logo from '../../logo.png';
@@ -11,6 +11,7 @@ import logo from '../../logo.png';
 import LogIn from './LogIn';
 import { Category } from '../Category';
 import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
+import Notification from './Notification';
 
 const AppHeader = (props) => {
   const client = useApolloClient();
@@ -40,6 +41,8 @@ const AppHeader = (props) => {
               <Menu.Item>
                 <Input icon={{ name: 'search', link: true }} placeholder="Ara..." transparent onKeyPress={handleKeyPress} />
               </Menu.Item>
+              <Notification />
+              {/* <Popup trigger/> */}
               <Menu.Item>
                 <Button as={Link} to="/yeni-bilig" color="green" icon="write" />
               </Menu.Item>
