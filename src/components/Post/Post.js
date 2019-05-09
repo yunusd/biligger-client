@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useApolloClient } from 'react-apollo-hooks';
-import marked from 'marked';
+import ReactMarkdown from 'react-markdown';
 import {
   Grid, Card, Label, Header, Divider, Icon,
 } from 'semantic-ui-react';
@@ -21,7 +21,6 @@ moment.updateLocale('en', dateLocale);
 
 const Post = (props) => {
   const client = useApolloClient();
-
   const { pathname } = props.location;
   const path = pathname.split('/');
   const checkUrl = path.length >= 2 ? pathname.slice(-24) : false;
@@ -68,7 +67,6 @@ const Post = (props) => {
     return <Redirect to={slug.post.url} />;
   }
 
-  const markedContent = marked(content);
   return (
     <Grid columns={1} centered id={id} key={id}>
       <Grid.Row>
@@ -84,8 +82,8 @@ const Post = (props) => {
                 {title}
               </Card.Header>
               <Divider clearing />
-              <Card.Description dangerouslySetInnerHTML={{ __html: markedContent }} className="display-linebreak">
-                {/* {markedContent} */}
+              <Card.Description>
+                <ReactMarkdown source={content} />
               </Card.Description>
             </Card.Content>
 

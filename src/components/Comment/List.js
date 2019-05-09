@@ -2,17 +2,18 @@ import React from 'react';
 import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import removeMd from 'remove-markdown';
+
 import {
  Comment, Card, Divider, Icon, Button,
 } from 'semantic-ui-react';
-import marked from 'marked';
 
 import Like from '../Like';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../queries';
 import { GET_LATEST_COMMENTS } from './queries';
 import dateLocale from '../../helpers/dateLocale';
-import './Comment.css';
 import urlSerializer from '../../helpers/urlSerializer';
+import './Comment.css';
 
 moment.updateLocale('en', dateLocale);
 
@@ -51,6 +52,10 @@ const Reply = ({ parent, getMe, currentUser }) => {
     isLoggedIn: currentUser.isLoggedIn && true,
   };
 
+  const raw = removeMd(content);
+
+  const plainContent = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
+
   return (
     <React.Fragment>
       <Divider clearing />
@@ -63,8 +68,8 @@ const Reply = ({ parent, getMe, currentUser }) => {
             <span>{moment(createdAt).fromNow()}</span>
           </Comment.Metadata>
           <br />
-          <Comment.Text className="comment-list-text" as={Link} to={`${slug.comment.url}`} dangerouslySetInnerHTML={{ __html: content }}>
-            {/* { rawContent } */}
+          <Comment.Text className="comment-list-text" as={Link} to={`${slug.comment.url}`}>
+            { plainContent }
           </Comment.Text>
           <Comment.Actions className="comment-list-actions">
             <Like parentModel="Comment" id={id} like={like} onList />
@@ -107,16 +112,20 @@ const CommentList = ({ data }) => {
       isLoggedIn: currentUser.isLoggedIn && true,
     };
 
+    const raw = removeMd(content);
+
     const slug = urlSerializer({
       id,
       username: author.username,
       text: {
-        content,
+        content: raw,
       },
       type: {
         comment: true,
       },
     });
+
+    const plainContent = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
 
     return (
       <Card fluid className="comment-list-card" key={id}>
@@ -130,8 +139,8 @@ const CommentList = ({ data }) => {
                 <span>{moment(createdAt).fromNow()}</span>
               </Comment.Metadata>
               <br />
-              <Comment.Text className="comment-list-text" as={Link} to={`${slug.comment.url}`} dangerouslySetInnerHTML={{ __html: content }}>
-                {/* { rawContent } */}
+              <Comment.Text className="comment-list-text" as={Link} to={`${slug.comment.url}`}>
+                { plainContent }
               </Comment.Text>
               <Comment.Actions className="comment-list-actions">
                 <Like parentModel="Comment" id={id} like={like} onList />

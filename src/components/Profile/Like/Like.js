@@ -1,5 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
+import removeMd from 'remove-markdown';
+
 import { Link } from 'react-router-dom';
 import { List, Button } from 'semantic-ui-react';
 import GET_LIKES from './queries';
@@ -20,12 +22,15 @@ const LikeList = ({ data }) => data.getLikes.map(({ parent }) => {
         comment: true,
       },
     });
+    const raw = removeMd(title || content);
+
+    const plainContent = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
 
     return (
       <List.Item key={id} className="user-post-list-item">
         <div className="list-item-hr-margin" />
         <List.Content as={Link} to={slug.comment.url || slug.post.url} className="user-post-list-content">
-          { content || title }
+          { plainContent }
         </List.Content>
       </List.Item>
     );

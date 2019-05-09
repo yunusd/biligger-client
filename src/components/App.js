@@ -22,6 +22,8 @@ import Profile from './Profile';
 import { EditUser } from './Profile/User';
 import { Comment, EditComment } from './Comment';
 import Search from './Search';
+import Footer from './Footer';
+import SiteInfo from './SiteInfo';
 
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -53,7 +55,7 @@ const App = () => (
         <ScrollTop>
           <React.Fragment>
             <Auth>
-              <Container fluid>
+              <Container fluid style={{ paddingTop: '55px'}}>
                 <Route component={Header} />
                 <Switch>
                   <Route path="/giriş" exact component={LogIn} />
@@ -63,6 +65,7 @@ const App = () => (
                   <PrivateRoute path="/ara" exact component={Search} />
                   <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
                   <PrivateRoute path="/(teknoloji|bilim|yaşam-biçimi|spor|sanat)/" exact component={Category} />
+                  <Route path="/(hakkinda|gizlilik-politikasi-ve-hizmet-sartlari|kullanim-kosullari)/" exact component={SiteInfo} />
                   <PrivateRoute path="/@:username" exact component={Profile} />
                   <PrivateRoute path="/@:username/ayarlar" component={EditUser} />
                   <Route path="/@:username/:content/:comment" exact component={Comment} />
@@ -71,6 +74,7 @@ const App = () => (
                   <PrivateRoute path="/:title/düzenle" exact component={EditPost} />
                   <PrivateRoute component={NotFound} />
                 </Switch>
+                <Route component={Footer} />
               </Container>
             </Auth>
           </React.Fragment>

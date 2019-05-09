@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
+import removeMd from 'remove-markdown';
 
 import { List, Dropdown, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,7 @@ import GET_POST_BY_USER from './queries';
 import urlSerializer from '../../../helpers/urlSerializer';
 
 const PostList = ({ data, auth }) => data.getPostsByUser.map((val) => {
-    const { id, title, content } = val;
+    const { id, title } = val;
     const { isOwn, isLoggedIn } = auth;
 
     const slug = urlSerializer({
@@ -19,7 +20,9 @@ const PostList = ({ data, auth }) => data.getPostsByUser.map((val) => {
         post: true,
       },
     });
+    const raw = removeMd(val.content);
 
+    const content = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
     return (
       <List.Item key={id} className="user-post-list-item">
         <div className="list-item-hr-margin" />

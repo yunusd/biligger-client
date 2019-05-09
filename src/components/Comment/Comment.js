@@ -5,7 +5,8 @@ import {
 } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
 import moment from 'moment';
-import marked from 'marked';
+import ReactMarkdown from 'react-markdown';
+import removeMd from 'remove-markdown';
 
 import List from './List';
 import AddComment from './AddComment';
@@ -44,13 +45,15 @@ const Comment = (props) => {
   } = data.getComment;
 
   const deleted = parentModel === 'Post' && !parent ? true : (!!(parentModel === 'Comment' && !parent));
+  const raw = removeMd(content);
+  const rawParentContent = removeMd(parent.content);
 
   const slug = urlSerializer({
     pathname,
     id,
     username: author.username,
     text: {
-      content,
+      content: raw,
     },
     type: {
       comment: true,
@@ -83,7 +86,7 @@ const Comment = (props) => {
 
   const comment = {
     id: deleted || parent.id,
-    content: deleted || parent.content,
+    content: deleted || rawParentContent,
     author: deleted || (parent.author ? parent.author.username : null),
   };
 
@@ -103,8 +106,8 @@ const Comment = (props) => {
                 &nbsp;-&nbsp;
                 {moment(createdAt).fromNow()}
               </Label>
-              <Card.Description style={{ marginTop: '10px', fontSize: '21px' }} dangerouslySetInnerHTML={{ __html: content }} className="display-linebreak">
-                {/* {markedContent} */}
+              <Card.Description style={{ marginTop: '10px', fontSize: '21px' }}>
+                <ReactMarkdown source={content} />
               </Card.Description>
             </Card.Content>
             <Card.Content extra>

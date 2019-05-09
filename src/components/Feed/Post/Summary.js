@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import moment from 'moment';
-import marked from 'marked';
+import removeMd from 'remove-markdown';
 
 import { Card, Icon } from 'semantic-ui-react';
 
@@ -22,7 +22,7 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
   };
 
   const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
-  const rawContent = marked(val.content);
+  const raw = removeMd(val.content);
 
   const slug = urlSerializer({
     id: val.id,
@@ -35,12 +35,8 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
     },
   });
 
-  const paragraph = rawContent.substring(
-    rawContent.lastIndexOf('<p>'),
-    rawContent.lastIndexOf('</p>'),
-  );
 
-  const content = paragraph.length < 500 ? paragraph : `${paragraph.slice(0, 500)}...`;
+  const content = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
 
   return (
     <Card fluid id={val.id} key={val.id}>
@@ -63,8 +59,8 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
                 &nbsp;-&nbsp;
           {moment(val.createdAt).fromNow()}
         </Card.Meta>
-        <Card.Description dangerouslySetInnerHTML={{ __html: content }} className="display-linebreak">
-          {/* {content} */}
+        <Card.Description>
+          {content}
         </Card.Description>
       </Card.Content>
 

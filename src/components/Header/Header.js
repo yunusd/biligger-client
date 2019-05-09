@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useApolloClient } from 'react-apollo-hooks';
-
 import {
-  Menu, Image, Button, Input, Icon, Label, Popup,
+  Menu, Image, Button, Input,
 } from 'semantic-ui-react';
-import './Header.css';
-import logo from '../../logo.png';
 
 import LogIn from './LogIn';
+import Notification from './Notification';
 import { Category } from '../Category';
 import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
-import Notification from './Notification';
+
+import logo from '../../logo.png';
+import './Header.css';
 
 const AppHeader = (props) => {
   const client = useApolloClient();
@@ -30,35 +30,32 @@ const AppHeader = (props) => {
 
   if (props.location.pathname !== '/giriş' && props.location.pathname !== '/kayıt') {
     return (
-      <div id="header-menu-fix">
-        <Menu stackable fixed="top" className="borderless header-menu">
-          <Menu.Item header>
-            <Image as={Link} to="/" src={logo} width="100px" />
-          </Menu.Item>
-          <Category />
-          {currentUser.isLoggedIn ? (
-            <Menu.Menu position="right">
-              <Menu.Item>
-                <Input icon={{ name: 'search', link: true }} placeholder="Ara..." transparent onKeyPress={handleKeyPress} />
-              </Menu.Item>
-              <Notification />
-              {/* <Popup trigger/> */}
-              <Menu.Item>
-                <Button as={Link} to="/yeni-bilig" color="green" icon="write" />
-              </Menu.Item>
-              <Menu.Item>
-                <Button as={Link} to={profileUrl} content={getMe.username} icon="user" />
-              </Menu.Item>
-            </Menu.Menu>
-            )
-            : (
-              <Menu.Item position="right" className="header-right">
-                <LogIn button={<Button basic color="green">Giriş Yap</Button>} />
-              </Menu.Item>
-            )
-          }
-        </Menu>
-      </div>
+      <Menu stackable fixed="top" className="borderless header-menu">
+        <Menu.Item header>
+          <Image as={Link} to="/" src={logo} width="100px" />
+        </Menu.Item>
+        <Category />
+        {currentUser.isLoggedIn ? (
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <Input icon={{ name: 'search', link: true }} placeholder="Ara..." transparent onKeyPress={handleKeyPress} />
+            </Menu.Item>
+            <Notification />
+            <Menu.Item>
+              <Button as={Link} to="/yeni-bilig" color="green" icon="write" />
+            </Menu.Item>
+            <Menu.Item>
+              <Button as={Link} to={profileUrl} content={getMe.username} icon="user" />
+            </Menu.Item>
+          </Menu.Menu>
+          )
+          : (
+            <Menu.Item position="right" className="header-right">
+              <LogIn button={<Button basic color="green">Giriş Yap</Button>} />
+            </Menu.Item>
+          )
+        }
+      </Menu>
     );
   }
   return <div />;

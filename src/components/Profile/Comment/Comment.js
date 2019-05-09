@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
+import removeMd from 'remove-markdown';
 
 import { List, Dropdown, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -11,21 +12,26 @@ const CommentList = ({ auth, data }) => {
   const { isOwn, isLoggedIn } = auth;
   return data.getUserComments.map((val) => {
     const { id, content, author } = val;
+    const raw = removeMd(content);
+
     const slug = urlSerializer({
       id,
       username: author.username,
       text: {
-        content,
+        content: raw,
       },
       type: {
         comment: true,
       },
     });
+
+    const plainContent = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
+
     return (
       <List.Item key={id} className="user-comment-list-item">
         <div className="list-item-hr-margin" />
         <List.Content as={Link} to={slug.comment.url} className="user-comment-list-content">
-          {content}
+          {plainContent}
         </List.Content>
         {isLoggedIn && (
           <List.Content floated="right">
