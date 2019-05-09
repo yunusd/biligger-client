@@ -79,8 +79,8 @@ const Settings = (props) => {
   };
 
   return (
-    <Grid columns={2} centered>
-      <Grid.Column width={12}>
+    <Grid columns={1} centered>
+      <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
         <Segment piled textAlign="center">
           <Header size="huge">
             { username }

@@ -70,7 +70,7 @@ const Post = (props) => {
   return (
     <Grid columns={1} centered id={id} key={id}>
       <Grid.Row>
-        <Grid.Column width={12}>
+        <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <Card fluid>
             <Card.Content>
               <Label as={Link} to={authorUrl} color="blue" ribbon>

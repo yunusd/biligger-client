@@ -93,12 +93,12 @@ const Comment = (props) => {
   return (
     <Grid columns={2} centered>
       <Grid.Row>
-        <Grid.Column width={12}>
+        <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <CommentParent parent={{ post, comment, deleted }} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
-        <Grid.Column width={12}>
+        <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <Card fluid key={id}>
             <Card.Content>
               <Label as={Link} to={`/@${author.username}`} color="blue" ribbon>
@@ -143,12 +143,12 @@ const Comment = (props) => {
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
-        <Grid.Column width={12}>
+        <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <AddComment parent={{ id, parentModel: 'Comment' }} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
-        <Grid.Column width={12}>
+        <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <Divider horizontal>
             <Header as="h3" style={{ color: 'grey' }}>
                 Yorumlar

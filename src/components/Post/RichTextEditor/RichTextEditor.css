@@ -6,3 +6,26 @@ input.LinkToolbar__Input-sc-1x85sfk-2::placeholder{
  color: white!important;
  opacity: 1;
 }
+
+
+
+.content-textarea, .title-input {
+  background:transparent!important;
+  outline:none!important;
+  border:none!important;
+  width:100%!important;
+  font-size:20px!important;
+  padding: 0!important;
+}
+
+.title-input {
+  font-size: 25px!important;
+}
+
+.content-textarea {
+  padding-top: 15px!important;  
+}
+
+.content-category {
+  padding: 10px!important;
+}

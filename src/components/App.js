@@ -4,7 +4,6 @@ import {
 } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks';
-import { Container } from 'semantic-ui-react';
 
 import { GET_AUTH_STATUS } from '../queries';
 
@@ -55,11 +54,10 @@ const App = () => (
         <ScrollTop>
           <React.Fragment>
             <Auth>
-              <Container fluid style={{ paddingTop: '55px'}}>
-                <Route component={Header} />
+              <Route path="/giriş" exact component={LogIn} />
+              <Route path="/kayıt" exact component={Register} />
+              <Header>
                 <Switch>
-                  <Route path="/giriş" exact component={LogIn} />
-                  <Route path="/kayıt" exact component={Register} />
                   <PrivateRoute path="/" exact component={Feed} />
                   <PrivateRoute path="/yeni" exact component={Feed} />
                   <PrivateRoute path="/ara" exact component={Search} />
@@ -75,7 +73,7 @@ const App = () => (
                   <PrivateRoute component={NotFound} />
                 </Switch>
                 <Route component={Footer} />
-              </Container>
+              </Header>
             </Auth>
           </React.Fragment>
         </ScrollTop>

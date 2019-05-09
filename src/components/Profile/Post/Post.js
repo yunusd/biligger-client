@@ -34,7 +34,7 @@ const PostList = ({ data, auth }) => data.getPostsByUser.map((val) => {
         </List.Content>
         {isLoggedIn && (
           <List.Content floated="right">
-            <Dropdown item icon="ellipsis horizontal">
+            <Dropdown item icon="ellipsis horizontal" pointing="top right">
               <Dropdown.Menu style={{ boxShadow: 'none' }}>
                 {isOwn ? (
                   <React.Fragment>

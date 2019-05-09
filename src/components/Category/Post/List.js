@@ -45,7 +45,7 @@ const List = (props) => {
         return (
           <Grid columns={2} centered>
             <Grid.Row>
-              <Grid.Column width={12}>
+              <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
                 <Segment
                   color={
                     colors.teknoloji || colors.bilim
@@ -65,11 +65,11 @@ const List = (props) => {
             </Grid.Row>
             <Grid.Row>
               {error && 'HATA'}
-              <Grid.Column width={12}>
+              <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
                 <Summary isExist={isExist} data={data.getPopulerPostsByCategory} />
               </Grid.Column>
             </Grid.Row>
-            <Grid.Column width={12}>
+            <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
               {data.getPopulerPostsByCategory.length >= 10
                 && (
                   <Button

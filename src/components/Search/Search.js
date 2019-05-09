@@ -16,7 +16,7 @@ moment.updateLocale('en', dateLocale);
 
 const SearchHeader = () => (
   <Grid.Row>
-    <Grid.Column width={12}>
+    <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
       <Segment
         color="red"
         style={{
@@ -140,7 +140,7 @@ const Search = (props) => {
     <React.Fragment>
       <Grid columns={1} centered>
         <Grid.Row>
-          <Grid.Column width={12}>
+          <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
             <SearchHeader />
             <SearchList data={data} />
             {data.searchPosts.length >= 10

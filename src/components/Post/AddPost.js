@@ -42,7 +42,7 @@ const AddPost = (props) => {
       {(post, { loading, error }) => (
         <Grid columns={1} centered>
           <Grid.Row>
-            <Grid.Column width={12}>
+            <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
               <Form
                 loading={loading}
                 onSubmit={(e) => {
@@ -74,7 +74,7 @@ const AddPost = (props) => {
                         if (result.error) return 'Hata';
                         return (
                           data.getCategories.map(({ id, name }) => (
-                            <Label key={id}>
+                            <Label key={id} style={{ margin: '5px' }}>
                               <Radio
                                 label={name}
                                 value={id}

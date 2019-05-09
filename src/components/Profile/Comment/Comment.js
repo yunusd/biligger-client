@@ -35,7 +35,7 @@ const CommentList = ({ auth, data }) => {
         </List.Content>
         {isLoggedIn && (
           <List.Content floated="right">
-            <Dropdown item icon="ellipsis horizontal">
+            <Dropdown item icon="ellipsis horizontal" pointing="top right">
               <Dropdown.Menu style={{ boxShadow: 'none' }}>
                 {isOwn ? (
                   <React.Fragment>

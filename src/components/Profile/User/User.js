@@ -51,7 +51,7 @@ const User = (props) => {
     {
       menuItem: { key: 'posts', icon: 'pencil', content: 'Biligler' },
       render: () => (
-        <Tab.Pane>
+        <Tab.Pane attached={false}>
           <List divided className="user-post-list">
             <Post auth={auth} userId={id} />
           </List>
@@ -61,7 +61,7 @@ const User = (props) => {
     {
       menuItem: { key: 'comments', icon: 'comment', content: 'Yorumlar' },
       render: () => (
-        <Tab.Pane>
+        <Tab.Pane attached={false}>
           <List divided className="user-comment-list">
             <Comment auth={auth} userId={id} />
           </List>
@@ -73,7 +73,7 @@ const User = (props) => {
       render: () => (
         <React.Fragment>
           {auth.isLoggedIn && auth.isOwn ? (
-            <Tab.Pane>
+            <Tab.Pane attached={false}>
               <List divided className="user-comment-list">
                 <Like auth={auth} userId={id} {...props} />
               </List>
@@ -127,7 +127,7 @@ const User = (props) => {
           {bio || 'Bu kullanıcının biografisi yok!'}
         </Card.Content>
       </Card>
-      <Tab className="profile-tab" panes={panes} />
+      <Tab className="profile-tab" panes={panes} menu={{ secondary: true }} />
     </React.Fragment>
   );
 };

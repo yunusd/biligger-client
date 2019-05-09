@@ -1,7 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import {
- Dimmer, Loader, Button, Grid,
+ Dimmer, Loader, Button,
 } from 'semantic-ui-react';
 import { useApolloClient } from 'react-apollo-hooks';
 
@@ -43,36 +43,32 @@ const List = () => {
           );
         }
         return (
-          <Grid columns={1} centered>
+          <React.Fragment>
             { error && 'Maalesef bazı sıkıntılar yaşıyoruz!'}
-            <Grid.Row>
-              <Grid.Column width={16}>
-                <Summary data={data.getPopulerPosts} getMe={getMe} currentUser={currentUser} />
-                {data.getPopulerPosts.length >= 10
-                && (
-                  <Button
-                    basic
-                    fluid
-                    onClick={() => {
-                      fetchMore({
-                        variables: {
-                          offset: data.getPopulerPosts.length,
-                        },
-                        updateQuery: (prev, { fetchMoreResult }) => {
-                          if (!fetchMoreResult) return prev;
-                          return Object.assign({}, prev, {
-                            getPopulerPosts: [...prev.getPopulerPosts, ...fetchMoreResult.getPopulerPosts],
-                          });
-                        },
-                      });
-                    }}
-                  >
+            <Summary data={data.getPopulerPosts} getMe={getMe} currentUser={currentUser} />
+            {data.getPopulerPosts.length >= 10
+              && (
+                <Button
+                  basic
+                  fluid
+                  onClick={() => {
+                    fetchMore({
+                      variables: {
+                        offset: data.getPopulerPosts.length,
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev;
+                        return Object.assign({}, prev, {
+                          getPopulerPosts: [...prev.getPopulerPosts, ...fetchMoreResult.getPopulerPosts],
+                        });
+                      },
+                    });
+                  }}
+                >
                   Daha Fazla
-                  </Button>
-                )}
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+                </Button>
+            )}
+          </React.Fragment>
         );
       }}
     </Query>
