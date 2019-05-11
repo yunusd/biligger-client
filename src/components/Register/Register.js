@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import { useApolloClient } from 'react-apollo-hooks';
 import { Mutation } from 'react-apollo';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
   Grid, Button, Header, Segment, Form, Divider, Image, Message,
 } from 'semantic-ui-react';
@@ -8,6 +9,7 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { REGISTER_USER } from './mutations';
+import { GET_AUTH_STATUS } from '../../queries';
 import LogIn from '../LogIn';
 import logo from '../../logo.png';
 import './Register.css';
@@ -39,6 +41,11 @@ const RegisterSchema = Yup.object().shape({
 });
 
 const RegisterForm = (props) => {
+  const client = useApolloClient();
+
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  if (currentUser.isLoggedIn) return <Redirect to="/" />;
+
   const {
     values,
     touched,

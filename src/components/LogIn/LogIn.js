@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
+import { useApolloClient } from 'react-apollo-hooks';
 import axios from 'axios';
-
+import { Link, Redirect } from 'react-router-dom';
 import {
   Button, Header, Form, Grid, Image, Segment, Divider, Message,
 } from 'semantic-ui-react';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { Link } from 'react-router-dom';
-
-import './LogIn.css';
+import { GET_AUTH_STATUS } from '../../queries';
 import logo from '../../logo.png';
+import './LogIn.css';
 
 const LogInSchema = Yup.object().shape({
   username: Yup.string()
@@ -20,6 +20,11 @@ const LogInSchema = Yup.object().shape({
 });
 
 const LogInForm = (props) => {
+  const client = useApolloClient();
+
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  if (currentUser.isLoggedIn) return <Redirect to="/" />;
+
   const {
     values,
     touched,
