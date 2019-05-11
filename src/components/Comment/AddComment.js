@@ -1,7 +1,7 @@
 import React from 'react';
 import { Mutation, ApolloConsumer } from 'react-apollo';
 import {
- Form, Card, Button, Header,
+ Form, Card, Button, Header, Message
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Content as CommentEditor } from '../Post/RichTextEditor';
@@ -35,34 +35,29 @@ const AddComment = (props) => {
       {(client) => {
         const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
         return (
-          <div>
+          <React.Fragment>
             { currentUser.isLoggedIn
               ? (
                 <Mutation mutation={ADD_COMMENT}>
                   {(data, { loading, error }) => (
-                    <Form
-                      loading={loading}
-                      onSubmit={(e) => {
-                      e.preventDefault();
-                      handleSubmit(data);
-                    }}
-                    >
+                    <React.Fragment>
                       {error && (
-                        <div style={{
-                          color: '#fff',
-                          textAlign: 'center',
-                          backgroundColor: 'red',
-                          marginBottom: '10px',
-                        }}
-                        >
-                          Boş bırakamazsınız
-                        </div>
+                        <Message error list={['Boş yorum gönderemezsiniz!']} />
                       )}
-                      <Card style={{ padding: '40px' }} fluid>
-                        <CommentEditor type="comment" placeholderValue="Yorumunuzu yazabilirsiniz..." />
-                      </Card>
-                      <Button fluid inverted color="blue" type="submit"> Gönder </Button>
-                    </Form>
+
+                      <Form
+                        loading={loading}
+                        onSubmit={(e) => {
+                        e.preventDefault();
+                        handleSubmit(data);
+                      }}
+                      >
+                        <Card style={{ padding: '40px' }} fluid>
+                          <CommentEditor type="comment" placeholderValue="Yorumunuzu yazabilirsiniz..." />
+                        </Card>
+                        <Button fluid inverted color="blue" type="submit"> Gönder </Button>
+                      </Form>
+                    </React.Fragment>
                 )}
                 </Mutation>
               )
@@ -73,7 +68,7 @@ const AddComment = (props) => {
                 </Header>
               </Card>
             )}
-          </div>
+          </React.Fragment>
         );
       }}
     </ApolloConsumer>

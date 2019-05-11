@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import { Mutation, Query } from 'react-apollo';
 import {
- Button, Form, Grid, Card, Radio, Label,
+ Button, Form, Grid, Card, Radio, Label, Message,
 } from 'semantic-ui-react';
 
 import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
@@ -74,6 +74,10 @@ const EditPost = (props) => {
         <Grid columns={1} centered>
           <Grid.Row>
             <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
+              {error && (
+                <Message error list={['Boş veya kategorisi belirtilmemiş bilig gönderemezsiniz!']} />
+              )}
+
               <Form
                 loading={loading}
                 onSubmit={(e) => {
@@ -83,18 +87,6 @@ const EditPost = (props) => {
               >
                 <Card fluid>
                   <Card.Content>
-                    {error && (
-                    <Card.Description style={{
-                      color: '#fff',
-                      textAlign: 'center',
-                      backgroundColor: 'red',
-                      marginBottom: '10px',
-                    }}
-                    >
-                      HATA
-                    </Card.Description>
-                    )}
-
                     <RichTextEditor type="editPost" post={post} />
                   </Card.Content>
                   <Card.Content extra>

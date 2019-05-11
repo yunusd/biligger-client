@@ -3,7 +3,7 @@ import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import { Mutation } from 'react-apollo';
 import { Redirect } from 'react-router-dom';
 import {
- Button, Form, Grid, Card,
+ Button, Form, Grid, Card, Message,
 } from 'semantic-ui-react';
 
 import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
@@ -84,7 +84,11 @@ const EditComment = (props) => {
       {(editComment, { loading, error }) => (
         <Grid columns={1} centered>
           <Grid.Row>
-            <Grid.Column width={12}>
+            <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
+              {error && (
+                <Message error list={['Boş yorum gönderemezsiniz!']} />
+              )}
+
               <Form
                 loading={loading}
                 onSubmit={(e) => {
@@ -94,20 +98,7 @@ const EditComment = (props) => {
               >
                 <Card fluid>
                   <Card.Content>
-                    {error && (
-                    <Card.Description style={{
-                      color: '#fff',
-                      textAlign: 'center',
-                      backgroundColor: 'red',
-                      marginBottom: '10px',
-                    }}
-                    >
-                      HATA
-                    </Card.Description>
-                    )}
-
                     <CommentEditor type="editComment" comment={{ content }} />
-
                   </Card.Content>
                 </Card>
                 <Button

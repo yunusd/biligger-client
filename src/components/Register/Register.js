@@ -1,110 +1,124 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import {
-  Grid, Button, Header, Segment, Form, Divider, Image,
+  Grid, Button, Header, Segment, Form, Divider, Image, Message,
 } from 'semantic-ui-react';
-
-import './Register.css';
-import logo from '../../logo.png';
+import { withFormik } from 'formik';
+import * as Yup from 'yup';
 
 import { REGISTER_USER } from './mutations';
 import LogIn from '../LogIn';
+import logo from '../../logo.png';
+import './Register.css';
 
-class Register extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isRegister: false };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const RegisterSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(3, 'Çok kısa!')
+    .max(20, 'Çok uzun!')
+    .required('Kullanıcı adı gerekli!'),
+  password: Yup.string()
+    .required('Şifre gerekli!')
+    .matches(
+      /^(?=(.*[a-zA-Z].*){3,})(?=.*\d.*)(?=.*\W.*)[a-zA-Z0-9\S]{8,}$/,
+      'Şifre 8 karakter uzunluğunda olmalı ve en az 3 harf, 1 rakam ve 1 özel karakter içermelidir!',
+    ),
+  passwordCheck: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Şifreler eşleşmeli')
+    .required('Şifre(tekrar) gerekli!'),
+  email: Yup.string()
+    .email('Geçersiz e-posta adresi')
+    .required('E-Posta gerekli!'),
+  degree: Yup.string()
+    .min(3, 'Çok kısa!')
+    .max(30, 'Çok uzun!')
+    .required('Ünvan gerekli!'),
+  bio: Yup.string()
+    .min(30, 'Çok kısa!')
+    .max(300, 'Çok uzun!'),
+});
 
-  componentWillMount() {
+const RegisterForm = (props) => {
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleSubmit,
+    status,
+    isSubmitting,
+  } = props;
+
+  useEffect(() => {
     document.getElementById('root').style.background = 'linear-gradient(to top, #527ec0 68.3%, #ffffff 50%)';
     document.getElementById('root').style.position = 'absolute';
     document.getElementById('root').style.width = '100%';
     document.getElementById('root').style.height = '100%';
-  }
 
-  componentWillUnmount() {
-    document.getElementById('root').style.background = null;
-    document.getElementById('root').style.position = null;
-    document.getElementById('root').style.width = null;
-    document.getElementById('root').style.height = null;
-  }
+    return () => {
+      document.getElementById('root').style.background = null;
+      document.getElementById('root').style.position = null;
+      document.getElementById('root').style.width = null;
+      document.getElementById('root').style.height = null;
+    };
+  });
 
-  async handleSubmit(register) {
-    const {
-      username,
-      passwordCheck,
-      password,
-      email,
-      degree,
-      bio,
-    } = this.state;
+  return (
+    <Mutation mutation={REGISTER_USER}>
+      {(register, { loading }) => {
+        values.register = register;
 
-    // Try catch block needed for testing. Without it test not passing.
-    try {
-      await register({
-        variables: {
-          username,
-          password,
-          passwordCheck,
-          email,
-          degree,
-          bio,
-        },
-      });
-      return this.setState({ isRegister: true });
-    } catch (error) {
-      return error;
-    }
-  }
+        const errorExists = Object.getOwnPropertyNames(errors).length > 0
+        && Object.getOwnPropertyNames(touched).length > 0;
+        const serverValidationErrors = status.errors ? status.errors : null;
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  render() {
-    const {
-      isRegister,
-      formValidation,
-      username,
-    } = this.state;
-
-
-    return (
-      <Mutation mutation={REGISTER_USER}>
-        {(register, { loading, error = '' }) => {
-        const errorMessage = `${error && 'Lütfen bilgileri doğru giriniz!'}`;
         return (
           <div>
-            {!isRegister
+            {!status.isRegister
               ? (
                 <div className="login-form">
                   <Grid textAlign="center" className="register-grid" verticalAlign="bottom">
                     <Grid.Column className="register-column">
                       <Image as={Link} to="/" src={logo} size="medium" />
                       <Header as="h2" className="register-header" textAlign="center">
-                        {errorMessage || 'Hoşgeldiniz'}
+                        Hoşgeldiniz
                       </Header>
                       <Segment raised className="register-segment">
+                        {
+                          errorExists || !!serverValidationErrors
+                          ? (
+                            <Message
+                              error
+                              list={[
+                                serverValidationErrors && serverValidationErrors.username,
+                                serverValidationErrors && serverValidationErrors.email,
+                                errors.username,
+                                errors.email,
+                                errors.password,
+                                errors.passwordCheck,
+                                errors.degree,
+                                errors.bio,
+                              ]}
+                            />
+                          )
+                          : null
+                        }
                         <Form
                           loading={loading}
                           onSubmit={(e) => {
-                          e.preventDefault();
-                          this.handleSubmit(register);
-                        }}
+                            e.preventDefault();
+                            handleSubmit();
+                          }}
                         >
-                          <Form.Input placeholder="Kullanıcı adı" name="username" onChange={this.handleChange} />
-                          <Form.Input type="email" placeholder="E-Posta adresi" name="email" onChange={this.handleChange} />
-                          <Form.Input type="password" placeholder="Şifre" name="password" onChange={this.handleChange} />
-                          <Form.Input type="password" placeholder="Şifre(tekrar)" name="passwordCheck" onChange={this.handleChange} />
-                          <Form.Input placeholder="Ünvan" name="degree" onChange={this.handleChange} />
-                          <Form.TextArea placeholder="Hakkınızda" name="bio" onChange={this.handleChange} />
+                          <Form.Input error={!!errors.username || !!(serverValidationErrors && serverValidationErrors.username)} placeholder="Kullanıcı adı" name="username" value={values.username} onChange={handleChange} />
+                          <Form.Input error={!!errors.email || !!(serverValidationErrors && serverValidationErrors.email)} type="email" placeholder="E-Posta adresi" name="email" value={values.email} onChange={handleChange} />
+                          <Form.Input error={!!errors.password} type="password" placeholder="Şifre" name="password" value={values.password} onChange={handleChange} />
+                          <Form.Input error={!!errors.passwordCheck} type="password" placeholder="Şifre(tekrar)" name="passwordCheck" value={values.passwordCheck} onChange={handleChange} />
+                          <Form.Input error={!!errors.degree} placeholder="Ünvan" name="degree" value={values.degree} onChange={handleChange} />
+                          <Form.TextArea error={!!errors.bio} placeholder="Hakkınızda" name="bio" value={values.bio} onChange={handleChange} />
 
                           <Button
-                            disabled={formValidation}
+                            disabled={isSubmitting}
                             type="submit"
                             content="Kayıt Ol"
                           />
@@ -118,14 +132,66 @@ class Register extends Component {
                   </Grid>
                 </div>
               )
-              : <LogIn isRedirect username={username} />
+              : <LogIn isRedirect username={status.username} />
             }
           </div>
         );
-        }
       }
-      </Mutation>
-    );
-  }
-}
+    }
+    </Mutation>
+  );
+};
+
+const Register = withFormik({
+  mapPropsToValues: () => ({
+    username: '',
+    email: '',
+    password: '',
+    passwordCheck: '',
+    degree: '',
+    bio: '',
+  }),
+  mapPropsToStatus: () => ({
+    isRegister: false,
+    errors: null,
+  }),
+  validationSchema: RegisterSchema,
+  handleSubmit: async (values, { setSubmitting, setStatus }) => {
+    const {
+      register,
+      username,
+      password,
+      passwordCheck,
+      email,
+      degree,
+      bio,
+    } = values;
+    // Try catch block needed for testing. Without it test not passing.
+    try {
+      await register({
+        variables: {
+          username,
+          password,
+          passwordCheck,
+          email,
+          degree,
+          bio,
+        },
+      });
+      setStatus({ isRegister: true, username });
+    } catch (err) {
+      setSubmitting(false);
+      const { errors } = err.graphQLErrors[0].extensions.exception;
+      setStatus({
+        errors: {
+          username: errors.username !== undefined && errors.username.message,
+          email: errors.email !== undefined && errors.email.message,
+        },
+      });
+      return err;
+    }
+  },
+  displayName: 'BasicForm',
+})(RegisterForm);
+
 export default Register;

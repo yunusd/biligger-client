@@ -1,40 +1,108 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 import {
-  Button, Header, Form, Grid, Image, Segment, Divider,
+  Button, Header, Form, Grid, Image, Segment, Divider, Message,
 } from 'semantic-ui-react';
+import { withFormik } from 'formik';
+import * as Yup from 'yup';
 
 import { Link } from 'react-router-dom';
 
 import './LogIn.css';
 import logo from '../../logo.png';
 
-class LogIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const LogInSchema = Yup.object().shape({
+  username: Yup.string()
+    .required('Kullanıcı adı gerekli!'),
+  password: Yup.string()
+    .required('Şifre gerekli!'),
+});
 
-  componentWillMount() {
+const LogInForm = (props) => {
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleSubmit,
+    status,
+    isSubmitting,
+  } = props;
+
+  useEffect(() => {
     document.body.style.background = 'linear-gradient(to top, #527ec0 68.3%, #ffffff 50%)';
     document.body.style.position = 'absolute';
     document.body.style.width = '100%';
     document.body.style.height = '100%';
-  }
+    return () => {
+      document.body.style.background = null;
+      document.body.style.position = null;
+      document.body.style.width = null;
+      document.body.style.height = null;
+    };
+  });
 
-  componentWillUnmount() {
-    document.body.style.background = null;
-    document.body.style.position = null;
-    document.body.style.width = null;
-    document.body.style.height = null;
-  }
+  const { username = '', isRedirect = '' } = props;
+  const user = `${isRedirect && `Hoşgeldin, ${username}`}`;
 
+  const errorExists = Object.getOwnPropertyNames(errors).length > 0
+  && Object.getOwnPropertyNames(touched).length > 0;
+  const serverValidationErrors = status.errors ? status.errors : null;
 
-  handleSubmit() {
-    const { username, password } = this.state;
+  return (
+    <Grid textAlign="center" className="login-grid" verticalAlign="bottom">
+      <Grid.Column className="login-column">
+        <Image as={Link} to="/" src={logo} size="medium" />
+        <Header as="h2" className="login-header" textAlign="center">
+          {user || 'Hoşgeldiniz'}
+        </Header>
+        <Segment raised className="login-segment">
+          {
+            errorExists || !!serverValidationErrors
+            ? (
+              <Message
+                error
+                list={[
+                  serverValidationErrors && serverValidationErrors.message,
+                  errors.username,
+                  errors.password,
+                ]}
+              />
+            )
+            : null
+          }
+          <Form onSubmit={handleSubmit}>
+            <Form.Input error={!!errors.username} type="text" placeholder="Kullanıcı adı" name="username" value={values.username} onChange={handleChange} />
+            <Form.Input error={!!errors.password} type="password" placeholder="Şifre" name="password" value={values.password} onChange={handleChange} />
+            <Button
+              disabled={isSubmitting}
+              type="submit"
+              content="Giriş Yap"
+            />
+          </Form>
+          <Divider />
+          Henüz kayıt olmadın mı?
+          <br />
+          <Link to="/kayıt" onClick={() => { if (props.location.pathname === 'kayıt') props.history.replace('/kayıt'); }} style={{ color: '#49ba6f' }}>Kayıt Ol</Link>
+        </Segment>
+      </Grid.Column>
+    </Grid>
+    );
+};
+
+const LogIn = withFormik({
+  mapPropsToValues: () => ({
+    username: '',
+    password: '',
+  }),
+  mapPropsToStatus: () => ({
+    errors: null,
+  }),
+  validationSchema: LogInSchema,
+  handleSubmit: async (values, { setSubmitting, setStatus, props }) => {
+    const { username, password } = values;
+
     axios.post('https://localhost:3000/auth', {
       username,
       password,
@@ -42,50 +110,21 @@ class LogIn extends Component {
       window.location.replace('/');
       return res;
     }).catch((error) => {
-      const unitTestHandleSubmit = this.props.handleSubmit;
+      setSubmitting(false);
+      const unitTestHandleSubmit = props.handleTestSubmit;
       if (unitTestHandleSubmit) {
-        this.props.handleSubmit(error); // added for unit test
+        props.handleTestSubmit(error); // added for unit test
       }
-      this.setState({ error: true });
+      setStatus({
+        errors: {
+          message: 'Kullanıcı adı ya da Şifre yanlış.',
+        },
+      });
       return error;
     });
-  }
+  },
+  displayName: 'BasicForm',
+})(LogInForm);
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  render() {
-    const { error = '' } = this.state;
-    const { username = '', isRedirect = '' } = this.props;
-    const user = `${isRedirect && `Hoşgeldin, ${username}`}`;
-    const errorMessage = `${error && 'Kullanıcı adı ya da şifre yanlış!'}`;
-
-    return (
-      <Grid textAlign="center" className="login-grid" verticalAlign="bottom">
-        <Grid.Column className="login-column">
-          <Image as={Link} to="/" src={logo} size="medium" />
-          <Header as="h2" className="login-header" textAlign="center">
-            {errorMessage || user || 'Hoşgeldiniz'}
-          </Header>
-          <Segment raised className="login-segment">
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Input placeholder="Kullanıcı adı" name="username" onChange={this.handleChange} />
-              <Form.Input type="password" placeholder="Şifre" name="password" onChange={this.handleChange} />
-              <Button
-                type="submit"
-                content="Giriş Yap"
-              />
-            </Form>
-            <Divider />
-            Henüz kayıt olmadın mı?
-            <br />
-            <Link to="/kayıt" onClick={() => { if (this.props.location.pathname === 'kayıt') this.props.history.replace('/kayıt'); }} style={{ color: '#49ba6f' }}>Kayıt Ol</Link>
-          </Segment>
-        </Grid.Column>
-      </Grid>
-      );
-  }
-}
 
 export default LogIn;

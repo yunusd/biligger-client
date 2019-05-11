@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import {
- Button, Form, Grid, Card, Radio, Label,
+ Button, Form, Grid, Card, Radio, Label, Message,
 } from 'semantic-ui-react';
 
 import { ADD_POST } from './mutations';
@@ -18,7 +18,7 @@ const AddPost = (props) => {
   async function handleSubmit(post) {
     const title = localStorage.getItem('title');
     const content = localStorage.getItem('content');
-    // const url = localStorage.getItem('url');
+
     try {
       await post({
         variables: {
@@ -43,6 +43,10 @@ const AddPost = (props) => {
         <Grid columns={1} centered>
           <Grid.Row>
             <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
+              {error && (
+                <Message error list={['Boş veya kategorisi belirtilmemiş bilig gönderemezsiniz!']} />
+              )}
+
               <Form
                 loading={loading}
                 onSubmit={(e) => {
@@ -52,18 +56,6 @@ const AddPost = (props) => {
               >
                 <Card fluid>
                   <Card.Content>
-                    {error && (
-                    <Card.Description style={{
-                      color: '#fff',
-                      textAlign: 'center',
-                      backgroundColor: 'red',
-                      marginBottom: '10px',
-                    }}
-                    >
-                      HATA
-                    </Card.Description>
-                    )}
-
                     <RichTextEditor />
                   </Card.Content>
                   <Card.Content extra>
