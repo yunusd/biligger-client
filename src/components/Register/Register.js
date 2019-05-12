@@ -47,20 +47,6 @@ const RegisterSchema = Yup.object().shape({
 
 const RegisterForm = (props) => {
   const client = useApolloClient();
-
-  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
-  if (currentUser.isLoggedIn) return <Redirect to="/" />;
-
-  const {
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleSubmit,
-    status,
-    isSubmitting,
-  } = props;
-
   useEffect(() => {
     document.getElementById('root').style.background = 'linear-gradient(to top, #527ec0 68.3%, #ffffff 50%)';
     document.getElementById('root').style.position = 'absolute';
@@ -74,6 +60,19 @@ const RegisterForm = (props) => {
       document.getElementById('root').style.height = null;
     };
   });
+
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  if (currentUser.isLoggedIn) return <Redirect to="/" />;
+
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleSubmit,
+    status,
+    isSubmitting,
+  } = props;
 
   return (
     <Mutation mutation={REGISTER_USER}>

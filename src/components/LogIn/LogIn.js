@@ -20,19 +20,6 @@ const LogInSchema = Yup.object().shape({
 const LogInForm = (props) => {
   const client = useApolloClient();
 
-  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
-  if (currentUser.isLoggedIn) return <Redirect to="/" />;
-
-  const {
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleSubmit,
-    status,
-    isSubmitting,
-  } = props;
-
   useEffect(() => {
     document.body.style.background = 'linear-gradient(to top, #527ec0 68.3%, #ffffff 50%)';
     document.body.style.position = 'absolute';
@@ -45,6 +32,19 @@ const LogInForm = (props) => {
       document.body.style.height = null;
     };
   });
+
+  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+  if (currentUser.isLoggedIn) return <Redirect to="/" />;
+
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleSubmit,
+    status,
+    isSubmitting,
+  } = props;
 
   const { username = '', isRedirect = '' } = props;
   const user = `${isRedirect && `Hoşgeldin, ${username}`}`;

@@ -15,60 +15,65 @@ import './Notification.css';
 
 moment.updateLocale('en', dateLocale);
 
-const NotificationList = ({ data }) => data.map((val) => {
+const NotificationList = ({ data }) => {
   const client = useApolloClient();
-  const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
-  const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
-  /**
-  * val.entityId 1 = Liked a Post,
-  * val.entityId 2 = Liked a Comment
-  * val.entityId 3 = Commented a Post
-  * val.entityId 4 = Commented a Comment
-  *
-   */
-  const entityIdMessage = [0, 'biliginizi beğendi', 'yorumunuzu beğendi', 'biliginize yorum yaptı', 'yorumunuza cevap yazdı'];
-  const postLikedMessage = val.count - 1 >= 1
-  ? ` ve ${val.count - 1} kişi daha bir ${entityIdMessage[val.entityId]}`
-  : `, bir ${entityIdMessage[val.entityId]}`;
 
-  const slug = urlSerializer({
-    id: val.entity,
-    username: getMe.username,
-    text: {
-      title: val.entityId === 3 || val.entityId === 1 ? val.message : false,
-      content: val.entityId === 2 || val.entityId === 4 ? val.message : false,
-    },
-    type: {
-      post: true,
-      comment: true,
-    },
+  return data.map((val) => {
+    const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
+    const { getMe } = currentUser.isLoggedIn
+    ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
+
+    /**
+    * val.entityId 1 = Liked a Post,
+    * val.entityId 2 = Liked a Comment
+    * val.entityId 3 = Commented a Post
+    * val.entityId 4 = Commented a Comment
+    *
+    */
+    const entityIdMessage = [0, 'biliginizi beğendi', 'yorumunuzu beğendi', 'biliginize yorum yaptı', 'yorumunuza cevap yazdı'];
+    const postLikedMessage = val.count - 1 >= 1
+    ? ` ve ${val.count - 1} kişi daha bir ${entityIdMessage[val.entityId]}`
+    : `, bir ${entityIdMessage[val.entityId]}`;
+
+    const slug = urlSerializer({
+      id: val.entity,
+      username: getMe.username,
+      text: {
+        title: val.entityId === 3 || val.entityId === 1 ? val.message : false,
+        content: val.entityId === 2 || val.entityId === 4 ? val.message : false,
+      },
+      type: {
+        post: true,
+        comment: true,
+      },
+    });
+
+    return (
+      <React.Fragment key={val.notificationId}>
+        <Feed.Event
+          className="notification-feed"
+        >
+          <Feed.Content>
+            <Feed.Date>
+              {moment(val.createdAt).fromNow()}
+              &nbsp;
+              &nbsp;
+              {val.seen === false && (
+                <Label circular color="red" empty key="red" />
+              )}
+            </Feed.Date>
+            <Feed.Summary>
+              <Link to={`/@${val.actor}`} className="notification-feed-message-actor">{val.actor}</Link>
+              <Link to={slug.comment.url || slug.post.url} className="notification-feed-message">
+                {postLikedMessage}
+              </Link>
+            </Feed.Summary>
+          </Feed.Content>
+        </Feed.Event>
+      </React.Fragment>
+    );
   });
-
-  return (
-    <React.Fragment key={val.notificationId}>
-      <Feed.Event
-        className="notification-feed"
-      >
-        <Feed.Content>
-          <Feed.Date>
-            {moment(val.createdAt).fromNow()}
-            &nbsp;
-            &nbsp;
-            {val.seen === false && (
-              <Label circular color="red" empty key="red" />
-            )}
-          </Feed.Date>
-          <Feed.Summary>
-            <Link to={`/@${val.actor}`} className="notification-feed-message-actor">{val.actor}</Link>
-            <Link to={slug.comment.url || slug.post.url} className="notification-feed-message">
-              {postLikedMessage}
-            </Link>
-          </Feed.Summary>
-        </Feed.Content>
-      </Feed.Event>
-    </React.Fragment>
-  );
-});
+};
 
 const Notification = () => {
   const [pollInterval, setPollInterval] = useState(5000);

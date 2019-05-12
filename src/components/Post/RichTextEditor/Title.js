@@ -1,4 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
+/**
+ * Slate packages doesn't exist in package.json because
+ * rich-markdown-editor installing slate packages.
+ * And if there is slate dep on package.json it will cause errors because of version conflict.
+ *
+ * TODO: Build this component with rich-markdown-editor instead of slate itself. / Build with input.
+ */
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import Plain from 'slate-plain-serializer';
@@ -48,7 +56,6 @@ class Title extends Component {
 
     this.state = {
       value: this.initialValue,
-      mobileValue: null,
       isMobile: false,
     };
   }
