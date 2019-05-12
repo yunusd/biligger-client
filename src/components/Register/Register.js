@@ -16,8 +16,8 @@ import './Register.css';
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string()
-    .min(3, 'Çok kısa!')
-    .max(20, 'Çok uzun!')
+    .min(3, 'Kullanıcı adı çok kısa!')
+    .max(20, 'Kullanıcı adı çok uzun!')
     .required('Kullanıcı adı gerekli!'),
   password: Yup.string()
     .required('Şifre gerekli!')
@@ -29,18 +29,18 @@ const RegisterSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Şifreler eşleşmeli')
     .required('Şifre(tekrar) gerekli!'),
   email: Yup.string()
-    .email('Geçersiz e-posta adresi')
+    .email('E-Posta adresi geçersiz!')
     .required('E-Posta gerekli!'),
   degree: Yup.string()
-    .min(3, 'Çok kısa!')
-    .max(30, 'Çok uzun!')
+    .min(3, 'Ünvan çok kısa!')
+    .max(30, 'Ünvan çok uzun!')
     .required('Ünvan gerekli!'),
   bio: Yup.string()
-    .min(30, 'Çok kısa!')
-    .max(300, 'Çok uzun!'),
+    .min(30, 'Hakkında çok kısa!')
+    .max(300, 'Hakkında çok uzun!'),
   invitationCode: Yup.string()
-    .min(10, 'Geçersiz davetiye kodu!')
-    .max(10, 'Geçersiz davetiye kodu!')
+    .min(10, 'Davetiye kodu geçersiz!')
+    .max(10, 'Davetiye kodu geçersiz!')
     .required('Üye olabilmeniz için davetiye kodu gerekli!'),
 
 });

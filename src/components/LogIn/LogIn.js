@@ -13,10 +13,8 @@ import logo from '../../logo.png';
 import './LogIn.css';
 
 const LogInSchema = Yup.object().shape({
-  username: Yup.string()
-    .required('Kullanıcı adı gerekli!'),
   password: Yup.string()
-    .required('Şifre gerekli!'),
+    .required('Mevcut şifreniz değişiklik için gerekli!'),
 });
 
 const LogInForm = (props) => {
