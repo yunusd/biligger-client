@@ -38,6 +38,11 @@ const RegisterSchema = Yup.object().shape({
   bio: Yup.string()
     .min(30, 'Çok kısa!')
     .max(300, 'Çok uzun!'),
+  invitationCode: Yup.string()
+    .min(10, 'Geçersiz davetiye kodu!')
+    .max(10, 'Geçersiz davetiye kodu!')
+    .required('Üye olabilmeniz için davetiye kodu gerekli!'),
+
 });
 
 const RegisterForm = (props) => {
@@ -99,6 +104,8 @@ const RegisterForm = (props) => {
                               list={[
                                 serverValidationErrors && serverValidationErrors.username,
                                 serverValidationErrors && serverValidationErrors.email,
+                                serverValidationErrors && serverValidationErrors.invitationCode,
+                                errors.invitationCode,
                                 errors.username,
                                 errors.email,
                                 errors.password,
@@ -117,6 +124,7 @@ const RegisterForm = (props) => {
                             handleSubmit();
                           }}
                         >
+                          <Form.Input error={!!errors.invitationCode || !!(serverValidationErrors && serverValidationErrors.invitationCode)} placeholder="Davetiye kodu" name="invitationCode" value={values.invitationCode} onChange={handleChange} />
                           <Form.Input error={!!errors.username || !!(serverValidationErrors && serverValidationErrors.username)} placeholder="Kullanıcı adı" name="username" value={values.username} onChange={handleChange} />
                           <Form.Input error={!!errors.email || !!(serverValidationErrors && serverValidationErrors.email)} type="email" placeholder="E-Posta adresi" name="email" value={values.email} onChange={handleChange} />
                           <Form.Input error={!!errors.password} type="password" placeholder="Şifre" name="password" value={values.password} onChange={handleChange} />
@@ -151,6 +159,7 @@ const RegisterForm = (props) => {
 
 const Register = withFormik({
   mapPropsToValues: () => ({
+    invitationCode: '',
     username: '',
     email: '',
     password: '',
@@ -166,6 +175,7 @@ const Register = withFormik({
   handleSubmit: async (values, { setSubmitting, setStatus }) => {
     const {
       register,
+      invitationCode,
       username,
       password,
       passwordCheck,
@@ -177,6 +187,7 @@ const Register = withFormik({
     try {
       await register({
         variables: {
+          invitationCode,
           username,
           password,
           passwordCheck,
@@ -188,11 +199,13 @@ const Register = withFormik({
       setStatus({ isRegister: true, username });
     } catch (err) {
       setSubmitting(false);
-      const { errors } = err.graphQLErrors[0].extensions.exception;
+      const { errors, invalidArg } = err.graphQLErrors[0].extensions.exception;
+
       setStatus({
         errors: {
-          username: errors.username !== undefined && errors.username.message,
-          email: errors.email !== undefined && errors.email.message,
+          username: errors && errors.username !== undefined && errors.username.message,
+          email: errors && errors.email !== undefined && errors.email.message,
+          invitationCode: invalidArg && err.graphQLErrors[0].message,
         },
       });
       return err;

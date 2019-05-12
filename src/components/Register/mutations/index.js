@@ -8,6 +8,7 @@ const REGISTER_USER = gql`
       $email: String!,
       $degree: String,
       $bio: String,
+      $invitationCode: String!,
     ){
     registerUser(
       username: $username,
@@ -16,6 +17,7 @@ const REGISTER_USER = gql`
       passwordCheck: $passwordCheck,
       degree: $degree,
       bio: $bio,
+      invitationCode: $invitationCode,
     ){
       username
     }
