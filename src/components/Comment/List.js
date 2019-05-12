@@ -68,7 +68,12 @@ const Reply = ({ parent, getMe, currentUser }) => {
             <span>{moment(createdAt).fromNow()}</span>
           </Comment.Metadata>
           <br />
-          <Comment.Text className="comment-list-text" as={Link} to={`${slug.comment.url}`}>
+          <Comment.Text
+            className="comment-list-text"
+            as={Link}
+            to={`${slug.comment.url}`}
+            style={{ fontSize: '18px', lineHeight: '1.618em' }}
+          >
             { plainContent }
           </Comment.Text>
           <Comment.Actions className="comment-list-actions">
@@ -82,8 +87,8 @@ const Reply = ({ parent, getMe, currentUser }) => {
                   {/* <DeletePost id={id} authorId={author.id} {...props} /> */}
                 </React.Fragment>
               ) : (
-                <Link to="#" className="summary-context-right" title="bildir">
-                  Bildir
+                <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
+                  <Icon name="flag" title="bildir" size="small" />
                 </Link>
               )
             )}
@@ -139,7 +144,12 @@ const CommentList = ({ data }) => {
                 <span>{moment(createdAt).fromNow()}</span>
               </Comment.Metadata>
               <br />
-              <Comment.Text className="comment-list-text" as={Link} to={`${slug.comment.url}`}>
+              <Comment.Text
+                className="comment-list-text"
+                as={Link}
+                to={`${slug.comment.url}`}
+                style={{ fontSize: '18px', lineHeight: '1.618em' }}
+              >
                 { plainContent }
               </Comment.Text>
               <Comment.Actions className="comment-list-actions">
@@ -153,8 +163,8 @@ const CommentList = ({ data }) => {
                       </Link>
                     </React.Fragment>
                   ) : (
-                    <Link to="#" className="summary-context-right" title="bildir">
-                      Bildir
+                    <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
+                      <Icon name="flag" title="bildir" size="small" />
                     </Link>
                   )
                 )}

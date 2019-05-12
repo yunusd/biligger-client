@@ -16,11 +16,6 @@ const colors = {
 };
 
 const theme = {
-  fontFamily:
-"-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen, Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif",
-  fontFamilyMono:
-"'SFMono-Regular',Consolas,'Liberation Mono', Menlo, Courier,monospace",
-  fontWeight: 400,
   link: colors.primary,
   placeholder: colors.black50,
   textSecondary: '#4E5C6E',

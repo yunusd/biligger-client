@@ -1,0 +1,22 @@
+/*******************************
+     User Global Variables
+*******************************/
+@fontName           : 'Open Sans';
+@pageBackground     : #f8f8f8;
+@lineHeight         : 1.618em;
+
+
+/* Colors */
+@red            : #DA324B;
+@orange         : #FE9A76;
+@yellow         : #FECE56;
+@olive          : #32CD32;
+@green          : #48BA6F;
+@teal           : #008080;
+@blue           : #527EC0;
+@violet         : #EE82EE;
+@purple         : #B413EC;
+@pink           : #FF1493;
+@brown          : #A52A2A;
+@grey           : #767676;
+@black          : #000000;

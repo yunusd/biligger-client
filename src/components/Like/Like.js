@@ -22,7 +22,7 @@ const Like = (props) => {
              ? (
                <Icon
                  name="idea"
-                 size={onList ? 'small' : 'large'}
+                 size="small"
                  color={status || change ? 'yellow' : 'grey'}
                  onClick={(e) => {
                     e.preventDefault();
@@ -41,7 +41,7 @@ const Like = (props) => {
                 return (
                   <Icon
                     name="idea"
-                    size={onList ? 'small' : 'large'}
+                    size="small"
                     color={status || change ? 'yellow' : 'grey'}
                     onClick={(e) => {
                       e.preventDefault();

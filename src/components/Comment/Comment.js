@@ -106,7 +106,7 @@ const Comment = (props) => {
                 &nbsp;-&nbsp;
                 {moment(createdAt).fromNow()}
               </Label>
-              <Card.Description style={{ marginTop: '10px', fontSize: '21px' }}>
+              <Card.Description style={{ fontSize: '21px', lineHeight: '1.618em' }}>
                 <ReactMarkdown source={content} />
               </Card.Description>
             </Card.Content>
@@ -117,13 +117,13 @@ const Comment = (props) => {
               &nbsp;&nbsp;&nbsp;
 
               <Link to="#" className="summary-context-icon">
-                <Icon name="comment" size="large" />
+                <Icon name="comment" size="small" />
               </Link>
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
                     <Link to={`${pathname}/düzenle`}>
-                      <Icon name="edit" size="large" className="summary-context-right summary-context-icon" />
+                      <Icon name="edit" size="small" className="summary-context-right summary-context-icon" />
                     </Link>
                     <DeleteComment
                       comment={
@@ -134,7 +134,7 @@ const Comment = (props) => {
                   </React.Fragment>
                 ) : (
                   <Link to="#" title="bildir" className="summary-context-right summary-context-icon">
-                    <Icon name="flag" title="bildir" size="large" />
+                    <Icon name="flag" title="bildir" size="small" />
                   </Link>
                 )
               )}

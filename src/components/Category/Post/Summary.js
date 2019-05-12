@@ -54,7 +54,7 @@ const Summary = (props) => {
             return (
               <Card fluid id={val.id} key={val.id}>
                 <Card.Content>
-                  <Card.Header>
+                  <Card.Header style={{ fontSize: '21px' }}>
                     <Link
                       to={{
                         pathname: val.id ? `${slug.post.url}` : '/',
@@ -70,31 +70,28 @@ const Summary = (props) => {
                       &nbsp;-&nbsp;
                     {moment(val.createdAt).fromNow()}
                   </Card.Meta>
-                  <Card.Description>
+                  <Card.Description style={{ fontSize: '16px', lineHeight: '1.618em' }}>
                     {content}
                   </Card.Description>
                 </Card.Content>
 
                 <Card.Content extra>
                   <Like parentModel="Post" id={val.id} like={val.like} />
-
-
                   &nbsp;&nbsp;&nbsp;
-
                   <Link to="/" className="summary-context-icon">
-                    <Icon name="comment" size="large" />
+                    <Icon name="comment" size="small" />
                   </Link>
 
                   {auth.isLoggedIn && (
                       auth.isOwn ? (
                         <React.Fragment>
                           <Link to={`${slug.post.url}/düzenle`} className="summary-context-right summary-context-icon">
-                            <Icon name="edit" size="large" />
+                            <Icon name="edit" size="small" />
                           </Link>
                         </React.Fragment>
                       ) : (
                         <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
-                          <Icon name="flag" title="bildir" size="large" />
+                          <Icon name="flag" title="bildir" size="small" />
                         </Link>
                       )
                     )}

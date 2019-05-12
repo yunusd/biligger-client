@@ -78,11 +78,11 @@ const Post = (props) => {
                 &nbsp;-&nbsp;
                 {moment(createdAt).fromNow()}
               </Label>
-              <Card.Header style={{ margin: '5px 0 0 0', fontSize: '30px' }}>
+              <Card.Header style={{ margin: '5px 0 0 0', fontSize: '42px' }}>
                 {title}
               </Card.Header>
               <Divider clearing />
-              <Card.Description>
+              <Card.Description style={{ fontSize: '21px' }}>
                 <ReactMarkdown source={content} />
               </Card.Description>
             </Card.Content>
@@ -93,19 +93,19 @@ const Post = (props) => {
               &nbsp;&nbsp;&nbsp;
 
               <Link to="#">
-                <Icon name="comment" size="large" color="grey" />
+                <Icon name="comment" size="small" color="grey" />
               </Link>
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
                     <Link to={`${slug.post.url}/düzenle`}>
-                      <Icon name="edit" color="grey" className="summary-context-right" size="large" />
+                      <Icon name="edit" color="grey" className="summary-context-right" size="small" />
                     </Link>
                     <DeletePost id={id} authorId={author.id} {...props} />
                   </React.Fragment>
                 ) : (
                   <Link to="#" className="summary-context-right" title="bildir">
-                    <Icon name="flag" size="large" title="bildir" />
+                    <Icon name="flag" size="small" title="bildir" />
                   </Link>
                 )
               )}

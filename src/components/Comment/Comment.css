@@ -1,14 +1,9 @@
 .comment-list-meta {
   margin-bottom: 10px!important;
-  font-size: 16px!important;
-}
-.comment-list-text, .comment-parent-text {
-  font-size: 21px!important;
 }
 
 .comment-list-actions {
   margin-top: 10px!important;
-  font-size: 16px!important;
 }
 
 .comment-list-group {
@@ -22,9 +17,4 @@
 
 .comment-list-author {
   margin-top: 10px!important;
-  font-size: 16px!important;
-}
-
-.small.icon {
-  font-size: 1em!important;
 }

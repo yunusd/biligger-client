@@ -47,7 +47,7 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
                   pathname: val.id ? `${slug.post.url}` : '/',
                   state: { id: val.id },
                 }}
-            style={{ color: 'rgba(0,0,0,.85)' }}
+            style={{ color: 'rgba(0,0,0,.85)', fontSize: '21px' }}
           >
             {title}
           </Link>
@@ -59,31 +59,28 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
                 &nbsp;-&nbsp;
           {moment(val.createdAt).fromNow()}
         </Card.Meta>
-        <Card.Description>
+        <Card.Description style={{ fontSize: '16px', lineHeight: '1.618em' }}>
           {content}
         </Card.Description>
       </Card.Content>
 
       <Card.Content extra>
         <Like parentModel="Post" id={val.id} like={val.like} />
-
-
-            &nbsp;&nbsp;&nbsp;
-
+        &nbsp;&nbsp;&nbsp;
         <Link to="/" className="summary-context-icon">
-          <Icon name="comment" size="large" />
+          <Icon name="comment" size="small" />
         </Link>
 
         {auth.isLoggedIn && (
           auth.isOwn ? (
             <React.Fragment>
               <Link to={`${slug.post.url}/düzenle`} className="summary-context-right summary-context-icon">
-                <Icon name="edit" size="large" />
+                <Icon name="edit" size="small" />
               </Link>
             </React.Fragment>
           ) : (
             <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
-              <Icon name="flag" title="bildir" size="large" />
+              <Icon name="flag" title="bildir" size="small" />
             </Link>
           )
         )}
