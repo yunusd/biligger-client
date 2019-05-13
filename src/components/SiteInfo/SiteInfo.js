@@ -1,10 +1,11 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import {
  Grid, Card, Divider, Header, List,
 } from 'semantic-ui-react';
 
 const SiteInfo = ({ location }) => {
-  const pathname = location.pathname;
+  const {pathname} = location;
 
   return (
     <Grid columns={1} centered>
@@ -14,6 +15,13 @@ const SiteInfo = ({ location }) => {
             <Card.Content>
               { pathname === '/hakkinda' && (
                 <React.Fragment>
+                  <Helmet>
+                    <title>Hakkında - Biligger</title>
+                    <meta
+                      name="description"
+                      content="Biligger doğruların, fikirlerin karşılaşmasıyla ortaya çıktığına inanan, bilgiyi paylaşarak, tartışarak büyütmeyi ve geliştirmeyi amaç edinmiş, saygıyı, nezaketi öne alan düşünürlerin (biligger’ların) buluştuğu ütopik bir tartışma platformudur."
+                    />
+                  </Helmet>
                   <Card.Header textAlign="center" style={{ margin: '5px 0 0 0', fontSize: '30px' }}>
                     Hakkında
                   </Card.Header>
@@ -61,6 +69,9 @@ const SiteInfo = ({ location }) => {
 
               { pathname === '/gizlilik-politikasi-ve-hizmet-sartlari' && (
                 <React.Fragment>
+                  <Helmet>
+                    <title>Gizlilik Politikası ve Hizmet Şartları - Biligger</title>
+                  </Helmet>
                   <Card.Header textAlign="center" style={{ margin: '5px 0 0 0', fontSize: '30px' }}>
                     Gizlilik politikası ve hizmet şartları
                   </Card.Header>
@@ -118,8 +129,11 @@ const SiteInfo = ({ location }) => {
 
               { pathname === '/kullanim-kosullari' && (
                 <React.Fragment>
+                  <Helmet>
+                    <title>Kullanım Koşulları - Biligger</title>
+                  </Helmet>
                   <Card.Header textAlign="center" style={{ margin: '5px 0 0 0', fontSize: '30px' }}>
-                    Kullanım Politikası
+                    Kullanım Koşulları
                   </Card.Header>
                   <Divider />
                   <Card.Description>

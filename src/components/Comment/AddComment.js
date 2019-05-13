@@ -52,7 +52,7 @@ const AddComment = (props) => {
                         handleSubmit(data);
                       }}
                       >
-                        <Card style={{ padding: '40px' }} fluid>
+                        <Card id="yorum-yaz" style={{ padding: '40px' }} fluid>
                           <CommentEditor type="comment" placeholderValue="Yorumunuzu yazabilirsiniz..." />
                         </Card>
                         <Button fluid inverted color="blue" type="submit"> Gönder </Button>

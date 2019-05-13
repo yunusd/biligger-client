@@ -223,7 +223,9 @@ const AppHeader = ({ history, location, children }) => {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      return history.replace(`/ara?bilig=${e.target.value}`);
+      const { value } = e.target;
+      e.target.value = '';
+      return history.replace(`/ara?bilig=${value}`);
     }
   };
 

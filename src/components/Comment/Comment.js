@@ -1,9 +1,11 @@
 import React from 'react';
 import { useQuery, useApolloClient } from 'react-apollo-hooks';
+import { Helmet } from 'react-helmet';
 import {
  Card, Grid, Divider, Header, Label, Icon,
 } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import moment from 'moment';
 import ReactMarkdown from 'react-markdown';
 import removeMd from 'remove-markdown';
@@ -45,8 +47,14 @@ const Comment = (props) => {
   } = data.getComment;
 
   const deleted = parentModel === 'Post' && !parent ? true : (!!(parentModel === 'Comment' && !parent));
-  const raw = removeMd(content);
-  const rawParentContent = removeMd(parent.content);
+  const raw = removeMd(content.replace(/\\/g, ''));
+  const rawParentContent = removeMd(
+    parent.title
+    ? parent.title.replace(/\\/g, '')
+    : parent.content.replace(/\\/g, ''),
+  );
+  const metaTitle = raw.length > 100 ? `${raw.slice(0, 100)}...` : raw;
+  const metaDesc = raw.length > 200 ? `${raw.slice(0, 200)}...` : raw;
 
   const slug = urlSerializer({
     pathname,
@@ -92,6 +100,10 @@ const Comment = (props) => {
 
   return (
     <Grid columns={2} centered>
+      <Helmet>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDesc} />
+      </Helmet>
       <Grid.Row>
         <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <CommentParent parent={{ post, comment, deleted }} />
@@ -116,13 +128,13 @@ const Comment = (props) => {
 
               &nbsp;&nbsp;&nbsp;
 
-              <Link to="#" className="summary-context-icon">
+              <HashLink to={`${pathname}#yorum-yaz`} className="summary-context-icon">
                 <Icon name="comment" size="small" />
-              </Link>
+              </HashLink>
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
-                    <Link to={`${pathname}/düzenle`}>
+                    <Link to={`${pathname}/duzenle`}>
                       <Icon name="edit" size="small" className="summary-context-right summary-context-icon" />
                     </Link>
                     <DeleteComment

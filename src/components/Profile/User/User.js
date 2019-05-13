@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery, useApolloClient } from 'react-apollo-hooks';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
@@ -99,6 +100,12 @@ const User = (props) => {
   return (
     <React.Fragment>
       <Segment piled textAlign="center">
+        <Helmet>
+          <title>
+            {username}
+            &nbsp;- Biligger
+          </title>
+        </Helmet>
         <Grid>
           <Grid.Row>
             <Grid.Column width={3} verticalAlign="middle">

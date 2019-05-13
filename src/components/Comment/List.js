@@ -24,6 +24,7 @@ const Reply = ({ parent, getMe, currentUser }) => {
       offset: 0,
       limit: 1,
     },
+    fetchPolicy: 'network-only',
   });
   if (loading) return null;
   if (error) return 'Biraz sıkıntı yaşıyoruz!';
@@ -52,7 +53,7 @@ const Reply = ({ parent, getMe, currentUser }) => {
     isLoggedIn: currentUser.isLoggedIn && true,
   };
 
-  const raw = removeMd(content);
+  const raw = removeMd(content.replace(/\\/g, ''));
 
   const plainContent = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
 
@@ -117,7 +118,7 @@ const CommentList = ({ data }) => {
       isLoggedIn: currentUser.isLoggedIn && true,
     };
 
-    const raw = removeMd(content);
+    const raw = removeMd(content.replace(/\\/g, ''));
 
     const slug = urlSerializer({
       id,
@@ -158,7 +159,7 @@ const CommentList = ({ data }) => {
                 {auth.isLoggedIn && (
                   auth.isOwn ? (
                     <React.Fragment>
-                      <Link to={`${slug.comment.url}/düzenle`} className="summary-context-right summary-context-icon">
+                      <Link to={`${slug.comment.url}/duzenle`} className="summary-context-right summary-context-icon">
                         <Icon name="edit" size="small" />
                       </Link>
                     </React.Fragment>

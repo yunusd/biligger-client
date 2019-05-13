@@ -3,6 +3,7 @@ import { useApolloClient } from 'react-apollo-hooks';
 import removeMd from 'remove-markdown';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 import { Card, Icon } from 'semantic-ui-react';
 
@@ -36,7 +37,7 @@ const Summary = (props) => {
             };
 
             const title = val.title.length < 100 ? val.title : val.title.slice(0, 100);
-            const raw = removeMd(val.content);
+            const raw = removeMd(val.content.replace(/\\/g, ''));
 
             const slug = urlSerializer({
               id: val.id,
@@ -78,14 +79,14 @@ const Summary = (props) => {
                 <Card.Content extra>
                   <Like parentModel="Post" id={val.id} like={val.like} />
                   &nbsp;&nbsp;&nbsp;
-                  <Link to="/" className="summary-context-icon">
+                  <HashLink to={`${slug.post.url}#yorum-yaz`} className="summary-context-icon">
                     <Icon name="comment" size="small" />
-                  </Link>
+                  </HashLink>
 
                   {auth.isLoggedIn && (
                       auth.isOwn ? (
                         <React.Fragment>
-                          <Link to={`${slug.post.url}/düzenle`} className="summary-context-right summary-context-icon">
+                          <Link to={`${slug.post.url}/duzenle`} className="summary-context-right summary-context-icon">
                             <Icon name="edit" size="small" />
                           </Link>
                         </React.Fragment>

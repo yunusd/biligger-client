@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import { Mutation } from 'react-apollo';
+import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import {
  Button, Form, Grid, Card, Message,
@@ -44,7 +45,7 @@ const EditComment = (props) => {
   const contentUrl = content.slice(0, 100).toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/\s/g, '-');
 
   if (stringifyUrl !== contentUrl) {
-    const validUrl = `/@${author.username}/${contentUrl}/${id}/düzenle`;
+    const validUrl = `/@${author.username}/${contentUrl}/${id}/duzenle`;
     return <Redirect to={validUrl} />;
   }
 
@@ -60,7 +61,6 @@ const EditComment = (props) => {
 
   async function handleSubmit(editComment) {
     const localContent = localStorage.getItem('edit-comment');
-    // const url = localStorage.getItem('url');
     try {
       await editComment({
         variables: {
@@ -70,8 +70,6 @@ const EditComment = (props) => {
         },
       });
       localStorage.removeItem('edit-comment');
-      // localStorage.removeItem('url');
-      // return props.history.replace('/');
 
       return window.location.replace(`/@${author.username}/${contentUrl}/${id}`);
     } catch (err) {
@@ -83,6 +81,9 @@ const EditComment = (props) => {
     <Mutation mutation={EDIT_COMMENT}>
       {(editComment, { loading, error }) => (
         <Grid columns={1} centered>
+          <Helmet>
+            <title>Yorum Düzenle - Biligger</title>
+          </Helmet>
           <Grid.Row>
             <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
               {error && (

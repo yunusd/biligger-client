@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useApolloClient } from 'react-apollo-hooks';
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import {
@@ -55,6 +56,9 @@ const LogInForm = (props) => {
 
   return (
     <Grid textAlign="center" className="login-grid" verticalAlign="bottom">
+      <Helmet>
+        <title>Giriş Yap - Biligger</title>
+      </Helmet>
       <Grid.Column className="login-column">
         <Image as={Link} to="/" src={logo} size="medium" />
         <Header as="h2" className="login-header" textAlign="center">

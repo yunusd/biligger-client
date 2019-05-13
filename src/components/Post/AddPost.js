@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mutation, Query } from 'react-apollo';
+import { Helmet } from 'react-helmet';
 import {
  Button, Form, Grid, Card, Radio, Label, Message,
 } from 'semantic-ui-react';
@@ -7,6 +8,7 @@ import {
 import { ADD_POST } from './mutations';
 import { GET_CATEGORIES } from '../Category/queries';
 import { RichTextEditor } from './RichTextEditor';
+import urlSerializer from '../../helpers/urlSerializer';
 
 const AddPost = (props) => {
   const [categoryId, setCategoryId] = useState(null);
@@ -20,7 +22,7 @@ const AddPost = (props) => {
     const content = localStorage.getItem('content');
 
     try {
-      await post({
+      const { data } = await post({
         variables: {
           title,
           content,
@@ -30,8 +32,16 @@ const AddPost = (props) => {
       });
       localStorage.removeItem('title');
       localStorage.removeItem('content');
-      // localStorage.removeItem('url');
-      return props.history.replace('/');
+      const slug = urlSerializer({
+        id: data.addPost.id,
+        text: {
+          title: data.addPost.title,
+        },
+        type: {
+          post: true,
+        },
+      });
+      return props.history.replace(slug.post.url);
     } catch (error) {
       return error;
     }
@@ -41,6 +51,9 @@ const AddPost = (props) => {
     <Mutation mutation={ADD_POST}>
       {(post, { loading, error }) => (
         <Grid columns={1} centered>
+          <Helmet>
+            <title>Yeni Bilig - Biligger</title>
+          </Helmet>
           <Grid.Row>
             <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
               {error && (

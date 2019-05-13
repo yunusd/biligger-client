@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useApolloClient } from 'react-apollo-hooks';
+import { Helmet } from 'react-helmet';
 import { Mutation } from 'react-apollo';
 import { Link, Redirect } from 'react-router-dom';
 import {
@@ -85,6 +86,9 @@ const RegisterForm = (props) => {
 
         return (
           <div>
+            <Helmet>
+              <title>Kayıt Ol - Biligger</title>
+            </Helmet>
             {!status.isRegister
               ? (
                 <div className="login-form">

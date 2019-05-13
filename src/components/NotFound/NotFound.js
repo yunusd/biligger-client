@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import {
  Header, Grid, List, Label,
 } from 'semantic-ui-react';
 
 const NotFound = props => (
   <Grid columns={2} divided>
+    <Helmet>
+      <title>Sayfa Bulunamadı - Biligger</title>
+    </Helmet>
     <Grid.Column mobile={16} tablet={10} computer={8}>
       <Header style={{ fontSize: '19em' }}>
         <span style={{ color: '#527ec0' }}>4</span>

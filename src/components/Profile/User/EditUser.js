@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApolloClient } from 'react-apollo-hooks';
+import { Helmet } from 'react-helmet';
 import { Mutation } from 'react-apollo';
 import {
  Segment, Grid, Card, Accordion, Form, Button, Header, Message,
@@ -70,6 +71,12 @@ const SettingsForm = (props) => {
 
   return (
     <Grid columns={1} centered>
+      <Helmet>
+        <title>
+          {username}
+          &nbsp;- Biligger
+        </title>
+      </Helmet>
       <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
         <Segment piled textAlign="center">
           <Header size="huge">

@@ -4,7 +4,7 @@
 @fontName           : 'Open Sans';
 @pageBackground     : #f8f8f8;
 @lineHeight         : 1.618em;
-
+@fontSmoothing      : antialiased;
 
 /* Colors */
 @red            : #DA324B;

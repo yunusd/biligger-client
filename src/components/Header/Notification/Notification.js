@@ -30,7 +30,7 @@ const NotificationList = ({ data }) => {
     * val.entityId 4 = Commented a Comment
     *
     */
-    const entityIdMessage = [0, 'biliginizi beğendi', 'yorumunuzu beğendi', 'biliginize yorum yaptı', 'yorumunuza cevap yazdı'];
+    const entityIdMessage = [0, 'biliginize katıldı', 'yorumunuza katıldı', 'biliginize yorum yaptı', 'yorumunuza cevap yazdı'];
     const postLikedMessage = val.count - 1 >= 1
     ? ` ve ${val.count - 1} kişi daha bir ${entityIdMessage[val.entityId]}`
     : `, bir ${entityIdMessage[val.entityId]}`;
@@ -63,7 +63,9 @@ const NotificationList = ({ data }) => {
               )}
             </Feed.Date>
             <Feed.Summary>
-              <Link to={`/@${val.actor}`} className="notification-feed-message-actor">{val.actor}</Link>
+              <Link to={`/@${val.actor}`} className="notification-feed-message-actor">
+                {val.actor}
+              </Link>
               <Link to={slug.comment.url || slug.post.url} className="notification-feed-message">
                 {postLikedMessage}
               </Link>

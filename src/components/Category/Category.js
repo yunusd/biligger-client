@@ -7,7 +7,7 @@ import { GET_CATEGORIES } from './queries';
 const Category = () => (
   <Query query={GET_CATEGORIES}>
     {({ data, loading, error }) => {
-        if (loading) return 'Yükleniyor';
+        if (loading) return null;
         if (error) return 'Hata';
         return (
           data.getCategories.map(({ id, name }) => (

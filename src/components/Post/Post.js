@@ -1,14 +1,16 @@
 import React from 'react';
 import { useQuery, useApolloClient } from 'react-apollo-hooks';
+import { Helmet } from 'react-helmet';
 import ReactMarkdown from 'react-markdown';
+import removeMd from 'remove-markdown';
 import {
   Grid, Card, Label, Header, Divider, Icon,
 } from 'semantic-ui-react';
-
 import { Link, Redirect } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import moment from 'moment';
-import GET_POST from './queries';
 
+import GET_POST from './queries';
 import { List, AddComment } from '../Comment';
 import NotFound from '../NotFound';
 import dateLocale from '../../helpers/dateLocale';
@@ -23,10 +25,12 @@ const Post = (props) => {
   const client = useApolloClient();
   const { pathname } = props.location;
   const path = pathname.split('/');
-  const checkUrl = path.length >= 2 ? pathname.slice(-24) : false;
-  const id = checkUrl.search('/') === 0 ? false : checkUrl;
-  const { data, loading, error } = useQuery(GET_POST, { variables: { id } });
+  const id = path.length >= 2 ? path[1].slice(-24) : false;
 
+  const { data, loading, error } = useQuery(GET_POST, {
+    variables: { id },
+    fetchPolicy: 'network-only',
+  });
   if (loading) return null;
   if (error) return <NotFound {...props} />;
 
@@ -67,8 +71,15 @@ const Post = (props) => {
     return <Redirect to={slug.post.url} />;
   }
 
+  const raw = removeMd(content.replace(/\\/g, ''));
+  const metaDesc = raw.length > 200 ? `${raw.slice(0, 200)}...` : raw;
+
   return (
     <Grid columns={1} centered id={id} key={id}>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={metaDesc} />
+      </Helmet>
       <Grid.Row>
         <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <Card fluid>
@@ -82,7 +93,7 @@ const Post = (props) => {
                 {title}
               </Card.Header>
               <Divider clearing />
-              <Card.Description style={{ fontSize: '21px' }}>
+              <Card.Description id="ff" style={{ fontSize: '21px' }}>
                 <ReactMarkdown source={content} />
               </Card.Description>
             </Card.Content>
@@ -92,19 +103,19 @@ const Post = (props) => {
 
               &nbsp;&nbsp;&nbsp;
 
-              <Link to="#">
-                <Icon name="comment" size="small" color="grey" />
-              </Link>
+              <HashLink to={`${slug.post.url}#yorum-yaz`}>
+                <Icon name="comment" size="small" className="summary-context-icon" />
+              </HashLink>
               {auth.isLoggedIn && (
                 auth.isOwn ? (
                   <React.Fragment>
-                    <Link to={`${slug.post.url}/düzenle`}>
-                      <Icon name="edit" color="grey" className="summary-context-right" size="small" />
+                    <Link to={`${slug.post.url}/duzenle`}>
+                      <Icon name="edit" className="summary-context-right  summary-context-icon" size="small" />
                     </Link>
                     <DeletePost id={id} authorId={author.id} {...props} />
                   </React.Fragment>
                 ) : (
-                  <Link to="#" className="summary-context-right" title="bildir">
+                  <Link to="#" className="summary-context-right  summary-context-icon" title="bildir">
                     <Icon name="flag" size="small" title="bildir" />
                   </Link>
                 )

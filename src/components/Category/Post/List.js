@@ -1,11 +1,16 @@
 import React from 'react';
 import { Query } from 'react-apollo';
+import { Helmet } from 'react-helmet';
 import {
  Dimmer, Loader, Grid, Button, Segment,
 } from 'semantic-ui-react';
 
 import Summary from './Summary';
 import { GET_POPULER_POSTS_BY_CATEGORY } from './queries';
+
+String.prototype.toFirstUpperCase = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 const List = (props) => {
   const path = props.location.pathname.slice(1);
@@ -41,9 +46,14 @@ const List = (props) => {
           sanat: name === 'sanat' && 'yellow',
           yasam: name === 'yaşam biçimi' && 'purple',
         };
-
         return (
           <Grid columns={2} centered>
+            <Helmet>
+              <title>
+                {name.toFirstUpperCase()}
+                &nbsp;- Biligger
+              </title>
+            </Helmet>
             <Grid.Row>
               <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
                 <Segment

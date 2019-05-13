@@ -12,7 +12,7 @@ const CommentList = ({ auth, data }) => {
   const { isOwn, isLoggedIn } = auth;
   return data.getUserComments.map((val) => {
     const { id, content, author } = val;
-    const raw = removeMd(content);
+    const raw = removeMd(content.replace(/\\/g, ''));
 
     const slug = urlSerializer({
       id,

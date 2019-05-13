@@ -20,7 +20,7 @@ const PostList = ({ data, auth }) => data.getPostsByUser.map((val) => {
         post: true,
       },
     });
-    const raw = removeMd(val.content);
+    const raw = removeMd(val.content.replace(/\\/g, ''));
 
     const content = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
     return (
