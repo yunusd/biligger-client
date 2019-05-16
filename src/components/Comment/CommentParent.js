@@ -3,19 +3,35 @@ import moment from 'moment';
 
 import { Link } from 'react-router-dom';
 import { Segment, Header } from 'semantic-ui-react';
+
+import urlSerializer from '../../helpers/urlSerializer';
 import dateLocale from '../../helpers/dateLocale';
 
 moment.updateLocale('en', dateLocale);
 
 const CommentParent = (props) => {
   const { post, comment, deleted } = props.parent;
+
+  const slug = urlSerializer({
+    id: post.id || comment.id,
+    username: comment.author ? comment.author : false,
+    text: {
+      title: post.title,
+      content: comment.content,
+    },
+    type: {
+      post: true,
+      comment: true,
+    },
+  });
+
   return (
     <Segment>
       <Header size="medium" textAlign="center">
         {
           post.title ? (
             <React.Fragment>
-              <Link to={deleted ? '#' : `/${post.title.replace(' ', '-')}-${post.id}`} style={{ color: '#000000' }}>
+              <Link to={deleted ? '#' : `${slug.post.url}`} style={{ color: '#000000' }}>
                 {deleted ? '[silinmiş]' : post.title}
               </Link>
               {
@@ -30,7 +46,7 @@ const CommentParent = (props) => {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Link to={deleted ? '#' : `/@${comment.author}/${comment.content.replace(' ', '-')}/${comment.id}`} style={{ color: '#000000' }}>
+              <Link to={deleted ? '#' : `${slug.comment.url}`} style={{ color: '#000000' }}>
                 {deleted ? '[silinmiş]' : (
                   <p>
                     {comment.content.slice(0, 100)}

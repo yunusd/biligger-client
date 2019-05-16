@@ -18,3 +18,8 @@
 .comment-list-author {
   margin-top: 10px!important;
 }
+
+.count-like {
+  position: relative;
+  bottom: 2px;
+}

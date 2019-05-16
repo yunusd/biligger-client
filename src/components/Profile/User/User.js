@@ -21,7 +21,7 @@ const User = (props) => {
   const client = useApolloClient();
 
   const handleSubmit = () => {
-    axios.get('https://localhost:3000/auth/logout', { withCredentials: 'include' })
+    axios.get('/auth/logout', { withCredentials: 'include' })
       .then(() => { client.clearStore(); window.location.replace('/'); })
       .catch(error => error);
   };

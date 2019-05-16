@@ -1,6 +1,6 @@
-.login-grid {
+/* .login-grid {
   height: 100%!important;
-}
+} */
 
 .login-column {
   max-width: 300px!important;
@@ -15,4 +15,11 @@
 .login-segment {
   padding: 20px 40px!important;
   border: none!important;
+}
+
+.boxs {
+	-webkit-box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+	-moz-box-shadow:    0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+  box-shadow:         0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+  border-radius: 5px;  
 }

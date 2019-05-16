@@ -21,6 +21,7 @@ import NotFound from '../NotFound';
 import dateLocale from '../../helpers/dateLocale';
 import Like from '../Like';
 import urlSerializer from '../../helpers/urlSerializer';
+import './Comment.css';
 
 moment.updateLocale('en', dateLocale);
 
@@ -28,7 +29,8 @@ const Comment = (props) => {
   const client = useApolloClient();
   const { pathname } = props.location;
   const path = pathname.split('/');
-  const commentId = path[path.length - 1];
+  const commentId = path.length >= 2 ? path[2].slice(-24) : false;
+
   const { data, loading, error } = useQuery(GET_COMMENT, {
     variables: { id: commentId },
   });
@@ -41,6 +43,7 @@ const Comment = (props) => {
     content,
     author,
     like,
+    countLike,
     parent,
     parentModel,
     createdAt,
@@ -124,7 +127,16 @@ const Comment = (props) => {
             </Card.Content>
             <Card.Content extra>
               <Like parentModel="Comment" id={id} like={like} />
-
+              { auth.isOwn && countLike !== 0 ? (
+                <Label
+                  basic
+                  pointing="left"
+                  color="yellow"
+                  size="small"
+                  className="count-like"
+                  content={countLike}
+                />
+              ) : null }
 
               &nbsp;&nbsp;&nbsp;
 

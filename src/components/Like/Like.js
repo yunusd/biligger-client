@@ -9,7 +9,6 @@ const Like = (props) => {
     like,
     id,
     parentModel,
-    onList,
   } = props;
   const [change, setChange] = useState();
   const [status, setStatus] = useState(like);

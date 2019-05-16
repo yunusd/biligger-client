@@ -7,6 +7,7 @@ const GET_POST = gql`
       title
       content
       url
+      countLike
       like
       category {
         id

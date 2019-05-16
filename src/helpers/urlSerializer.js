@@ -109,7 +109,8 @@ const pathSlicer = (str, type) => {
     };
   } if (type === 'Comment') {
     const author = path[1].slice(1);
-    const content = path[2].slice(0, 100);
+    const content = path[2].slice(0, -25).slice(0, 100);
+
     return {
       content,
       author,
@@ -145,21 +146,24 @@ export default (obj) => {
     const path = pathname ? pathSlicer(pathname, 'Post') : false;
     titleSlugify.title = slugify(text.title, {
       lower: true,
-      remove: /[*+~.()'"!:@]/g,
+      remove: /[^a-zA-Z\d\s:]/,
     });
     titleSlugify.valid.title = !type.post ? null : titleSlugify.title === path.title;
   } else if (text.content) {
     const path = pathname ? pathSlicer(pathname, 'Comment') : false;
     contentSlugify.content = slugify(text.content.slice(0, 100), {
       lower: true,
-      remove: /[*+~.()'"!:@]/g,
+      remove: /[^a-zA-Z\d\s:]/,
     });
+    contentSlugify.content = contentSlugify.content === '' ? contentSlugify.content = '-' : contentSlugify.content;
+
     contentSlugify.valid.username = !type.comment ? null : path.author === username;
     contentSlugify.valid.content = !type.comment ? null : contentSlugify.content === path.content;
   }
 
   const postUrl = type.post && titleSlugify.title ? `/${titleSlugify.title}-${id}` : false;
-  const commentUrl = type.comment && username && contentSlugify.content ? `/@${username}/${contentSlugify.content}/${id}` : false;
+  const commentUrl = type.comment && username && contentSlugify.content ? `/@${username}/${contentSlugify.content}-${id}` : false;
+
   return {
     post: {
       url: postUrl,

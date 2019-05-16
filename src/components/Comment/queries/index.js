@@ -9,6 +9,7 @@ const GET_COMMENT = gql`
         id
         username
       }
+      countLike
       like
       parentModel
       parent {

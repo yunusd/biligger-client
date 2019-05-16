@@ -18,3 +18,8 @@
 .display-linebreak {
   white-space: pre-line;
 }
+
+.count-like {
+  position: relative;
+  bottom: 2px;
+}

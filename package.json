@@ -1,14 +1,15 @@
 {
   "name": "biligger-client",
-  "version": "0.1.0",
+  "version": "0.8.0",
   "private": true,
   "scripts": {
-    "start": "HTTPS=true PORT=3001 react-scripts start",
+    "start": "PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },

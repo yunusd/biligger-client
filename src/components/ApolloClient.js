@@ -18,15 +18,17 @@ const client = new ApolloClient({
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
         graphQLErrors.map(({ message, locations, path }) => {
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-          );
+          if (process.env.NODE_ENV !== 'production') {
+            console.log(
+              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+            );
+          }
         });
       }
-      if (networkError) console.log(`[Network error]: ${networkError}`);
+      if (networkError && process.env.NODE_ENV !== 'production') console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
-      uri: 'https://localhost:3000/api',
+      uri: '/api',
       credentials: 'include',
     }),
   ]),

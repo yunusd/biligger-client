@@ -17,7 +17,7 @@ class LogIn extends Component {
 
   handleSubmit() {
     const { username, password } = this.state;
-    axios.post('https://localhost:3000/auth', {
+    axios.post('/auth', {
       username,
       password,
     }, { withCredentials: 'include' }).then((res) => {
@@ -43,7 +43,7 @@ class LogIn extends Component {
       button, location,
     } = this.props;
 
-    const urlCheck = location ? location.pathname === '/giriş-yap' : false;
+    const urlCheck = location ? location.pathname === '/giris' : false;
     const errorMessage = `${error && 'Kullanıcı adı ya da şifre yanlış!'}`;
 
     return (

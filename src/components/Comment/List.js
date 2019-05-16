@@ -78,7 +78,7 @@ const Reply = ({ parent, getMe, currentUser }) => {
             { plainContent }
           </Comment.Text>
           <Comment.Actions className="comment-list-actions">
-            <Like parentModel="Comment" id={id} like={like} onList />
+            <Like parentModel="Comment" id={id} like={like} />
             {auth.isLoggedIn && (
               auth.isOwn ? (
                 <React.Fragment>
@@ -188,6 +188,7 @@ const List = ({ parent }) => {
       offset: 0,
       limit: 10,
     },
+    fetchPolicy: 'network-only',
   });
   if (loading) return null;
   if (error) return 'Biraz sıkıntı yaşıyoruz!';

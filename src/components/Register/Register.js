@@ -49,16 +49,10 @@ const RegisterSchema = Yup.object().shape({
 const RegisterForm = (props) => {
   const client = useApolloClient();
   useEffect(() => {
-    document.getElementById('root').style.background = 'linear-gradient(to top, #527ec0 68.3%, #ffffff 50%)';
-    document.getElementById('root').style.position = 'absolute';
-    document.getElementById('root').style.width = '100%';
-    document.getElementById('root').style.height = '100%';
+    document.body.style.background = 'linear-gradient(to top, #527ec0 5%, #ffffff 60%) fixed';
 
     return () => {
-      document.getElementById('root').style.background = null;
-      document.getElementById('root').style.position = null;
-      document.getElementById('root').style.width = null;
-      document.getElementById('root').style.height = null;
+      document.body.style.background = null;
     };
   });
 
@@ -144,7 +138,7 @@ const RegisterForm = (props) => {
                         <Divider />
                         Zaten kayıtlı mısın?
                         <br />
-                        <Link to="/giriş" style={{ color: '#49ba6f' }}>Giriş Yap</Link>
+                        <Link to="/giris" style={{ color: '#49ba6f' }}>Giriş Yap</Link>
                       </Segment>
                     </Grid.Column>
                   </Grid>

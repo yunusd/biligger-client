@@ -38,7 +38,7 @@ const Post = (props) => {
   const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
 
   const {
-    title, content, author, createdAt, like,
+    title, content, author, createdAt, like, countLike,
   } = data.getPost;
 
   const auth = {
@@ -100,7 +100,16 @@ const Post = (props) => {
 
             <Card.Content extra>
               <Like parentModel="Post" id={id} like={like} />
-
+              { auth.isOwn && countLike !== 0 ? (
+                <Label
+                  basic
+                  pointing="left"
+                  color="yellow"
+                  size="small"
+                  className="count-like"
+                  content={countLike}
+                />
+              ) : null }
               &nbsp;&nbsp;&nbsp;
 
               <HashLink to={`${slug.post.url}#yorum-yaz`}>

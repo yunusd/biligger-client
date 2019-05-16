@@ -65,7 +65,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         ? <Component {...props} />
         : (
           <Redirect to={{
-              pathname: '/giriş',
+              pathname: '/giris',
               state: { from: props.location },
             }}
           />
@@ -102,7 +102,7 @@ const App = () => (
                   <RedirectRoute path="/(hakkinda|gizlilik-politikasi-ve-hizmet-sartlari|kullanim-kosullari)/" exact component={SiteInfo} />
                   <PrivateRoute path="/@:username" exact component={Profile} />
                   <PrivateRoute path="/@:username/ayarlar" component={EditUser} />
-                  <RedirectRoute path="/@:username/:content/:comment" exact component={Comment} />
+                  <RedirectRoute path="/@:username/:comment" exact component={Comment} />
                   <PrivateRoute path="/@:username/:content/:comment/duzenle" exact component={EditComment} />
                   <RedirectRoute path="/:title" exact component={Post} />
                   <PrivateRoute path="/:title/duzenle" exact component={EditPost} />

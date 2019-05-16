@@ -229,7 +229,7 @@ const AppHeader = ({ history, location, children }) => {
     }
   };
 
-  if (location.pathname !== '/giriş' && location.pathname !== '/kayıt') {
+  if (location.pathname !== '/giris' && location.pathname !== '/kayit') {
     return (
       <React.Fragment>
         <DesktopHeader
