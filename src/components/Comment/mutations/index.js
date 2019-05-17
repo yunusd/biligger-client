@@ -28,8 +28,9 @@ const DELETE_COMMENT = gql`
   mutation deleteComment(
     $id: ID!,
     $author: ID!,
+    $parent: ID!,
   ){
-    deleteComment(id: $id, author: $author){
+    deleteComment(id: $id, author: $author, parent: $parent){
       content
     }
   }

@@ -36,7 +36,7 @@ const DeletePost = (props) => {
     update: (proxy, result) => {
       window.location.replace(redirectUrl);
     },
-    variables: { id, author: authorId },
+    variables: { id, author: authorId, parent: parent.post.id },
   });
   return (
     <React.Fragment>
