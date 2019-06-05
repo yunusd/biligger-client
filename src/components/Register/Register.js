@@ -48,13 +48,6 @@ const RegisterSchema = Yup.object().shape({
 
 const RegisterForm = (props) => {
   const client = useApolloClient();
-  useEffect(() => {
-    document.body.style.background = 'linear-gradient(to top, #527ec0 5%, #ffffff 60%) fixed';
-
-    return () => {
-      document.body.style.background = null;
-    };
-  });
 
   const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
   if (currentUser.isLoggedIn) return <Redirect to="/" />;

@@ -39,7 +39,7 @@ const CommentList = ({ auth, data }) => {
               <Dropdown.Menu style={{ boxShadow: 'none' }}>
                 {isOwn ? (
                   <React.Fragment>
-                    <Dropdown.Item as={Link} to={`${slug.comment.url}/düzenle`} icon="edit" content="düzenle" />
+                    <Dropdown.Item as={Link} to={`${slug.comment.url}/duzenle`} icon="edit" content="düzenle" />
                   </React.Fragment>
                 ) : (
                   <React.Fragment>

@@ -96,8 +96,8 @@ const TabletHeader = ({
         vertical
         visible={sidebarOpened}
       >
-        <Menu.Item header>
-          <Image as={Link} to="/" src={logo} width="100px" />
+        <Menu.Item header onClick={handleSidebarHide}>
+          <Button content="Menüyü Kapat" fluid size="mini" />
         </Menu.Item>
         <Category />
         <Menu.Item>
@@ -166,6 +166,9 @@ return (
       visible={sidebarOpened}
     >
       <Menu.Item header>
+        <Menu.Item onClick={handleSidebarHide}>
+          <Button content="Menüyü Kapat" fluid size="mini" />
+        </Menu.Item>
         {currentUser.isLoggedIn && (
           <Menu.Menu position="right">
             <Menu.Item>

@@ -38,12 +38,11 @@ const PostList = ({ data, auth }) => data.getPostsByUser.map((val) => {
               <Dropdown.Menu style={{ boxShadow: 'none' }}>
                 {isOwn ? (
                   <React.Fragment>
-                    <Dropdown.Item as={Link} to={`${slug.post.url}/düzenle`} icon="edit" content="düzenle" />
+                    <Dropdown.Item as={Link} to={`${slug.post.url}/duzenle`} icon="edit" content="düzenle" />
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
                     <Dropdown.Item>Bildir</Dropdown.Item>
-                    <Dropdown.Item>Düzenle</Dropdown.Item>
                   </React.Fragment>
                 )}
               </Dropdown.Menu>

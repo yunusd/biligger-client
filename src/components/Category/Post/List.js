@@ -40,11 +40,12 @@ const List = (props) => {
         const isExist = data.getPopulerPostsByCategory.length !== 0;
 
         const colors = {
-          teknoloji: name === 'teknoloji' && 'blue',
+          teknoloji: name === 'teknoloji' && 'green',
           bilim: name === 'bilim' && 'red',
-          spor: name === 'spor' && 'green',
+          politika: name === 'politika' && 'black',
           sanat: name === 'sanat' && 'yellow',
-          yasam: name === 'yaşam biçimi' && 'purple',
+          ekonomi: name === 'ekonomi' && 'blue',
+          edebiyat: name === 'edebiyat' && 'yellow'
         };
         return (
           <Grid columns={2} centered>
@@ -59,8 +60,8 @@ const List = (props) => {
                 <Segment
                   color={
                     colors.teknoloji || colors.bilim
-                    || colors.spor || colors.sanat
-                    || colors.yasam
+                    || colors.ekonomi || colors.sanat
+                    || colors.politika || colors.edebiyat
                   }
                   style={{
                     boxShadow: 'none',

@@ -103,7 +103,7 @@ const App = () => (
                   <PrivateRoute path="/@:username" exact component={Profile} />
                   <PrivateRoute path="/@:username/ayarlar" component={EditUser} />
                   <RedirectRoute path="/@:username/:comment" exact component={Comment} />
-                  <PrivateRoute path="/@:username/:content/:comment/duzenle" exact component={EditComment} />
+                  <PrivateRoute path="/@:username/:comment/duzenle" exact component={EditComment} />
                   <RedirectRoute path="/:title" exact component={Post} />
                   <PrivateRoute path="/:title/duzenle" exact component={EditPost} />
                   <PrivateRoute component={NotFound} />

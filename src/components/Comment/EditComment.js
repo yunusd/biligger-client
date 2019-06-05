@@ -6,27 +6,28 @@ import { Redirect } from 'react-router-dom';
 import {
  Button, Form, Grid, Card, Message,
 } from 'semantic-ui-react';
+import removeMd from 'remove-markdown';
 
 import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
 import { GET_COMMENT } from './queries';
 import { EDIT_COMMENT } from './mutations';
 import { Content as CommentEditor } from '../Post/RichTextEditor';
+import urlSerializer from '../../helpers/urlSerializer';
 import NotFound from '../NotFound';
 
 const EditComment = (props) => {
   const client = useApolloClient();
-
-  const path = props.location.pathname.split('/');
+  const { pathname } = props.location;
+  const path = pathname.split('/');
   const commentAuthor = path[1].slice(1);
-  const commentId = path[3];
-  const commentContent = path[2].slice(0, 100);
+  const commentId = path[2].slice(-24);
 
   const { data, loading, error } = useQuery(GET_COMMENT, {
     variables: { id: commentId },
   });
 
   if (loading) return null;
-  if (error) return <NotFound />;
+  if (error) return <NotFound {...props} />;
 
   const {
     id,
@@ -34,19 +35,28 @@ const EditComment = (props) => {
     author,
   } = data.getComment;
 
+  const raw = removeMd(content.replace(/\\/g, ''));
 
-  if (commentAuthor !== author.username) return <NotFound {...props} />;
+  const slug = urlSerializer({
+    pathname,
+    id,
+    username: author.username,
+    text: {
+      content: raw,
+    },
+    type: {
+      comment: true,
+    },
+  });
+
+  if (!slug.comment.valid.username) return <NotFound {...props} />;
 
   /**
    * if title and post id of url is not match with title and id of post, page will be
    * redirected to matching url
    */
-  const stringifyUrl = JSON.stringify(commentContent).replace(/[^a-zA-Z\d\-:]/g, '').replace(/\s/g, '-');
-  const contentUrl = content.slice(0, 100).toLowerCase().replace(/[^a-zA-Z\d\s:]/g, '').replace(/\s/g, '-');
-
-  if (stringifyUrl !== contentUrl) {
-    const validUrl = `/@${author.username}/${contentUrl}/${id}/duzenle`;
-    return <Redirect to={validUrl} />;
+  if (!slug.comment.valid.content) {
+    return <Redirect to={`${slug.comment.url}/duzenle`} />;
   }
 
   const { currentUser } = client.readQuery({ query: GET_AUTH_STATUS });
@@ -71,7 +81,7 @@ const EditComment = (props) => {
       });
       localStorage.removeItem('edit-comment');
 
-      return window.location.replace(`/@${author.username}/${contentUrl}/${id}`);
+      return window.location.replace(slug.comment.url);
     } catch (err) {
       return err;
     }

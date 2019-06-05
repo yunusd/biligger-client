@@ -82,7 +82,7 @@ const Reply = ({ parent, getMe, currentUser }) => {
             {auth.isLoggedIn && (
               auth.isOwn ? (
                 <React.Fragment>
-                  <Link to={`${slug.comment.url}/düzenle`} className="summary-context-right summary-context-icon">
+                  <Link to={`${slug.comment.url}/duzenle`} className="summary-context-right summary-context-icon">
                     <Icon name="edit" size="small" />
                   </Link>
                   {/* <DeletePost id={id} authorId={author.id} {...props} /> */}
