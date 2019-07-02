@@ -19,7 +19,8 @@ const RegisterSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, 'Kullanıcı adı çok kısa!')
     .max(20, 'Kullanıcı adı çok uzun!')
-    .required('Kullanıcı adı gerekli!'),
+    .required('Kullanıcı adı gerekli!')
+    .matches(/^[a-zA-Z0-9]+$/, 'Geçersiz Kullanıcı adı!'),
   password: Yup.string()
     .required('Şifre gerekli!')
     .matches(
@@ -119,6 +120,11 @@ const RegisterForm = (props) => {
                           <Form.Input error={!!errors.email || !!(serverValidationErrors && serverValidationErrors.email)} type="email" placeholder="E-Posta adresi" name="email" value={values.email} onChange={handleChange} />
                           <Form.Input error={!!errors.password} type="password" placeholder="Şifre" name="password" value={values.password} onChange={handleChange} />
                           <Form.Input error={!!errors.passwordCheck} type="password" placeholder="Şifre(tekrar)" name="passwordCheck" value={values.passwordCheck} onChange={handleChange} />
+                          {
+                            errors.password
+                            ? <Message content="min 8 karakter, 3 harf, 2 rakam ve 1 özel karakter" />
+                            : null
+                          }
                           <Form.Input error={!!errors.degree} placeholder="Ünvan" name="degree" value={values.degree} onChange={handleChange} />
                           <Form.TextArea error={!!errors.bio} placeholder="Hakkınızda" name="bio" value={values.bio} onChange={handleChange} />
 
