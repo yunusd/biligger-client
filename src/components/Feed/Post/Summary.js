@@ -36,7 +36,7 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
     },
   });
 
-
+  const date = moment(val.createdAt).diff(Date.now(), 'days');
   const content = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
 
   return (
@@ -53,12 +53,12 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
             {title}
           </Link>
         </Card.Header>
-        <Card.Meta>
+        <Card.Meta title={moment(val.createdAt).format("dddd, D MMMM YYYY, H:MM:SS")}>
           <Link to={authorUrl}>
             {val.author.username}
           </Link>
           &nbsp;-&nbsp;
-          {moment(val.createdAt).fromNow()}
+          {date <= -30 ? moment(val.createdAt).format("D MMMM YYYY") : moment(val.createdAt).fromNow()}
         </Card.Meta>
         <Card.Description style={{ fontSize: '16px', lineHeight: '1.618em' }}>
           {content}

@@ -71,6 +71,7 @@ const Post = (props) => {
     return <Redirect to={slug.post.url} />;
   }
 
+  const date = moment(createdAt).diff(Date.now(), 'days');
   const raw = removeMd(content.replace(/\\/g, ''));
   const metaDesc = raw.length > 200 ? `${raw.slice(0, 200)}...` : raw;
 
@@ -84,10 +85,10 @@ const Post = (props) => {
         <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <Card fluid>
             <Card.Content>
-              <Label as={Link} to={authorUrl} color="blue" ribbon>
+              <Label as={Link} to={authorUrl} color="blue" title={moment(createdAt).format("dddd, D MMMM YYYY, H:MM:SS")} ribbon>
                 {author.username}
                 &nbsp;-&nbsp;
-                {moment(createdAt).fromNow()}
+                {date <= -30 ? moment(createdAt).format("D MMMM YYYY") : moment(createdAt).fromNow()}
               </Label>
               <Card.Header style={{ margin: '5px 0 0 0', fontSize: '42px' }}>
                 {title}

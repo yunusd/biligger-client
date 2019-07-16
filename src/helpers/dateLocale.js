@@ -15,4 +15,11 @@ export default {
     y: 'bir yıl',
     yy: '%d yıl',
   },
+  weekdays: [
+    'Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi',
+  ],
+  months: [
+    'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz',
+    'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık',
+  ],
 };
