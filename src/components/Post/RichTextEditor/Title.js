@@ -19,10 +19,11 @@ class Title extends Component {
     super(props);
     const { type = 'post', post } = this.props;
     this.type = type;
-    if (this.type === 'editPost') localStorage.setItem('edit-title', post.title);
-
+    if (this.type === 'editPost') {
+      localStorage.setItem('edit-title', post.title);
+      this.post = post.title || null;
+    }
     this.localStorageTitle = localStorage.getItem('title');
-    this.localStorageEditTitle = localStorage.getItem('edit-title');
 
     this.initialValue = Value.fromJSON({
       document: {
@@ -120,7 +121,7 @@ class Title extends Component {
     const { value, isMobile } = this.state;
     if (isMobile) {
       return (
-        <Input type="text" name="title" placeholder="Başlık" defaultValue={this.localStorageTitle || this.localStorageEditTitle} className="title-input" transparent onChange={this.handleInputChange} />
+        <Input type="text" name="title" placeholder="Başlık" defaultValue={this.post || this.localStorageTitle} className="title-input" transparent onChange={this.handleInputChange} />
       );
     }
     return (

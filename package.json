@@ -1,6 +1,6 @@
 {
   "name": "biligger-client",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "private": true,
   "scripts": {
     "start": "PORT=3000 react-scripts start",
@@ -41,6 +41,7 @@
     "react-router-dom": "^5.0.1",
     "react-router-hash-link": "^1.2.1",
     "react-scripts": "^3.0.1",
+    "react-textarea-autosize": "^7.1.0",
     "remove-markdown": "^0.3.0",
     "rich-markdown-editor": "^9.8.2",
     "semantic-ui": "^2.4.2",

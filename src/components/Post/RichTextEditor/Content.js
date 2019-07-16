@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Editor from 'rich-markdown-editor';
 
-import { TextArea } from 'semantic-ui-react';
+import TextareaAutosize from 'react-textarea-autosize';
 import theme from './Theme';
 
 class Content extends Component {
@@ -11,6 +11,7 @@ class Content extends Component {
     this.comment = comment;
     this.post = post;
     this.type = type;
+    if (this.post) localStorage.setItem('edit-content', this.post.content);
     this.draft = localStorage.getItem(this.type === 'comment' || 'content' || this.type === 'editComment' || 'edit-comment') || null;
     this.state = {
       // eslint-disable-next-line no-nested-ternary
@@ -51,7 +52,14 @@ class Content extends Component {
 
     if (isMobile) {
       return (
-        <TextArea type="text" name="content" defaultValue={value} placeholder="Yazmaya başlayabilirsiniz" className="content-textarea" onChange={this.handleInputChange} />
+        <TextareaAutosize
+          type="text"
+          name="content"
+          defaultValue={value}
+          placeholder="Yazmaya başlayabilirsiniz"
+          onChange={this.handleInputChange}
+          className="content-textarea"
+        />
       );
     }
 
