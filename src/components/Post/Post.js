@@ -85,10 +85,10 @@ const Post = (props) => {
         <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <Card fluid>
             <Card.Content>
-              <Label as={Link} to={authorUrl} color="blue" title={moment(createdAt).format("dddd, D MMMM YYYY, H:MM:SS")} ribbon>
+              <Label as={Link} to={authorUrl} color="blue" title={moment(createdAt).format('dddd, D MMMM YYYY, H:MM:SS')} ribbon>
                 {author.username}
                 &nbsp;-&nbsp;
-                {date <= -30 ? moment(createdAt).format("D MMMM YYYY") : moment(createdAt).fromNow()}
+                {date <= -30 ? moment(createdAt).format('D MMMM YYYY') : moment(createdAt).fromNow()}
               </Label>
               <Card.Header style={{ margin: '5px 0 0 0', fontSize: '42px' }}>
                 {title}

@@ -67,10 +67,10 @@ const Summary = (props) => {
                       {title}
                     </Link>
                   </Card.Header>
-                  <Card.Meta title={moment(val.createdAt).format("dddd, D MMMM YYYY, H:MM:SS")}>
+                  <Card.Meta title={moment(val.createdAt).format('dddd, D MMMM YYYY, H:MM:SS')}>
                     {val.author.username}
                       &nbsp;-&nbsp;
-                    {date <= -30 ? moment(val.createdAt).format("D MMMM YYYY") : moment(val.createdAt).fromNow()}
+                    {date <= -30 ? moment(val.createdAt).format('D MMMM YYYY') : moment(val.createdAt).fromNow()}
                   </Card.Meta>
                   <Card.Description style={{ fontSize: '16px', lineHeight: '1.618em' }}>
                     {content}
