@@ -55,6 +55,7 @@ const Reply = ({ parent, getMe, currentUser }) => {
 
   const raw = removeMd(content.replace(/\\/g, ''));
 
+  const date = moment(createdAt).diff(Date.now(), 'days');
   const plainContent = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
 
   return (
@@ -65,8 +66,8 @@ const Reply = ({ parent, getMe, currentUser }) => {
           <Comment.Author className="comment-list-author" as={Link} to={`/@${author.username}`}>
             { author.username }
           </Comment.Author>
-          <Comment.Metadata className="comment-list-meta">
-            <span>{moment(createdAt).fromNow()}</span>
+          <Comment.Metadata className="comment-list-meta" title={moment(createdAt).format('dddd, D MMMM YYYY, H:MM:SS')}>
+            <span>{date <= -30 ? moment(createdAt).format('D MMMM YYYY') : moment(createdAt).fromNow()}</span>
           </Comment.Metadata>
           <br />
           <Comment.Text
@@ -131,6 +132,7 @@ const CommentList = ({ data }) => {
       },
     });
 
+    const date = moment(createdAt).diff(Date.now(), 'days');
     const plainContent = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
 
     return (
@@ -141,8 +143,8 @@ const CommentList = ({ data }) => {
               <Comment.Author className="comment-list-author" as={Link} to={`/@${author.username}`}>
                 { author.username }
               </Comment.Author>
-              <Comment.Metadata className="comment-list-meta">
-                <span>{moment(createdAt).fromNow()}</span>
+              <Comment.Metadata className="comment-list-meta" title={moment(createdAt).format('dddd, D MMMM YYYY, H:MM:SS')}>
+                <span>{date <= -30 ? moment(createdAt).format('D MMMM YYYY') : moment(createdAt).fromNow()}</span>
               </Comment.Metadata>
               <br />
               <Comment.Text

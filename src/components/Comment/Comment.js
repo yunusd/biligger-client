@@ -50,6 +50,8 @@ const Comment = (props) => {
   } = data.getComment;
 
   const deleted = parentModel === 'Post' && !parent ? true : (!!(parentModel === 'Comment' && !parent));
+
+  const date = moment(createdAt).diff(Date.now(), 'days');
   const raw = removeMd(content.replace(/\\/g, ''));
   const rawParentContent = removeMd(
     parent.title
@@ -116,10 +118,10 @@ const Comment = (props) => {
         <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>
           <Card fluid key={id}>
             <Card.Content>
-              <Label as={Link} to={`/@${author.username}`} color="blue" ribbon>
+              <Label as={Link} to={`/@${author.username}`} color="blue" title={moment(createdAt).format('dddd, D MMMM YYYY, H:MM:SS')} ribbon>
                 {author.username}
                 &nbsp;-&nbsp;
-                {moment(createdAt).fromNow()}
+                {date <= -30 ? moment(createdAt).format('D MMMM YYYY') : moment(createdAt).fromNow()}
               </Label>
               <Card.Description style={{ fontSize: '21px', lineHeight: '1.618em' }}>
                 <ReactMarkdown source={content} />

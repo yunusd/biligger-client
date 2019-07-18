@@ -51,6 +51,7 @@ const SearchList = ({ data }) => {
 
     const authorUrl = `/@${val.author.username}`;
 
+    const date = moment(val.createdAt).diff(Date.now(), 'days');
     const raw = removeMd(val.content.replace(/\\/g, ''));
     const content = raw.length < 500 ? raw : `${raw.slice(0, 500)}...`;
 
@@ -78,12 +79,12 @@ const SearchList = ({ data }) => {
               {val.title}
             </Link>
           </Card.Header>
-          <Card.Meta>
+          <Card.Meta title={moment(val.createdAt).format('dddd, D MMMM YYYY, H:MM:SS')}>
             <Link to={authorUrl}>
               {val.author.username}
             </Link>
             &nbsp;-&nbsp;
-            {moment(val.createdAt).fromNow()}
+            {date <= -30 ? moment(val.createdAt).format('D MMMM YYYY') : moment(val.createdAt).fromNow()}
           </Card.Meta>
           <Card.Description style={{ fontSize: '16px', lineHeight: '1.618em' }}>
             {content}
