@@ -9,6 +9,7 @@ const GET_NOTIFICATIONS = gql`
         count
         message
         entity
+        entityChild
         entityId
         seen
         createdAt

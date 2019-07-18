@@ -36,11 +36,12 @@ const NotificationList = ({ data }) => {
     : `, bir ${entityIdMessage[val.entityId]}`;
 
     const slug = urlSerializer({
-      id: val.entity,
-      username: getMe.username,
+      id: val.entityId === 1 || val.entityId === 2 ? val.entity : val.entityChild,
+      username: val.entityId === 1 || val.entityId === 2 ? getMe.username : val.actor,
       text: {
-        title: val.entityId === 3 || val.entityId === 1 ? val.message : false,
-        content: val.entityId === 2 || val.entityId === 4 ? val.message : false,
+        title: val.entityId === 1 ? val.message : false,
+        content: val.entityId === 3 || val.entityId === 2 || val.entityId === 4
+          ? val.message : false,
       },
       type: {
         post: true,
