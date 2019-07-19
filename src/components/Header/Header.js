@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, NavLink } from 'react-router-dom';
 import { useApolloClient } from 'react-apollo-hooks';
 import {
   Menu, Image, Button, Input,
@@ -41,6 +41,20 @@ const DesktopHeader = ({
           <Container fluid>
             <Menu.Item header>
               <Image as={Link} to="/" src={logo} width="100px" />
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink
+                to={{
+                    pathname: '/yeni',
+                  }}
+                activeStyle={{
+                    fontWeight: 'bold',
+                    color: 'red',
+                  }}
+                style={{ color: 'black', textTransform: 'capitalize' }}
+              >
+                Yeni
+              </NavLink>
             </Menu.Item>
             <Category />
             {currentUser.isLoggedIn ? (
@@ -98,6 +112,20 @@ const TabletHeader = ({
       >
         <Menu.Item header onClick={handleSidebarHide}>
           <Button content="Menüyü Kapat" fluid size="mini" />
+        </Menu.Item>
+        <Menu.Item>
+          <NavLink
+            to={{
+                pathname: '/yeni',
+              }}
+            activeStyle={{
+                fontWeight: 'bold',
+                color: 'red',
+              }}
+            style={{ color: 'black', textTransform: 'capitalize' }}
+          >
+            Yeni
+          </NavLink>
         </Menu.Item>
         <Category />
         <Menu.Item>
@@ -180,6 +208,20 @@ return (
           </Menu.Menu>
           )
         }
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink
+          to={{
+              pathname: '/yeni',
+            }}
+          activeStyle={{
+              fontWeight: 'bold',
+              color: 'red',
+            }}
+          style={{ color: 'black', textTransform: 'capitalize' }}
+        >
+          Yeni
+        </NavLink>
       </Menu.Item>
       <Category />
       <Menu.Item>
