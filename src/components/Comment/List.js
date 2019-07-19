@@ -1,11 +1,12 @@
 import React from 'react';
 import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import moment from 'moment';
 import removeMd from 'remove-markdown';
 
 import {
- Comment, Card, Divider, Icon, Button,
+ Comment, Card, Divider, Icon, Button, Label,
 } from 'semantic-ui-react';
 
 import Like from '../Like';
@@ -110,6 +111,7 @@ const CommentList = ({ data }) => {
   return data.getLatestComments.map(({
     id,
     author,
+    countReply,
     content,
     like,
     createdAt,
@@ -157,6 +159,23 @@ const CommentList = ({ data }) => {
               </Comment.Text>
               <Comment.Actions className="comment-list-actions">
                 <Like parentModel="Comment" id={id} like={like} onList />
+                &nbsp;&nbsp;&nbsp;
+
+                <HashLink to={`${slug.comment.url}#yorum-yaz`} className="summary-context-icon">
+                  <Icon name="comment" size="small" />
+                  { countReply > 0
+                    ? (
+                      <Label
+                        basic
+                        pointing="left"
+                        color="grey"
+                        size="tiny"
+                        className="count-like"
+                        content={countReply}
+                      />
+                    ) : null
+                  }
+                </HashLink>
 
                 {auth.isLoggedIn && (
                   auth.isOwn ? (

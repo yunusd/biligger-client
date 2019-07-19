@@ -8,6 +8,7 @@ const GET_POST = gql`
       content
       url
       countLike
+      countReply
       like
       category {
         id

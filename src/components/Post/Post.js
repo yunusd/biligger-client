@@ -38,7 +38,7 @@ const Post = (props) => {
   const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
 
   const {
-    title, content, author, createdAt, like, countLike,
+    title, content, author, createdAt, like, countLike, countReply,
   } = data.getPost;
 
   const auth = {
@@ -115,6 +115,14 @@ const Post = (props) => {
 
               <HashLink to={`${slug.post.url}#yorum-yaz`}>
                 <Icon name="comment" size="small" className="summary-context-icon" />
+                <Label
+                  basic
+                  pointing="left"
+                  color="grey"
+                  size="small"
+                  className="count-like"
+                  content={countReply}
+                />
               </HashLink>
               {auth.isLoggedIn && (
                 auth.isOwn ? (

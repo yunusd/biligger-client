@@ -10,6 +10,7 @@ const GET_COMMENT = gql`
         username
       }
       countLike
+      countReply,
       like
       parentModel
       parent {
@@ -44,6 +45,7 @@ const GET_LATEST_COMMENTS = gql`
       id
       username
     }
+    countReply
     like
     parentModel
     parent {
