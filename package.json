@@ -1,6 +1,6 @@
 {
   "name": "biligger-client",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "private": true,
   "scripts": {
     "start": "PORT=3000 react-scripts start",
