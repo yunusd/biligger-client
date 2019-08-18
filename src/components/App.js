@@ -22,6 +22,7 @@ import Profile from './Profile';
 import { EditUser } from './Profile/User';
 import { Comment, EditComment } from './Comment';
 import Search from './Search';
+import { VerifyEmail, ResetPassword, SendConfirmationEmail } from './Confirmation';
 import Footer from './Footer';
 import SiteInfo from './SiteInfo';
 
@@ -94,16 +95,28 @@ const App = () => (
               <RedirectRoute path="/kayit" exact component={Register} />
               <Header>
                 <Switch>
+                  {/* Root and Functional Routes */}
                   <PrivateRoute path="/" exact component={Feed} />
                   <PrivateRoute path="/yeni" exact component={Feed} />
                   <PrivateRoute path="/ara" exact component={Search} />
                   <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
+
+                  {/* Category and Static Routes */}
                   <PrivateRoute path="/(bilim|teknoloji|sanat|politika|ekonomi|edebiyat)/" exact component={Category} />
                   <RedirectRoute path="/(hakkinda|gizlilik-politikasi-ve-hizmet-sartlari|kullanim-kosullari)/" exact component={SiteInfo} />
+
+                  {/* User Routes */}
                   <PrivateRoute path="/@:username" exact component={Profile} />
                   <PrivateRoute path="/@:username/ayarlar" component={EditUser} />
                   <RedirectRoute path="/@:username/:comment" exact component={Comment} />
                   <PrivateRoute path="/@:username/:comment/duzenle" exact component={EditComment} />
+
+                  {/* Confirmation Routes */}
+                  <RedirectRoute path="/giris/sifirla" exact component={SendConfirmationEmail} />
+                  <RedirectRoute path="/confirmation_verify_email&:hash" exact component={VerifyEmail} />
+                  <RedirectRoute path="/confirmation_reset_password&:hash" exact component={ResetPassword} />
+
+                  {/* Post Routes */}
                   <RedirectRoute path="/:title" exact component={Post} />
                   <PrivateRoute path="/:title/duzenle" exact component={EditPost} />
                   <PrivateRoute component={NotFound} />

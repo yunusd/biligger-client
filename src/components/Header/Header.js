@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Mutation } from 'react-apollo';
 import { Link, withRouter, NavLink } from 'react-router-dom';
 import { useApolloClient } from 'react-apollo-hooks';
 import {
@@ -8,12 +9,15 @@ import {
   Icon,
   Sidebar,
   Visibility,
+  Segment,
+  Grid,
 } from 'semantic-ui-react';
 
 import LogIn from './LogIn';
 import Notification from './Notification';
 import { Category } from '../Category';
 import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
+import { SEND_CONFIRMATION_EMAIL } from '../Confirmation/mutations';
 
 import logo from '../../logo.png';
 import './Header.css';
@@ -257,6 +261,56 @@ return (
 );
 };
 
+const emailVerifyMessage = (getMe) => {
+  async function handleSubmit(resendEmail) {
+    try {
+      const data = await resendEmail({
+        variables: {
+          email: getMe.email,
+          action: 1,
+        },
+      });
+      return data;
+    } catch (e) {
+      return e;
+    }
+  }
+  return (
+    <Grid textAlign="center">
+      <Grid.Column width="12">
+        <Segment inverted color="yellow" textAlign="center">
+          <p style={{ color: 'black ' }}>
+            E-Posta adresinizi doğrulamak için size bir bağlantı gönderdik.
+            &nbsp;
+              <b>{getMe.email}</b>
+            &nbsp;
+            adresini kontrol ediniz!
+          </p>
+
+          <Mutation mutation={SEND_CONFIRMATION_EMAIL}>
+            {(resendEmail, { data, loading }) => (
+              <Button
+                content={data ? 'Gönderildi' : 'Tekrar gönder'}
+                size="small"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSubmit(resendEmail);
+                }
+              }
+                disabled={loading || !!data}
+              />
+            )}
+          </Mutation>
+
+          <Link to={`/@${getMe.username}/ayarlar`}>
+            E-Posta adresini değiştir
+          </Link>
+        </Segment>
+      </Grid.Column>
+    </Grid>
+);
+};
+
 const AppHeader = ({ history, location, children }) => {
   const client = useApolloClient();
 
@@ -264,6 +318,11 @@ const AppHeader = ({ history, location, children }) => {
   const { getMe } = currentUser.isLoggedIn ? client.readQuery({ query: GET_ME_FROM_CACHE }) : false;
 
   const profileUrl = currentUser.isLoggedIn ? `/@${getMe.username}` : '#';
+
+  // Only show warning when user is on the home or profile page.
+  const isCorrectPath = location.pathname === '/' || location.pathname === profileUrl;
+  // eslint-disable-next-line no-nested-ternary
+  const alertMessage = getMe ? (isCorrectPath ? !getMe.active : false) : false;
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -284,6 +343,7 @@ const AppHeader = ({ history, location, children }) => {
           handleKeyPress={handleKeyPress}
         >
           <Container fluid style={{ paddingTop: '100px' }}>
+            {alertMessage && emailVerifyMessage(getMe)}
             {children}
           </Container>
         </DesktopHeader>
@@ -294,6 +354,7 @@ const AppHeader = ({ history, location, children }) => {
           handleKeyPress={handleKeyPress}
         >
           <Container fluid style={{ paddingTop: '100px', minHeight: '100vh' }}>
+            {alertMessage && emailVerifyMessage(getMe)}
             {children}
           </Container>
         </TabletHeader>
@@ -304,6 +365,7 @@ const AppHeader = ({ history, location, children }) => {
           handleKeyPress={handleKeyPress}
         >
           <Container fluid style={{ paddingTop: '100px', minHeight: '100vh' }}>
+            {alertMessage && emailVerifyMessage(getMe)}
             {children}
           </Container>
         </MobileHeader>

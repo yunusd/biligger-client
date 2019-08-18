@@ -13,6 +13,8 @@ const GET_ME_FROM_CACHE = gql`
     getMe @client {
       id
       username
+      email
+      active
     }
   }
 `;

@@ -79,6 +79,8 @@ const LogInForm = (props) => {
               />
             </Form>
             <Divider />
+            <Link to="/giris/sifirla" style={{ color: '#49ba6f' }}>Şifreni mi unuttun?</Link>
+            <br />
             Henüz kayıt olmadın mı?
             <br />
             <Link to="/kayit" onClick={() => { if (props.location.pathname === 'kayit') props.history.replace('/kayit'); }} style={{ color: '#49ba6f' }}>Kayıt Ol</Link>
