@@ -8,9 +8,8 @@ import {
 import Summary from './Summary';
 import { GET_POPULER_POSTS_BY_CATEGORY } from './queries';
 
-String.prototype.toFirstUpperCase = function() {
-  return this.charAt(0).toUpperCase() + this.slice(1);
-};
+// eslint-disable-next-line no-extend-native
+String.prototype.toFirstUpperCase = () => this.charAt(0).toUpperCase() + this.slice(1);
 
 const List = (props) => {
   const path = props.location.pathname.slice(1);

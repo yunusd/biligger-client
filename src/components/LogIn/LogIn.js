@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useApolloClient } from 'react-apollo-hooks';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';

@@ -19,7 +19,7 @@ const EditComment = (props) => {
   const client = useApolloClient();
   const { pathname } = props.location;
   const path = pathname.split('/');
-  const commentAuthor = path[1].slice(1);
+  // const commentAuthor = path[1].slice(1);
   const commentId = path[2].slice(-24);
 
   const { data, loading, error } = useQuery(GET_COMMENT, {
