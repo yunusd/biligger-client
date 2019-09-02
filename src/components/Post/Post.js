@@ -80,6 +80,8 @@ const Post = (props) => {
     <Grid columns={1} centered id={id} key={id}>
       <Helmet>
         <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={metaDesc} />
         <meta name="description" content={metaDesc} />
       </Helmet>
       <Grid.Row>

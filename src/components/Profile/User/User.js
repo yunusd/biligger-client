@@ -105,6 +105,8 @@ const User = (props) => {
             {username}
             &nbsp;- Biligger
           </title>
+          <meta property="og:title" content={`${username} - Biligger`} />
+          <meta property="og:description" content="Biligger doğruların, fikirlerin karşılaşmasıyla ortaya çıktığına inanan, bilgiyi paylaşarak, tartışarak büyütmeyi ve geliştirmeyi amaç edinmiş, saygıyı, nezaketi öne alan düşünürlerin (biligger’ların) buluştuğu ütopik bir tartışma platformudur." />
         </Helmet>
         <Grid>
           <Grid.Row>

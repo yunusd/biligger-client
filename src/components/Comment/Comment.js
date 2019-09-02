@@ -110,6 +110,8 @@ const Comment = (props) => {
       <Helmet>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDesc} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDesc} />
       </Helmet>
       <Grid.Row>
         <Grid.Column largeScreen={12} computer={12} widescreen={12} tablet={12} mobile={16}>

@@ -25,6 +25,7 @@ import Search from './Search';
 import { VerifyEmail, ResetPassword, SendConfirmationEmail } from './Confirmation';
 import Footer from './Footer';
 import SiteInfo from './SiteInfo';
+import logo from '../logo.png';
 
 const RedirectRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -76,7 +77,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
-
 const App = () => (
   <ApolloProvider client={client}>
     <ApolloProviderHooks client={client}>
@@ -86,6 +86,9 @@ const App = () => (
             <Auth>
               <Helmet>
                 <title>Biligger</title>
+                <meta property="og:title" content="Biligger" />
+                <meta property="og:description" content="Biligger doğruların, fikirlerin karşılaşmasıyla ortaya çıktığına inanan, bilgiyi paylaşarak, tartışarak büyütmeyi ve geliştirmeyi amaç edinmiş, saygıyı, nezaketi öne alan düşünürlerin (biligger’ların) buluştuğu ütopik bir tartışma platformudur." />
+                <meta property="og:image" content={logo} />
                 <meta
                   name="description"
                   content="Biligger doğruların, fikirlerin karşılaşmasıyla ortaya çıktığına inanan, bilgiyi paylaşarak, tartışarak büyütmeyi ve geliştirmeyi amaç edinmiş, saygıyı, nezaketi öne alan düşünürlerin (biligger’ların) buluştuğu ütopik bir tartışma platformudur."
