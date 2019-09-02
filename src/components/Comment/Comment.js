@@ -19,6 +19,7 @@ import CommentParent from './CommentParent';
 import DeleteComment from './DeleteComment';
 import NotFound from '../NotFound';
 import dateLocale from '../../helpers/dateLocale';
+import Report from '../Report';
 import Like from '../Like';
 import urlSerializer from '../../helpers/urlSerializer';
 import './Comment.css';
@@ -168,9 +169,7 @@ const Comment = (props) => {
                     />
                   </React.Fragment>
                 ) : (
-                  <Link to="#" title="bildir" className="summary-context-right summary-context-icon">
-                    <Icon name="flag" title="bildir" size="small" />
-                  </Link>
+                  <Report actor={id} reporter={getMe.id} entityRef="Comment" entityId={1} />
                 )
               )}
             </Card.Content>

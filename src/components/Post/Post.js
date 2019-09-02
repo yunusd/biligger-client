@@ -18,6 +18,7 @@ import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../queries';
 import DeletePost from './DeletePost';
 import Like from '../Like';
 import urlSerializer from '../../helpers/urlSerializer';
+import Report from '../Report/Report';
 
 moment.updateLocale('en', dateLocale);
 
@@ -133,9 +134,7 @@ const Post = (props) => {
                     <DeletePost id={id} authorId={author.id} {...props} />
                   </React.Fragment>
                 ) : (
-                  <Link to="#" className="summary-context-right  summary-context-icon" title="bildir">
-                    <Icon name="flag" size="small" title="bildir" />
-                  </Link>
+                  <Report actor={id} reporter={getMe.id} entityRef="Post" entityId={1} />
                 )
               )}
             </Card.Content>

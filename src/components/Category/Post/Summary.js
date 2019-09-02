@@ -8,6 +8,7 @@ import { HashLink } from 'react-router-hash-link';
 import { Card, Icon } from 'semantic-ui-react';
 
 import urlSerializer from '../../../helpers/urlSerializer';
+import Report from '../../Report';
 import Like from '../../Like';
 import dateLocale from '../../../helpers/dateLocale';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../../queries';
@@ -92,9 +93,7 @@ const Summary = (props) => {
                           </Link>
                         </React.Fragment>
                       ) : (
-                        <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
-                          <Icon name="flag" title="bildir" size="small" />
-                        </Link>
+                        <Report actor={val.id} reporter={getMe.id} entityRef="Post" entityId={1} />
                       )
                     )}
                 </Card.Content>

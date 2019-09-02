@@ -13,6 +13,7 @@ import SEARCH_POSTS from './queries';
 import { GET_AUTH_STATUS, GET_ME_FROM_CACHE } from '../../queries';
 import dateLocale from '../../helpers/dateLocale';
 import urlSerializer from '../../helpers/urlSerializer';
+import Report from '../Report';
 import Like from '../Like';
 
 moment.updateLocale('en', dateLocale);
@@ -108,9 +109,7 @@ const SearchList = ({ data }) => {
                 </Link>
               </React.Fragment>
             ) : (
-              <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
-                <Icon name="flag" title="bildir" size="small" />
-              </Link>
+              <Report actor={val.id} reporter={getMe.id} entityRef="Post" entityId={1} />
             )
           )}
 

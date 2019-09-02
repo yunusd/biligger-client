@@ -9,6 +9,7 @@ import {
  Comment, Card, Divider, Icon, Button, Label,
 } from 'semantic-ui-react';
 
+import Report from '../Report';
 import Like from '../Like';
 import { GET_ME_FROM_CACHE, GET_AUTH_STATUS } from '../../queries';
 import { GET_LATEST_COMMENTS } from './queries';
@@ -90,9 +91,7 @@ const Reply = ({ parent, getMe, currentUser }) => {
                   {/* <DeletePost id={id} authorId={author.id} {...props} /> */}
                 </React.Fragment>
               ) : (
-                <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
-                  <Icon name="flag" title="bildir" size="small" />
-                </Link>
+                <Report actor={id} reporter={getMe.id} entityRef="Post" entityId={1} />
               )
             )}
           </Comment.Actions>
@@ -185,9 +184,7 @@ const CommentList = ({ data }) => {
                       </Link>
                     </React.Fragment>
                   ) : (
-                    <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
-                      <Icon name="flag" title="bildir" size="small" />
-                    </Link>
+                    <Report actor={id} reporter={getMe.id} entityRef="Comment" entityId={1} />
                   )
                 )}
               </Comment.Actions>

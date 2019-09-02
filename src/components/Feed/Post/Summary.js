@@ -9,6 +9,7 @@ import { Card, Icon } from 'semantic-ui-react';
 
 import urlSerializer from '../../../helpers/urlSerializer';
 import Like from '../../Like';
+import Report from '../../Report';
 import dateLocale from '../../../helpers/dateLocale';
 import './Summary.css';
 
@@ -80,9 +81,7 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
               </Link>
             </React.Fragment>
           ) : (
-            <Link to="#" title="Bildir" className="summary-context-right summary-context-icon">
-              <Icon name="flag" title="bildir" size="small" />
-            </Link>
+            <Report actor={val.id} reporter={getMe.id} entityRef="Post" entityId={1} />
           )
         )}
 
