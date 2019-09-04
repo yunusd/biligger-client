@@ -148,14 +148,16 @@ const Comment = (props) => {
 
               <HashLink to={`${pathname}#yorum-yaz`} className="summary-context-icon">
                 <Icon name="comment" size="small" />
-                <Label
-                  basic
-                  pointing="left"
-                  color="grey"
-                  size="small"
-                  className="count-like"
-                  content={countReply}
-                />
+                { countReply !== 0 && (
+                  <Label
+                    basic
+                    pointing="left"
+                    color="grey"
+                    size="small"
+                    className="count-like"
+                    content={countReply}
+                  />
+                )}
               </HashLink>
               {auth.isLoggedIn && (
                 auth.isOwn ? (

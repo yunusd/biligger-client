@@ -118,14 +118,17 @@ const Post = (props) => {
 
               <HashLink to={`${slug.post.url}#yorum-yaz`}>
                 <Icon name="comment" size="small" className="summary-context-icon" />
-                <Label
-                  basic
-                  pointing="left"
-                  color="grey"
-                  size="small"
-                  className="count-like"
-                  content={countReply}
-                />
+                { countReply !== 0 && (
+                  <Label
+                    basic
+                    pointing="left"
+                    color="grey"
+                    size="small"
+                    className="count-like"
+                    content={countReply}
+                  />
+                )}
+
               </HashLink>
               {auth.isLoggedIn && (
                 auth.isOwn ? (
