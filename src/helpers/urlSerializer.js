@@ -97,6 +97,12 @@ slugify.extend({
 'ہ': 'h',
 'ھ': 'h',
 'ے': 'e',
+
+// Special Chars
+'&': 've',
+'%': 'yuzde',
+'$': 'dolar',
+'₺': 'turklirasi',
 });
 
 const pathSlicer = (str, type) => {
