@@ -94,7 +94,28 @@ const Notification = () => {
     },
   });
   if (loading) return null;
-  if (error) return 'Hata';
+  if (error) {
+    return (
+      <Popup
+        flowing
+        on="click"
+        position="bottom center"
+        onOpen={() => {
+              seenNotification();
+              setPollInterval(50000);
+              setActive(false);
+            }}
+        onClose={() => {
+              setPollInterval(5000);
+            }}
+        trigger={(
+          <Menu.Item as="a">
+            <Icon name="bell" />
+          </Menu.Item>
+          )}
+      />
+  );
+ }
   const { notifications, count } = data.getNotifications;
 
   return (
