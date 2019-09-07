@@ -13,7 +13,7 @@ import { ADD_REPORT } from './mutations';
  * $message: String!,
  */
 const Report = ({
-    actor, reporter, entityId, entityRef, message,
+    actor, reporter, entity, entityId, entityRef, message,
   }) => {
   const [modal, setModal] = useState(false);
 
@@ -25,6 +25,7 @@ const Report = ({
         variables: {
           actor,
           reporter,
+          entity,
           entityRef,
           entityId,
         },

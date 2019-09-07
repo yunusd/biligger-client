@@ -81,7 +81,7 @@ const Summary = ({ data, getMe, currentUser }) => data.map((val) => {
               </Link>
             </React.Fragment>
           ) : (
-            <Report actor={val.id} reporter={getMe.id} entityRef="Post" entityId={1} />
+            <Report actor={val.author.id} reporter={getMe.id} entity={val.id} entityRef="Post" entityId={1} />
           )
         )}
 

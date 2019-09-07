@@ -173,7 +173,7 @@ const Comment = (props) => {
                     />
                   </React.Fragment>
                 ) : (
-                  <Report actor={id} reporter={getMe.id} entityRef="Comment" entityId={1} />
+                  <Report actor={author.id} reporter={getMe.id} entity={id} entityRef="Comment" entityId={1} />
                 )
               )}
             </Card.Content>

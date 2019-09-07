@@ -139,7 +139,7 @@ const Post = (props) => {
                     <DeletePost id={id} authorId={author.id} {...props} />
                   </React.Fragment>
                 ) : (
-                  <Report actor={id} reporter={getMe.id} entityRef="Post" entityId={1} />
+                  <Report actor={author.id} reporter={getMe.id} entity={id} entityRef="Post" entityId={1} />
                 )
               )}
             </Card.Content>

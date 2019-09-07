@@ -91,7 +91,7 @@ const Reply = ({ parent, getMe, currentUser }) => {
                   {/* <DeletePost id={id} authorId={author.id} {...props} /> */}
                 </React.Fragment>
               ) : (
-                <Report actor={id} reporter={getMe.id} entityRef="Post" entityId={1} />
+                <Report actor={author.id} reporter={getMe.id} entity={id} entityRef="Comment" entityId={1} />
               )
             )}
           </Comment.Actions>
@@ -184,7 +184,7 @@ const CommentList = ({ data }) => {
                       </Link>
                     </React.Fragment>
                   ) : (
-                    <Report actor={id} reporter={getMe.id} entityRef="Comment" entityId={1} />
+                    <Report actor={author.id} reporter={getMe.id} entity={id} entityRef="Comment" entityId={1} />
                   )
                 )}
               </Comment.Actions>
