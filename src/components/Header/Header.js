@@ -275,6 +275,13 @@ const emailVerifyMessage = (getMe) => {
       return e;
     }
   }
+
+  const emailAlert = getMe.email.slice(getMe.email.search('@') + 1);
+  const emailAlertMessage = msg => `
+    Geçiçi olarak ${msg} uzantılı e-postalara, e-posta yollamada sıkıntı yaşıyoruz.
+    Eğer e-posta almakta sorun yaşıyorsanız lütfen farklı bir e-posta giriniz.
+  `;
+
   return (
     <Grid textAlign="center">
       <Grid.Column width="12">
@@ -282,9 +289,17 @@ const emailVerifyMessage = (getMe) => {
           <p style={{ color: 'black ' }}>
             E-Posta adresinizi doğrulamak için size bir bağlantı gönderdik.
             &nbsp;
-              <b>{getMe.email}</b>
+            <b>{getMe.email}</b>
             &nbsp;
             adresini kontrol ediniz!
+            <br />
+            {
+              (emailAlert.search('hotmail') !== -1 || emailAlert.search('outlook') !== -1) && (
+              <b>
+                {emailAlertMessage('hotmail/outlook')}
+              </b>
+              )
+            }
           </p>
 
           <Mutation mutation={SEND_CONFIRMATION_EMAIL}>
@@ -297,7 +312,7 @@ const emailVerifyMessage = (getMe) => {
                   handleSubmit(resendEmail);
                 }
               }
-                disabled={loading || !!data}
+                disabled={(loading || !!data)}
               />
             )}
           </Mutation>
