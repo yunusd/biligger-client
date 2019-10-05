@@ -1,101 +1,132 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import {
-  Button, Header, Form, Popup, Grid, Divider,
+  Button, Header, Form, Popup, Grid, Divider, Message,
 } from 'semantic-ui-react';
 import './LogIn.css';
 import { Link } from 'react-router-dom';
+import { withFormik } from 'formik';
+import * as Yup from 'yup';
 
-class LogIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const LogInSchema = Yup.object().shape({
+  username: Yup.string().required('Kullanıcı adı gerekli!'),
+  password: Yup.string().required('Şifre gerekli!'),
+});
 
-  handleSubmit() {
-    const { username, password } = this.state;
+const LogInForm = (props) => {
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleSubmit,
+    status,
+    isSubmitting,
+    location,
+    button,
+  } = props;
+
+  const errorExists = Object.getOwnPropertyNames(errors).length > 0
+  && Object.getOwnPropertyNames(touched).length > 0;
+  const serverValidationErrors = status.errors ? status.errors : null;
+  const urlCheck = location ? location.pathname === '/giris' : false;
+
+  return (
+    <React.Fragment>
+      { urlCheck
+      ? <h5>GİRİŞ YAP</h5>
+      : (
+        <Popup
+          trigger={button}
+          on="click"
+          flowing
+          position="bottom right"
+          className="logIn"
+          content={(
+            <Grid columns={2} divided>
+              <Grid.Row className="logInRow" stretched>
+                <Grid.Column className="logInLeft">
+                  <Header
+                    content="Hoşgeldiniz"
+                    size="huge"
+                    textAlign="center"
+                    className="logInLeftText"
+                  />
+                </Grid.Column>
+                <Grid.Column className="logInRight">
+                  { errorExists || !!serverValidationErrors ? (
+                    <Message
+                      error
+                      list={[
+                        serverValidationErrors && serverValidationErrors.message,
+                        errors.username,
+                        errors.password,
+                      ]}
+                    />
+                  ) : null}
+                  <Form onSubmit={handleSubmit}>
+                    <Form.Input error={!!errors.username} placeholder="Kullanıcı adı" name="username" value={values.username} onChange={handleChange} />
+                    <Form.Input error={!!errors.password} type="password" placeholder="Şifre" name="password" value={values.password} onChange={handleChange} />
+                    <Button
+                      type="submit"
+                      content="Giriş Yap"
+                      floated="right"
+                      disabled={isSubmitting}
+                    />
+                  </Form>
+
+                  <Divider />
+
+                  <div>
+                    Henüz hesabınız yok mu?
+                    <Link to="/kayit"> Kayıt Ol</Link>
+                  </div>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          )}
+        />
+
+      )
+      }
+    </React.Fragment>
+  );
+};
+
+const LogIn = withFormik({
+  mapPropsToValues: () => ({
+    username: '',
+    password: '',
+  }),
+  mapPropsToStatus: () => ({
+    errors: null,
+  }),
+  validationSchema: LogInSchema,
+  handleSubmit: async (values, { setSubmitting, setStatus, props }) => {
+    const { username, password } = values;
+
     axios.post('/auth', {
       username,
       password,
     }, { withCredentials: 'include' }).then((res) => {
-      window.location.reload();
+      window.location.replace('/');
       return res;
     }).catch((error) => {
-      const unitTestHandleSubmit = this.props.handleSubmit;
+      setSubmitting(false);
+      const unitTestHandleSubmit = props.handleTestSubmit;
       if (unitTestHandleSubmit) {
-        this.props.handleSubmit(error); // added for unit test
+        props.handleTestSubmit(error); // added for unit test
       }
-      this.setState({ error: true });
+      setStatus({
+        errors: {
+          message: 'Kullanıcı adı ya da Şifre yanlış.',
+        },
+      });
       return error;
     });
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  render() {
-    const { error = '' } = this.state;
-    const {
-      button, location,
-    } = this.props;
-
-    const urlCheck = location ? location.pathname === '/giris' : false;
-    const errorMessage = `${error && 'Kullanıcı adı ya da şifre yanlış!'}`;
-
-    return (
-      <div>
-        { urlCheck
-        ? <h5>GİRİŞ YAP</h5>
-        : (
-          <Popup
-            trigger={button}
-            on="click"
-            flowing
-            position="bottom right"
-            className="logIn"
-            content={(
-              <Grid columns={2} divided>
-                <Grid.Row className="logInRow" stretched>
-                  <Grid.Column className="logInLeft">
-                    <Header
-                      content={errorMessage || 'Hoşgeldiniz'}
-                      size="huge"
-                      textAlign="center"
-                      className="logInLeftText"
-                    />
-                  </Grid.Column>
-                  <Grid.Column className="logInRight">
-                    <Form onSubmit={this.handleSubmit}>
-                      <Form.Input label="Kullanıcı adı" placeholder="Kullanıcı adı" name="username" onChange={this.handleChange} />
-                      <Form.Input type="password" label="Şifre" placeholder="Şifre" name="password" onChange={this.handleChange} />
-                      <Button
-                        type="submit"
-                        content="Giriş Yap"
-                        floated="right"
-                      />
-                    </Form>
-
-                    <Divider />
-
-                    <div>
-                      Henüz hesabınız yok mu?
-                      <Link to="/kayıt"> Kayıt Ol</Link>
-                    </div>
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-            )}
-          />
-
-        )
-        }
-      </div>
-    );
-  }
-}
+  },
+  displayName: 'BasicForm',
+})(LogInForm);
 
 export default LogIn;

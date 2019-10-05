@@ -64,7 +64,7 @@ const AddComment = (props) => {
             : (
               <Card style={{ padding: '20px' }} fluid>
                 <Header as="h4" style={{ color: 'grey' }} textAlign="center">
-                  <Link to="/" style={{ color: 'grey' }}>Yorum yapmak için giriş yapmalısınız...</Link>
+                  <Link to="/giris" style={{ color: 'grey' }}>Yorum yapmak için giriş yapmalısınız...</Link>
                 </Header>
               </Card>
             )}

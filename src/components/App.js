@@ -99,17 +99,17 @@ const App = () => (
               <Header>
                 <Switch>
                   {/* Root and Functional Routes */}
-                  <PrivateRoute path="/" exact component={Feed} />
-                  <PrivateRoute path="/yeni" exact component={Feed} />
-                  <PrivateRoute path="/ara" exact component={Search} />
+                  <Route path="/" exact component={Feed} />
+                  <RedirectRoute path="/yeni" exact component={Feed} />
+                  <RedirectRoute path="/ara" exact component={Search} />
                   <PrivateRoute path="/yeni-bilig" exact component={AddPost} />
 
                   {/* Category and Static Routes */}
-                  <PrivateRoute path="/(bilim|teknoloji|sanat|politika|ekonomi|edebiyat)/" exact component={Category} />
+                  <RedirectRoute path="/(bilim|teknoloji|sanat|politika|ekonomi|edebiyat)/" exact component={Category} />
                   <RedirectRoute path="/(hakkinda|gizlilik-politikasi-ve-hizmet-sartlari|kullanim-kosullari)/" exact component={SiteInfo} />
 
                   {/* User Routes */}
-                  <PrivateRoute path="/@:username" exact component={Profile} />
+                  <RedirectRoute path="/@:username" exact component={Profile} />
                   <PrivateRoute path="/@:username/ayarlar" component={EditUser} />
                   <RedirectRoute path="/@:username/:comment" exact component={Comment} />
                   <PrivateRoute path="/@:username/:comment/duzenle" exact component={EditComment} />
