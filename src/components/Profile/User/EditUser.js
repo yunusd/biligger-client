@@ -27,11 +27,11 @@ const settingsSchema = Yup.object().shape({
   email: Yup.string()
     .email('Geçersiz e-posta adresi'),
   degree: Yup.string()
-    .min(3, 'Çok kısa!')
-    .max(30, 'Çok uzun!'),
+    .min(3, 'Ünvan çok kısa!')
+    .max(30, 'Ünvan çok uzun!'),
   bio: Yup.string()
-    .min(30, 'Çok kısa!')
-    .max(300, 'Çok uzun!'),
+    .min(30, 'Hakkında çok kısa!')
+    .max(300, 'Hakkında çok uzun!'),
 });
 
 const SettingsForm = (props) => {
